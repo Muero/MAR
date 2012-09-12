@@ -18,7 +18,7 @@ import muehle.Board.eColor;
 public class Main {
 
 	public static final int depth = 2; // playing ability
-	public static final boolean usewebcam = true;
+	public static final boolean usewebcam = false;
 	public static final boolean userobot = false;
 	public static String file = "field";
 	public static String fileEnding = "jpg";
