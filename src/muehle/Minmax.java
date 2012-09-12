@@ -1,7 +1,7 @@
 package muehle;
 
-import muehle.Board.Color;
-import static muehle.Board.Color.*;
+import muehle.Board.eColor;
+import static muehle.Board.eColor.*;
 
 /**
  * determine the best turn for the computer
@@ -13,7 +13,7 @@ public class Minmax {
 	public static int deepthBlackMill = 0;		//not used yet
 
 
-	public static int minmaxLay(Board board, Color computer, Color player,
+	public static int minmaxLay(Board board, eColor computer, eColor player,
 			int deepth) {
 
 		if (deepth > 0) {
@@ -106,7 +106,7 @@ public class Minmax {
 
 	}
 
-	public static int minmaxMove(Board board, Color computer, Color player,
+	public static int minmaxMove(Board board, eColor computer, eColor player,
 			int deepth) {
 		if (deepth > 0) {
 
@@ -207,7 +207,7 @@ public class Minmax {
 
 	}
 
-	public static int minmaxJumping(Board board, Color computer, Color player,
+	public static int minmaxJumping(Board board, eColor computer, eColor player,
 			int deepth) {
 		if (deepth > 0) {
 

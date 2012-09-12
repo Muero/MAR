@@ -77,9 +77,9 @@ class BoardPanel extends JPanel {
 		for (JButton b : buttons.keySet()) {
 			Position p = buttons.get(b);
 			Color bg = null;
-			if (board.getColor(p) == Board.Color.BLACK)
+			if (board.getColor(p) == Board.eColor.BLACK)
 				bg = Color.blue;
-			else if (board.getColor(p) == Board.Color.WHITE)
+			else if (board.getColor(p) == Board.eColor.WHITE)
 				bg = Color.green;
 			else
 				bg = Color.black;

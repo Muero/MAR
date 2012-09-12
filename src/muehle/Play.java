@@ -1,8 +1,8 @@
 package muehle;
 
-import static muehle.Board.Color.BLACK;
-import static muehle.Board.Color.NONE;
-import static muehle.Board.Color.WHITE;
+import static muehle.Board.eColor.BLACK;
+import static muehle.Board.eColor.NONE;
+import static muehle.Board.eColor.WHITE;
 
 public class Play {
 

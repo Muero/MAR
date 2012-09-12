@@ -1,6 +1,6 @@
 package muehle;
 
-import static muehle.Board.Color.*;
+import static muehle.Board.eColor.*;
 
 public class Evaluation {
 

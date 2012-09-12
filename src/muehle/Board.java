@@ -9,11 +9,11 @@ import java.util.Set;
 
 public class Board {
 
-	public enum Color {
+	public enum eColor {
 		NONE, BLACK, WHITE //The three modes that a "Position" may have.
 	}
 
-	private Map<Position, Color> board = new HashMap<Position, Color>();
+	private Map<Position, eColor> board = new HashMap<Position, eColor>();
 
 	
 	/**	
@@ -22,11 +22,11 @@ public class Board {
 	 * @param p the position where you want to find out the color
 	 * @return c the color at the position p
 	 */
-	public Color getColor(Position p) {
+	public eColor getColor(Position p) {
 		if(p == null) throw new IllegalArgumentException();
-		Color c = board.get(p);
+		eColor c = board.get(p);
 		if (c == null)
-			c = Color.NONE;
+			c = eColor.NONE;
 		return c;
 	}
 
@@ -38,7 +38,7 @@ public class Board {
 	 * @param c color
 	 * @throws IllegalArgumentException if p == null
 	 */
-	public void setColor(Position p, Color c) {
+	public void setColor(Position p, eColor c) {
 		if(p == null) throw new IllegalArgumentException();
 		board.put(p, c);
 	}
@@ -84,9 +84,9 @@ public class Board {
 	 * @param color given color
 	 * @return the number of stones with the given color
 	 */
-	public int getNumberOfStones(Color color) {
+	public int getNumberOfStones(eColor color) {
 		int counter = 0;
-		for (Color c : board.values()) {
+		for (eColor c : board.values()) {
 			if (c == color)
 				counter++;
 		}
@@ -99,7 +99,7 @@ public class Board {
 	 * @param pos one of the positions of the mill
 	 * @return whether a mill is at position ps
 	 */
-	public boolean isMill(Position pos, Color stone) {
+	public boolean isMill(Position pos, eColor stone) {
 		int id = pos.getId();
 		Set<Position> candidates = new HashSet<Position>();
 		candidates.add(pos);
@@ -137,7 +137,7 @@ public class Board {
 	 * @param c color whose mills care counted
 	 * @return number of mills in the color c
 	 */
-	public int getNumberOfMills(Color c) {
+	public int getNumberOfMills(eColor c) {
 		int counter = 0;
 		
 		// horizontal
