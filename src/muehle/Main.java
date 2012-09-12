@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import muehle.Board.Color;
 import muehle.bt.BTConnection;
-
+//test
 public class Main {
 
 	public static final int depth = 2; // playing ability
