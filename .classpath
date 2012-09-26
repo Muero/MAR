@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/acer/Desktop/Webcamworkspace/JMF/lib/jmf.jar"/>
 	<classpathentry kind="lib" path="C:/Users/acer/Desktop/Webcamworkspace/JMF/lib/mediaplayer.jar"/>
 	<classpathentry kind="lib" path="C:/Users/acer/Desktop/Webcamworkspace/JMF/lib/multiplayer.jar"/>
+	<classpathentry kind="lib" path="C:/Users/acer/Desktop/Webcamworkspace/JDesktop/appframework-1.0.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

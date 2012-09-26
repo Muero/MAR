@@ -10,98 +10,108 @@ import javax.swing.JPanel;
 
 import muehle.Main;
 
+import camera.Camera;
+
 public class Panel2 extends JPanel{
 	private static final long serialVersionUID = 1L;
-
+		
+	private int a=0;
+	private int b=0;
+	private boolean mouseClicked = false;
+	private Point mousePosition = new Point(-10,-10);
+	private Point starterPosition = new Point(-10,-10);
+	private Point[] positions = new Point[24];
+	private int index = 0;
 	
-	private Point alpha = new Point(0,0);
-	private int sensitivity = 50;
-	
-	public Panel2(int x,int y,int width, int height){
-		this.setBounds(x,y,width,height);
-		this.setLayout(null);
+	public Panel2(){
+		for(int i=0;i<24;i++)
+			positions[i] = new Point(-10,-10);
 		this.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {
-				alpha.x = arg0.getX();
-				alpha.y = arg0.getY();
+				mouseClicked = true;
+				mousePosition = new Point(arg0.getX(),arg0.getY());
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {}
+			public void mousePressed(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {}
 			
 		});
-		thread();
+	}
+	
+	public int getPositionIndex(){
+		return index;
+	}
+	
+	public boolean mouseClicked(){
+		return mouseClicked;
+	}
+	public void setMouseClick(boolean click){
+		mouseClicked = click;
+	}
+	public Point getMousePosition(){
+		return mousePosition;
+	}
+	public Point getStarterPosition(){
+		return starterPosition;
+	}
+	public void setStarterPosition(Point start){
+		this.starterPosition = new Point(start);
+	}
+	public void setFieldPosition(Point field){
+		if(index<24){
+			positions[index] = new Point(field);
+			this.index++;
+		}
+	}
+	public Point getFieldPosition(int a){
+		return positions[a];
+	}
+	public void clearLastFieldPosition(){
+		if(index>0){
+			positions[index-1] = new Point(-10,-10);
+			System.out.println(positions[index-1]);
+			System.out.println(index);
+			this.index--;
+		}
 	}
 	
 	public void paintComponent(Graphics g){
-		if(Main.guimode == 1){
-			g.fillRect(0,0,Main.img.getWidth(),Main.img.getHeight());
-
-			for(int i=0;i<Main.img.getWidth();i++){
-				for(int j=0;j<Main.img.getHeight();j++){
-					g.setColor(new Color(Main.imgcolor[i][j].getRed(),Main.imgcolor[i][j].getGreen(),Main.imgcolor[i][j].getBlue(),Panel3.getValue()));
-					if(this.checkStones(Main.imgcolor[i][j].getRed(),Main.imgcolor[i][j].getGreen(),Main.imgcolor[i][j].getBlue(),i,j))
-						g.setColor(new Color(Main.imgcolor[i][j].getRed(),Main.imgcolor[i][j].getGreen(),Main.imgcolor[i][j].getBlue(),255));
-					g.drawLine(i, j, i, j);
-					
-				}
+		g.setColor(Color.black);
+		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		for(int i=0;i<Camera.imageColor.length;i++){
+			for(int j=0;j<Camera.imageColor[0].length;j++){
+				if(!alphacheck(Camera.imageColor[i][j]))
+					g.setColor(new Color(Camera.imageColor[i][j].getRed(),Camera.imageColor[i][j].getGreen(),Camera.imageColor[i][j].getBlue(),Main.frame.panel3.getValue(0)));
+				else
+					g.setColor(Camera.imageColor[i][j]);
+				g.drawLine(i-a, j-b, i-a, j-b);
 			}
-			g.setColor(Color.black);
-			for(int i=0;i<5;i++)
-				g.drawRect(i,i,Main.img.getWidth()-2*i,Main.img.getHeight()-2*i);			
-		}else{
-			
+		}
+		g.setColor(Color.blue);
+		g.fillRect(getStarterPosition().x-5,getStarterPosition().y-5,10,10);
+		
+		for(int i=0;i<24;i++){
+			g.setColor(Color.red);
+			g.fillRect(getFieldPosition(i).x-5,getFieldPosition(i).y-5,10,10);
 		}
 		
 	}
 
-	private void thread(){
-		new Thread(){
-			public void run(){
-				while(true){
-					Main.frame.repaint();
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}.start();
-	}
-
-	public boolean checkStones(int r,int g,int b,int i,int j){
-		if(!(alpha.x == 0 && alpha.y == 0)){
-			int ra = Main.imgcolor[alpha.x][alpha.y].getRed();
-			int ga = Main.imgcolor[alpha.x][alpha.y].getGreen();
-			int ba = Main.imgcolor[alpha.x][alpha.y].getBlue();
-			if(Math.abs(r-ra)<sensitivity&&Math.abs(g-ga)<sensitivity&&Math.abs(b-ba)<sensitivity)
-				return true;
-			else 
-				return false;
-		}else
+	private boolean alphacheck(Color c){
+		if(Main.frame.panel3.isStarterSet()){
+			Color alphapixel = Camera.imageColor[starterPosition.x][starterPosition.y];
+			int r = Math.abs(c.getRed()-alphapixel.getRed());
+			int g = Math.abs(c.getGreen()-alphapixel.getGreen());
+			int b = Math.abs(c.getBlue()-alphapixel.getBlue());
+				
+			int a = Main.frame.panel3.getValue(1);
+		
+			return r<a && g<a && b<a;
+		}else{
 			return false;
+		}
+
 	}
+	
 }

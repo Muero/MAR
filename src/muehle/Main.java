@@ -5,29 +5,24 @@ import gui.Frame;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import camera.Camera;
-
-import java.awt.Color;
 import muehle.Board.eColor;
+import muehle.bt.BTConnection;
 //test
 public class Main {
 
 	public static final int depth = 2; // playing ability
-	public static final boolean usewebcam = false;
-	public static final boolean userobot = false;
-	public static String file = "field";
-	public static String fileEnding = "jpg";
-	public static BufferedImage img;
-	public static Color[][] imgcolor;
-	public static int guimode = 0;
-	public static Dimension size = new Dimension(1600,800);
+	public static boolean usewebcam = false;
+	public static boolean userobot = false;
+	public static boolean usealgorithm = false;
+	public static int difficulty = 0;
+	public static int guimode = 1;
+	public static Dimension size = new Dimension(542,378);
 
-	public static Frame frame = new Frame(size);
+	public static Frame frame = new Frame();
 
 	
 	
@@ -35,23 +30,40 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Connection conn;
-		//conn = new BTConnection();		//with robot
-		conn = new EmptyConnection();		//without robot
-		conn.openConnection();
 		//---------------------------------------------------------------------
 		
-				if(usewebcam)
+	
+		if(usewebcam){
+			Camera.generatePlayer();
+			Camera.importPictureFromPlayer(frame);
+		}else{
+			Camera.importPictureFromPC(frame);
+		}
+		Camera.readColor(frame);
+		if(usewebcam)		
+			Camera.closePlayer();
 
-					Camera.generatePlayer();
-				if(usewebcam)
-					Camera.importPicture(file,fileEnding);
-				Camera.readColor();
 
-					frame.setGuiMode(1);
-					if(usewebcam)
-						
-						Camera.closePlayer();
-							
+		frame.setGuiMode(1);
+		frame.waitForStart();
+		frame.setGuiMode(2);
+		
+		
+		gui.Output.create();
+		
+		
+		
+		userobot = frame.panel3.isPressed(2);
+		usewebcam = frame.panel3.isPressed(3);
+		usealgorithm = frame.panel3.isPressed(4);
+		
+		if(userobot)
+			conn = new BTConnection();		//with robot
+		else
+			conn = new EmptyConnection();	//without robot
+		conn.openConnection();
+
+		
 					
 				
 		//---------------------------------------------------------------------
@@ -59,9 +71,9 @@ public class Main {
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
 
-		JFrame mainWindow = initializeGui(panel, conn);
-		mainWindow.pack();
-		mainWindow.setVisible(true);
+//		JFrame mainWindow = initializeGui(panel, conn);
+//		mainWindow.pack();
+//		mainWindow.setVisible(true);
 
 		Play.lay(board, panel, depth, conn); // first phase: placing the stones
 		
@@ -90,6 +102,11 @@ public class Main {
 				System.exit(0);
 			}
 		});
+		
+		
+		
+		
+		
 		return frame;
 	}
 
