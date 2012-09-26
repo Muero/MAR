@@ -34,7 +34,7 @@ public class Panel3 extends JPanel{
 	public JLabel l1 = new JLabel("Starter setzen");
 	public JLabel l2 = new JLabel("Helligkeit");
 	public JLabel l3 = new JLabel("Alpha-Korrektur");
-	String[] string1 = {"Easy","Medium","Hard"};
+	String[] string1 = {"Easy","Medium","Hard","Insane"};
 	public JComboBox cb1 = new JComboBox(string1);
 	
 	private boolean starterSet = false;
@@ -180,6 +180,7 @@ public class Panel3 extends JPanel{
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		button5.setBackground(Color.green);
+		button5.setEnabled(false);
 		c.insets = new Insets(0,0,0,20);	
 	this.add(button5,c);
 	
@@ -206,7 +207,9 @@ public class Panel3 extends JPanel{
 		});
 		button2.addMouseListener(new MouseListener(){
 		public void mouseClicked(MouseEvent arg0) {
-			if(starterSet&&fieldSet)
+//TODO
+//			if(starterSet&&fieldSet)
+			if(starterSet)
 				isButton2 = true;
 		}
 		public void mouseEntered(MouseEvent arg0) {}
@@ -296,6 +299,7 @@ public class Panel3 extends JPanel{
 	
 	private void thread(){
 		new Thread(){
+			@SuppressWarnings("deprecation")
 			public void run(){
 				while(true){
 					if(isButton1){

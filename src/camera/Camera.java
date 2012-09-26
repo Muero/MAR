@@ -25,7 +25,7 @@ public class Camera {
 	public static Image image = null;
 	public static BufferedImage imageBuffer = null;
 	public static Color[][] imageColor = null;
-	public static String file = "field3";
+	public static String file = "field2";
 	public static String fileEnding = "jpg";
 
 	public static MediaTracker mt;

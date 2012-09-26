@@ -12,24 +12,18 @@ import muehle.Main;
 
 public class Frame extends JFrame{
 	private static final long serialVersionUID = 1L;
-	
-	public static final int mühlesize = 400;
-	public static int step = 0;
-	
+		
 	public Panel1 panel1 = new Panel1();
 	public Panel2 panel2 = new Panel2();
 	public Panel3 panel3 = new Panel3();
-		
-	private int ready = 0;
+	public Panel4 panel4 = new Panel4();
+	public Panel5 panel5 = new Panel5();
 	
 	public Frame(){
 		addComponentsToPane(this.getContentPane());
 		refresh();
 	}
 	
-	public int getReadyValue(){
-		return ready;
-	}
 	private void addComponentsToPane(Container pane){
 		pane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		pane.setLayout(new GridBagLayout());
@@ -72,11 +66,37 @@ public class Frame extends JFrame{
 			panel3.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		pane.add(panel3,c);
 			
+		
+			c.weightx = 1;
+			c.weighty = 1;
+			c.fill = GridBagConstraints.BOTH;
+			c.gridx = 0;
+			c.gridy = 0;
+			c.gridwidth = 1;
+			c.gridheight = 1;
+			c.ipadx = 200;
+			c.ipady = 200;
+			panel4.setBorder(new BevelBorder(BevelBorder.LOWERED));
+		pane.add(panel4,c);
+
+			c.weightx = 1;
+			c.weighty = 1;
+			c.fill = GridBagConstraints.BOTH;
+			c.gridx = 1;
+			c.gridy = 0;
+			c.gridwidth = 1;
+			c.gridheight = 1;
+			c.ipadx = 200;
+			c.ipady = 200;
+			panel5.setBorder(new BevelBorder(BevelBorder.LOWERED));
+			pane.add(panel5,c);
+		
+		
 		this.pack();
 
 	}
 		
-	public void refresh(){
+	private void refresh(){
 		new Thread(){
 			public void run(){
 				while(true){
@@ -95,18 +115,31 @@ public class Frame extends JFrame{
 		switch(newmode){
 		case 0:
 			Main.frame.setVisible(false);
+			Main.cframe.setVisible(false);
 			break;
 		case 1:
 			Main.frame.setVisible(true);
+			Main.cframe.setVisible(false);
 			Main.frame.panel3.setVisible(true);
 			Main.frame.panel2.setVisible(true);
 			Main.frame.panel1.setVisible(true);
+			Main.frame.panel4.setVisible(false);
+			Main.frame.panel5.setVisible(false);
 			break;
 		case 2:
 			Main.frame.setVisible(true);
+			Main.cframe.setVisible(false);
 			Main.frame.panel3.setVisible(false);
-			Main.frame.panel2.setVisible(true);
-			Main.frame.panel1.setVisible(true);					
+			Main.frame.panel2.setVisible(false);
+			Main.frame.panel1.setVisible(false);
+			Main.frame.panel4.setVisible(true);
+			Main.frame.panel5.setVisible(true);
+			break;
+		case 3:
+			Main.frame.setVisible(false);
+			Main.cframe.setVisible(true);
+			Main.cframe.cpanel1.setVisible(true);
+			Main.cframe.cpanel2.setVisible(true);
 			break;
 		}
 		Main.frame.repaint();

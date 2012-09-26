@@ -1,63 +1,39 @@
 package muehle;
 
+import gui.ComputerFrame;
 import gui.Frame;
+import gui.Output;
 
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import camera.Camera;
 import muehle.Board.eColor;
 import muehle.bt.BTConnection;
 //test
 public class Main {
 
 	public static final int depth = 2; // playing ability
-	public static boolean usewebcam = false;
-	public static boolean userobot = false;
-	public static boolean usealgorithm = false;
-	public static int difficulty = 0;
 	public static int guimode = 1;
 	public static Dimension size = new Dimension(542,378);
 
 	public static Frame frame = new Frame();
-
+	public static ComputerFrame cframe = new ComputerFrame();
 	
 	
 	
-	
-	public static void main(String[] args) {
-		Connection conn;
+	public static void main(String[] args){
 		//---------------------------------------------------------------------
-		
 	
-		if(usewebcam){
-			Camera.generatePlayer();
-			Camera.importPictureFromPlayer(frame);
-		}else{
-			Camera.importPictureFromPC(frame);
-		}
-		Camera.readColor(frame);
-		if(usewebcam)		
-			Camera.closePlayer();
-
-
-		frame.setGuiMode(1);
-		frame.waitForStart();
-		frame.setGuiMode(2);
-		
-		
+		gui.Input.startGui(frame);
 		gui.Output.create();
+		gui.Input.startIngameGui(frame);
 		
 		
 		
-		userobot = frame.panel3.isPressed(2);
-		usewebcam = frame.panel3.isPressed(3);
-		usealgorithm = frame.panel3.isPressed(4);
-		
-		if(userobot)
+		Connection conn;
+		if(Output.userobot)
 			conn = new BTConnection();		//with robot
 		else
 			conn = new EmptyConnection();	//without robot
@@ -70,10 +46,6 @@ public class Main {
 
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
-
-//		JFrame mainWindow = initializeGui(panel, conn);
-//		mainWindow.pack();
-//		mainWindow.setVisible(true);
 
 		Play.lay(board, panel, depth, conn); // first phase: placing the stones
 		
@@ -91,23 +63,4 @@ public class Main {
 		System.out.println(board);
 		conn.closeConnection();
 	}
-
-	private static JFrame initializeGui(JPanel panel, final Connection conn) {
-		JFrame frame = new JFrame("Muehle");
-		frame.setAlwaysOnTop(true);
-		frame.add(panel);
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent arg0) {
-				conn.closeConnection();
-				System.exit(0);
-			}
-		});
-		
-		
-		
-		
-		
-		return frame;
-	}
-
 }
