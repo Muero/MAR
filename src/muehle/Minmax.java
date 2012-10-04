@@ -1,28 +1,50 @@
 package muehle;
 
-import muehle.Board.eColor;
 import static muehle.Board.eColor.*;
+import muehle.Board.eColor;
 
 /**
  * determine the best turn for the computer
+ * 
  * @return the best value of the evaluation
  */
 public class Minmax {
 
-	public static int deepthWhiteMill = 0;		//not used yet
-	public static int deepthBlackMill = 0;		//not used yet
+	public static int deepthWhiteMill = 0; // not used yet
+	public static int deepthBlackMill = 0; // not used yet
 
+	public static int minmaxDecide(Board board, eColor computer, eColor player,
+			int depth, int numberOfMoves) {
+		int value = 0;
+		if (!board.getStuck(player, computer)) {
+			if (numberOfMoves < Main.numberOfStones * 2) {
+				value = Minmax.minmaxLay(board, computer, player, depth,
+						numberOfMoves);
+			} else if (board.getNumberOfStones(computer) > 3) {
+				value = Minmax.minmaxMove(board, computer, player, depth,
+						numberOfMoves);
+			} else {
+				value = Minmax.minmaxJumping(board, computer, player, depth,
+						numberOfMoves);
+			}
+		} else {
+			value = Evaluation.evaluation(board);
+		}
+
+		return value;
+
+	}
 
 	public static int minmaxLay(Board board, eColor computer, eColor player,
-			int deepth) {
+			int depth, int numberOfMoves) {
 
-		if (deepth > 0) {
+		if (depth > 0) {
 
 			int result;
 
 			Position nextMove = null;
 			Position nextTake = null;
-			
+
 			if (computer == BLACK) {
 				result = Integer.MIN_VALUE;
 			} else {
@@ -30,16 +52,25 @@ public class Minmax {
 			}
 
 			for (Position turn : Position.getAllPositions()) {
-				if (board.getColor(turn) == NONE) {				//On every possible position, a brick is laid.
+				if (board.getColor(turn) == NONE) { // On every possible
+													// position, a brick is
+													// laid.
 					board.setColor(turn, computer);
-					if (board.isMill(turn, computer)) {			//If with this position "turn" is a mill
-						for (Position takeAway : Position.getAllPositions()) {	//any opposing stone is taken away
+					if (board.isMill(turn, computer)) { // If with this position
+														// "turn" is a mill
+						for (Position takeAway : Position.getAllPositions()) { // any
+																				// opposing
+																				// stone
+																				// is
+																				// taken
+																				// away
 							if (board.getColor(takeAway) == player
 									&& !board.isMill(takeAway, player)) {
 								board.setColor(takeAway, NONE);
 
-								int value = minmaxLay(board, player, computer,	//other player has its turn
-										(deepth - 1));
+								int value = minmaxDecide(board, player,
+										computer, // other player has its turn
+										(depth - 1), numberOfMoves + 1);
 
 								if (computer == BLACK) {
 									if (result < value) {
@@ -63,11 +94,12 @@ public class Minmax {
 					} else {
 						// no new mill with this move
 
-						//other player has its turn
-						int value = minmaxLay(board, player, computer,
-								(deepth - 1));
+						// other player has its turn
+						int value = minmaxDecide(board, player, computer,
+								(depth - 1), numberOfMoves + 1);
 
-						// Depending on what color is in the series, the minimum or the maximum is stored.
+						// Depending on what color is in the series, the minimum
+						// or the maximum is stored.
 						if (computer == BLACK) {
 							if (result < value) {
 								result = value;
@@ -92,7 +124,7 @@ public class Minmax {
 				}
 			}
 
-			//The best turn is stored
+			// The best turn is stored
 			Play.nextTurnFrom = null;
 			Play.nextTurnTo = nextMove;
 			Play.nextTake = nextTake;
@@ -107,8 +139,8 @@ public class Minmax {
 	}
 
 	public static int minmaxMove(Board board, eColor computer, eColor player,
-			int deepth) {
-		if (deepth > 0) {
+			int depth, int numberOfMoves) {
+		if (depth > 0) {
 
 			int result;
 
@@ -124,19 +156,36 @@ public class Minmax {
 
 			for (Position turnFrom : Position.getAllPositions()) {
 				if (board.getColor(turnFrom) == computer) {
-					board.setColor(turnFrom, NONE);				//Every brick with the Color is removed
+					board.setColor(turnFrom, NONE); // Every brick with the
+													// Color is removed
 					for (Position turnTo : Position.getNeighboursOf(turnFrom)) {
-						if (board.getColor(turnTo) == NONE) {	
-							board.setColor(turnTo, computer);	//on each nearby position is a stone set
+						if (board.getColor(turnTo) == NONE) {
+							board.setColor(turnTo, computer); // on each nearby
+																// position is a
+																// stone set
 
-							if (board.isMill(turnTo, computer)) {		//If with this position "turnTo" is a mill
-								for (Position takeAway : Position.getAllPositions()) {
+							if (board.isMill(turnTo, computer)) { // If with
+																	// this
+																	// position
+																	// "turnTo"
+																	// is a mill
+								for (Position takeAway : Position
+										.getAllPositions()) {
 									if (board.getColor(takeAway) == player
 											&& !board.isMill(takeAway, player)) {
-										board.setColor(takeAway, NONE);	//any opposing stone is taken away
+										board.setColor(takeAway, NONE); // any
+																		// opposing
+																		// stone
+																		// is
+																		// taken
+																		// away
 
-										int value = minmaxMove(board, player, //other player has its turn
-												computer, (deepth - 1));
+										int value = minmaxDecide(
+												board,
+												player, // other player has its
+														// turn
+												computer, (depth - 1),
+												numberOfMoves + 1);
 
 										if (computer == BLACK) {
 											if (result < value) {
@@ -162,11 +211,13 @@ public class Minmax {
 							} else {
 								// no new mill with this move
 
-								//other player has its turn
-								int value = minmaxMove(board, player,
-										computer, (deepth - 1));
+								// other player has its turn
+								int value = minmaxDecide(board, player,
+										computer, (depth - 1),
+										numberOfMoves + 1);
 
-								// Depending on what color is in the series, the minimum or the maximum is stored.
+								// Depending on what color is in the series, the
+								// minimum or the maximum is stored.
 								if (computer == BLACK) {
 									if (result < value) {
 										result = value;
@@ -194,7 +245,7 @@ public class Minmax {
 					board.setColor(turnFrom, computer);
 				}
 			}
-			//The best turn is stored
+			// The best turn is stored
 			Play.nextTurnFrom = nextMoveFrom;
 			Play.nextTurnTo = nextMoveTo;
 			Play.nextTake = nextTake;
@@ -207,9 +258,9 @@ public class Minmax {
 
 	}
 
-	public static int minmaxJumping(Board board, eColor computer, eColor player,
-			int deepth) {
-		if (deepth > 0) {
+	public static int minmaxJumping(Board board, eColor computer,
+			eColor player, int depth, int numberOfMoves) {
+		if (depth > 0) {
 
 			int result;
 
@@ -224,20 +275,40 @@ public class Minmax {
 			}
 
 			for (Position turnFrom : Position.getAllPositions()) {
-				if (board.getColor(turnFrom) == computer) {		//Every brick with the Color is removed
+				if (board.getColor(turnFrom) == computer) { // Every brick with
+															// the Color is
+															// removed
 					board.setColor(turnFrom, NONE);
 					for (Position turnTo : Position.getAllPositions()) {
-						if (turnTo != turnFrom && board.getColor(turnTo) == NONE) {
-							board.setColor(turnTo, computer);	//On every possible position, a brick is laid.
+						if (turnTo != turnFrom
+								&& board.getColor(turnTo) == NONE) {
+							board.setColor(turnTo, computer); // On every
+																// possible
+																// position, a
+																// brick is
+																// laid.
 
-							if (board.isMill(turnTo, computer)) {	//If with this position "turnTo" is a mill
-								for (Position takeAway : Position.getAllPositions()) {
+							if (board.isMill(turnTo, computer)) { // If with
+																	// this
+																	// position
+																	// "turnTo"
+																	// is a mill
+								for (Position takeAway : Position
+										.getAllPositions()) {
 									if (board.getColor(takeAway) == player
 											&& !board.isMill(takeAway, player)) {
-										board.setColor(takeAway, NONE);	//any opposing stone is taken away
+										board.setColor(takeAway, NONE); // any
+																		// opposing
+																		// stone
+																		// is
+																		// taken
+																		// away
 
-										int value = minmaxJumping(board,	//other player has its turn
-												player, computer, (deepth - 1));
+										int value = minmaxDecide(
+												board, // other player has its
+														// turn
+												player, computer, (depth - 1),
+												numberOfMoves);
 
 										if (computer == BLACK) {
 											if (result < value) {
@@ -260,15 +331,17 @@ public class Minmax {
 										board.setColor(takeAway, player);
 									}
 								}
-							
+
 							} else {
 								// no new mill with this move
 
-								//other player has its turn
-								int value = minmaxJumping(board, player,
-										computer, (deepth - 1));
+								// other player has its turn
+								int value = minmaxDecide(board, player,
+										computer, (depth - 1),
+										numberOfMoves + 1);
 
-								// Depending on what color is in the series, the minimum or the maximum is stored.
+								// Depending on what color is in the series, the
+								// minimum or the maximum is stored.
 								if (computer == BLACK) {
 									if (result < value) {
 										result = value;
@@ -297,7 +370,7 @@ public class Minmax {
 
 				}
 			}
-			//The best turn is stored
+			// The best turn is stored
 			Play.nextTurnFrom = nextMoveFrom;
 			Play.nextTurnTo = nextMoveTo;
 			Play.nextTake = nextTake;

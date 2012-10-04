@@ -213,4 +213,26 @@ public class Board {
 
 	}
 
+	public boolean getStuck(eColor you, eColor opp){
+		boolean b=true;
+		for (Position p : Position.getAllPositions()){
+			if(getColor(p) == you){
+				for(Position n : Position.getNeighboursOf(p)){
+					if(getColor(n)!=opp)
+						b=false;
+				}
+				
+			}
+			
+		}
+				
+		return b;
+	}
+	
+	public boolean isOpenMill(Position pos, eColor stone){
+		
+		
+		
+		return true;
+	}
 }
