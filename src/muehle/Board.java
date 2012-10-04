@@ -5,41 +5,45 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 public class Board {
 
 	public enum eColor {
-		NONE, BLACK, WHITE //The three modes that a "Position" may have.
+		NONE, BLACK, WHITE // The three modes that a "Position" may have.
 	}
 
 	private Map<Position, eColor> board = new HashMap<Position, eColor>();
 
-	
-	/**	
-	 * Returns the Color on the Position p.
-	 * If on the Position is no Color it returns the Color NONE.
-	 * @param p the position where you want to find out the color
+	/**
+	 * Returns the Color on the Position p. If on the Position is no Color it
+	 * returns the Color NONE.
+	 * 
+	 * @param p
+	 *            the position where you want to find out the color
 	 * @return c the color at the position p
 	 */
 	public eColor getColor(Position p) {
-		if(p == null) throw new IllegalArgumentException();
+		if (p == null)
+			throw new IllegalArgumentException();
 		eColor c = board.get(p);
 		if (c == null)
 			c = eColor.NONE;
 		return c;
 	}
 
-
 	/**
-	 * Set the color c on the position p. The color can be
-	 * retrieved with method {@link getColor}
-	 * @param p position
-	 * @param c color
-	 * @throws IllegalArgumentException if p == null
+	 * Set the color c on the position p. The color can be retrieved with method
+	 * {@link getColor}
+	 * 
+	 * @param p
+	 *            position
+	 * @param c
+	 *            color
+	 * @throws IllegalArgumentException
+	 *             if p == null
 	 */
 	public void setColor(Position p, eColor c) {
-		if(p == null) throw new IllegalArgumentException();
+		if (p == null)
+			throw new IllegalArgumentException();
 		board.put(p, c);
 	}
 
@@ -48,7 +52,7 @@ public class Board {
 	 */
 	public String toString() {
 		return String.format(
-				
+
 				// "NONEx-------------NONEx-------------NONEx\n"+
 				// "  |   NONEx-------NONEx-------NONEx   |  \n"+
 				// "  |     |   NONEx-NONEx-NONEx   |     |  \n"+
@@ -78,10 +82,12 @@ public class Board {
 				getColor(Position.p65), getColor(Position.p70),
 				getColor(Position.p73), getColor(Position.p76));
 	}
-	
+
 	/**
 	 * Returns the number of stones of a given color.
-	 * @param color given color
+	 * 
+	 * @param color
+	 *            given color
 	 * @return the number of stones with the given color
 	 */
 	public int getNumberOfStones(eColor color) {
@@ -95,8 +101,11 @@ public class Board {
 
 	/**
 	 * Test whether a mill is on the Position pos.
-	 * @param stone the color of the mill
-	 * @param pos one of the positions of the mill
+	 * 
+	 * @param stone
+	 *            the color of the mill
+	 * @param pos
+	 *            one of the positions of the mill
 	 * @return whether a mill is at position ps
 	 */
 	public boolean isMill(Position pos, eColor stone) {
@@ -134,14 +143,15 @@ public class Board {
 	/**
 	 * Counts the number of mills in the given color c
 	 * 
-	 * @param c color whose mills care counted
+	 * @param c
+	 *            color whose mills care counted
 	 * @return number of mills in the color c
 	 */
 	public int getNumberOfMills(eColor c) {
 		int counter = 0;
-		
+
 		// horizontal
-		
+
 		if (board.get(Position.p10) == c && board.get(Position.p13) == c
 				&& board.get(Position.p16) == c) {
 			counter++;
@@ -174,9 +184,9 @@ public class Board {
 				&& board.get(Position.p76) == c) {
 			counter++;
 		}
-		
+
 		// vertical
-		
+
 		if (board.get(Position.p10) == c && board.get(Position.p40) == c
 				&& board.get(Position.p70) == c) {
 			counter++;
@@ -213,26 +223,366 @@ public class Board {
 
 	}
 
-	public boolean getStuck(eColor you, eColor opp){
-		boolean b=true;
-		for (Position p : Position.getAllPositions()){
-			if(getColor(p) == you){
-				for(Position n : Position.getNeighboursOf(p)){
-					if(getColor(n)!=opp)
-						b=false;
+	public boolean getStuck(eColor you, eColor opp) {
+		boolean b = true;
+		for (Position p : Position.getAllPositions()) {
+			if (getColor(p) == you) {
+				for (Position n : Position.getNeighboursOf(p)) {
+					if (getColor(n) != opp)
+						b = false;
 				}
-				
+
 			}
-			
+
 		}
-				
+
 		return b;
 	}
-	
-	public boolean isOpenMill(Position pos, eColor stone){
+
+	public int getNumberOfOpenMills(eColor stone) {
+		int z = 0;
+		// biggest circle
+		// left
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p40) == stone
+				&& board.get(Position.p73) == stone
+				&& board.get(Position.p70) == eColor.NONE)
+			z++;
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p70) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p40) == eColor.NONE)
+			z++;
+		if (board.get(Position.p70) == stone
+				&& board.get(Position.p40) == stone
+				&& board.get(Position.p13) == stone
+				&& board.get(Position.p10) == eColor.NONE)
+			z++;
+		// top
+		if (board.get(Position.p70) == stone
+				&& board.get(Position.p73) == stone
+				&& board.get(Position.p46) == stone
+				&& board.get(Position.p76) == eColor.NONE)
+			z++;
+		if (board.get(Position.p70) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p76) == stone
+				&& board.get(Position.p73) == eColor.NONE)
+			z++;
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p73) == stone
+				&& board.get(Position.p76) == stone
+				&& board.get(Position.p70) == eColor.NONE)
+			z++;
+		// right
+		if (board.get(Position.p76) == stone
+				&& board.get(Position.p46) == stone
+				&& board.get(Position.p13) == stone
+				&& board.get(Position.p16) == eColor.NONE)
+			z++;
+		if (board.get(Position.p76) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p16) == stone
+				&& board.get(Position.p46) == eColor.NONE)
+			z++;
+		if (board.get(Position.p73) == stone
+				&& board.get(Position.p46) == stone
+				&& board.get(Position.p16) == stone
+				&& board.get(Position.p76) == eColor.NONE)
+			z++;
+		// bottom
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p13) == stone
+				&& board.get(Position.p46) == stone
+				&& board.get(Position.p16) == eColor.NONE)
+			z++;
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p16) == stone
+				&& board.get(Position.p13) == eColor.NONE)
+			z++;
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p13) == stone
+				&& board.get(Position.p16) == stone
+				&& board.get(Position.p10) == eColor.NONE)
+			z++;
+		// medium circle
+		// left
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p61) == eColor.NONE)
+			z++;
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p61) == stone
+				&& board.get(Position.p41) == eColor.NONE)
+			z++;
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p40) == stone
+				&& board.get(Position.p61) == stone
+				&& board.get(Position.p41) == eColor.NONE)
+			z++;
+		if (board.get(Position.p23) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p61) == stone
+				&& board.get(Position.p21) == eColor.NONE)
+			z++;
+		// top
+		if (board.get(Position.p61) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p65) == eColor.NONE)
+			z++;
+		if (board.get(Position.p61) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p65) == stone
+				&& board.get(Position.p63) == eColor.NONE)
+			z++;
+		if (board.get(Position.p61) == stone
+				&& board.get(Position.p73) == stone
+				&& board.get(Position.p65) == stone
+				&& board.get(Position.p63) == eColor.NONE)
+			z++;
+		if (board.get(Position.p41) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p65) == stone
+				&& board.get(Position.p61) == eColor.NONE)
+			z++;
+		// right
+		if (board.get(Position.p65) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p25) == eColor.NONE)
+			z++;
+		if (board.get(Position.p65) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p45) == eColor.NONE)
+			z++;
+		if (board.get(Position.p65) == stone
+				&& board.get(Position.p46) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p45) == eColor.NONE)
+			z++;
+		if (board.get(Position.p63) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p65) == eColor.NONE)
+			z++;
+		// bottom
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p25) == eColor.NONE)
+			z++;
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p23) == eColor.NONE)
+			z++;
+		if (board.get(Position.p21) == stone
+				&& board.get(Position.p13) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p23) == eColor.NONE)
+			z++;
+		if (board.get(Position.p41) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p21) == eColor.NONE)
+			z++;
+		// smallest circle
+		// left
+		if (board.get(Position.p32) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p52) == eColor.NONE)
+			z++;
+		if (board.get(Position.p32) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p52) == stone
+				&& board.get(Position.p42) == eColor.NONE)
+			z++;
+		if (board.get(Position.p33) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p52) == stone
+				&& board.get(Position.p32) == eColor.NONE)
+			z++;
+		// top
+		if (board.get(Position.p52) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p54) == eColor.NONE)
+			z++;
+		if (board.get(Position.p52) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p54) == stone
+				&& board.get(Position.p53) == eColor.NONE)
+			z++;
+		if (board.get(Position.p42) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p54) == stone
+				&& board.get(Position.p52) == eColor.NONE)
+			z++;
+		// right
+		if (board.get(Position.p54) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p34) == eColor.NONE)
+			z++;
+		if (board.get(Position.p54) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p44) == eColor.NONE)
+			z++;
+		if (board.get(Position.p53) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p54) == eColor.NONE)
+			z++;
+		// bottom
+		if (board.get(Position.p32) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p34) == eColor.NONE)
+			z++;
+		if (board.get(Position.p32) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p33) == eColor.NONE)
+			z++;
+		if (board.get(Position.p42) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p32) == eColor.NONE)
+			z++;
+
+		// left cross
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p52) == stone
+				&& board.get(Position.p42) == eColor.NONE)
+			z++;
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p32) == stone
+				&& board.get(Position.p42) == eColor.NONE)
+			z++;
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p61) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p41) == eColor.NONE)
+			z++;
+		if (board.get(Position.p40) == stone
+				&& board.get(Position.p21) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p41) == eColor.NONE)
+			z++;
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p40) == eColor.NONE)
+			z++;
+		if (board.get(Position.p70) == stone
+				&& board.get(Position.p41) == stone
+				&& board.get(Position.p42) == stone
+				&& board.get(Position.p40) == eColor.NONE)
+			z++;
+		// up cross
+		if (board.get(Position.p73) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p54) == stone
+				&& board.get(Position.p53) == eColor.NONE)
+			z++;
+		if (board.get(Position.p73) == stone
+				&& board.get(Position.p63) == stone
+				&& board.get(Position.p52) == stone
+				&& board.get(Position.p53) == eColor.NONE)
+			z++;
+		if (board.get(Position.p73) == stone
+				&& board.get(Position.p61) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p63) == eColor.NONE)
+			z++;
+		if (board.get(Position.p73) == stone
+				&& board.get(Position.p65) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p63) == eColor.NONE)
+			z++;
+		if (board.get(Position.p63) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p70) == stone
+				&& board.get(Position.p73) == eColor.NONE)
+			z++;
+		if (board.get(Position.p63) == stone
+				&& board.get(Position.p53) == stone
+				&& board.get(Position.p76) == stone
+				&& board.get(Position.p73) == eColor.NONE)
+			z++;
 		
 		
-		
-		return true;
+		// right cross
+		if (board.get(Position.p46) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p54) == stone
+				&& board.get(Position.p44) == eColor.NONE)
+			z++;
+		if (board.get(Position.p46) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p44) == eColor.NONE)
+			z++;
+		if (board.get(Position.p46) == stone
+				&& board.get(Position.p65) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p45) == eColor.NONE)
+			z++;
+		if (board.get(Position.p46) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p45) == eColor.NONE)
+			z++;
+		if (board.get(Position.p76) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p46) == eColor.NONE)
+			z++;
+		if (board.get(Position.p16) == stone
+				&& board.get(Position.p45) == stone
+				&& board.get(Position.p44) == stone
+				&& board.get(Position.p46) == eColor.NONE)
+			z++;
+		// bottom cross
+		if (board.get(Position.p13) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p32) == stone
+				&& board.get(Position.p33) == eColor.NONE)
+			z++;
+		if (board.get(Position.p13) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p34) == stone
+				&& board.get(Position.p33) == eColor.NONE)
+			z++;
+		if (board.get(Position.p13) == stone
+				&& board.get(Position.p21) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p23) == eColor.NONE)
+			z++;
+		if (board.get(Position.p13) == stone
+				&& board.get(Position.p25) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p23) == eColor.NONE)
+			z++;
+		if (board.get(Position.p10) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p13) == eColor.NONE)
+			z++;
+		if (board.get(Position.p16) == stone
+				&& board.get(Position.p23) == stone
+				&& board.get(Position.p33) == stone
+				&& board.get(Position.p13) == eColor.NONE)
+			z++;
+		return z;
 	}
 }

@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.GridBagConstraints;

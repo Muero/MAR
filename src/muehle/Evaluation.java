@@ -16,25 +16,27 @@ public class Evaluation {
 
 		int bewertung = (int) Math.round(Math.random() * 40);
 
-		int newBlackMills = board.getNumberOfMills(BLACK) - Play.oldBlackMills;
-		int newWhiteMills = board.getNumberOfMills(WHITE) - Play.oldWhiteMills;
+		int BlackMills = board.getNumberOfMills(BLACK);
+		int WhiteMills = board.getNumberOfMills(WHITE);
 
-		int numberOfWhiteStones = board.getNumberOfStones(WHITE); // not used
-																	// yet
-		int numberOfBlackStones = board.getNumberOfStones(BLACK); // not used
-																	// yet
+//		int numberOfWhiteStones = board.getNumberOfStones(WHITE);
+//		int numberOfBlackStones = board.getNumberOfStones(BLACK);
+
+		int openMillsBlack = board.getNumberOfOpenMills(BLACK);
+		int openMillsWhite = board.getNumberOfOpenMills(WHITE);
 
 		if (board.getStuck(BLACK, WHITE)) {
-			bewertung = bewertung + 1000;
-		}else if (board.getStuck(WHITE, BLACK)) {
 			bewertung = bewertung - 1000;
+		} else if (board.getStuck(WHITE, BLACK)) {
+			bewertung = bewertung + 1000;
 		}
-		
+		bewertung = bewertung + 200 * openMillsBlack;
+		bewertung = bewertung - 200 * openMillsWhite;
 
-		if (newBlackMills > newWhiteMills) {
-			bewertung = bewertung + 100 * (newBlackMills - newWhiteMills);
-		} else if (newBlackMills < newWhiteMills) {
-			bewertung = bewertung + 200 * (newBlackMills - newWhiteMills);
+		if (BlackMills > WhiteMills) {
+			bewertung = bewertung + 100 * (BlackMills - WhiteMills);
+		} else if (BlackMills < WhiteMills) {
+			bewertung = bewertung + 200 * (BlackMills - WhiteMills);
 		}
 
 		return bewertung;

@@ -10,8 +10,6 @@ public class Play {
 	static Position nextTurnTo;
 	public static Position clickedButton = null;
 	public static Position nextTake;
-	public static int oldBlackMills;
-	public static int oldWhiteMills;
 
 	/**In This Method the Player and the Computers lay their stones.
 	 * @param deepth is the strength of the computer
@@ -84,8 +82,6 @@ public class Play {
 			System.out.println("I'm thinking ... \n");
 
 			// Computer determines his best possible move
-			int oldBlackMills = board.getNumberOfMills(BLACK);
-			int oldWhiteMills = board.getNumberOfMills(WHITE);
 			Minmax.minmaxDecide(board, BLACK, WHITE, deepth, 2*i+1);
 
 			// Computer put his Stone
@@ -228,8 +224,6 @@ public class Play {
 			if (board.getNumberOfStones(BLACK) < 3
 					|| board.getNumberOfStones(WHITE) < 3)
 				return;
-			int oldBlackMills = board.getNumberOfMills(BLACK);
-			int oldWhiteMills = board.getNumberOfMills(WHITE);
 			Minmax.minmaxDecide(board, BLACK, WHITE, deepth, numberOfMoves);
 			
 			numberOfMoves++;

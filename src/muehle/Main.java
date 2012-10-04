@@ -4,35 +4,11 @@ import gui.ComputerFrame;
 import gui.Frame;
 import gui.Output;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-//<<<<<<< HEAD
-//
-//import muehle.Board.eColor;
-//import camera.Camera;
-////test
-//public class Main {
-//
-//	public static final int depth = 4; // playing ability
-//	public static final int numberOfStones = 6; //With how many stones u will play
-//	public static final boolean usewebcam = false;
-//	public static final boolean userobot = false;
-//	public static String file = "field2";
-//	public static String fileEnding = "jpg";
-//	public static BufferedImage img;
-//	public static Color[][] imgcolor;
-//	public static int guimode = 0;
-//	public static Dimension size = new Dimension(1600,800);
-//
-//	public static Frame frame = new Frame(size);
-//=======
+
 import muehle.Board.eColor;
 import muehle.bt.BTConnection;
-//test
+
 public class Main {
 
     public static final int numberOfStones = 6; //With how many stones u will play
@@ -41,7 +17,7 @@ public class Main {
 	public static final int depth = 2; // playing ability
 	public static int guimode = 1;
 	public static Dimension size = new Dimension(542,378);
-//>>>>>>> d341048f8c73be852c0180743cce9a43a60cf19f
+
 
 	public static Frame frame = new Frame();
 	public static ComputerFrame cframe = new ComputerFrame();
