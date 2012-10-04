@@ -10,12 +10,14 @@ public class Play {
 	static Position nextTurnTo;
 	public static Position clickedButton = null;
 	public static Position nextTake;
+	public static int oldBlackMills;
+	public static int oldWhiteMills;
 
 	/**In This Method the Player and the Computers lay their stones.
-	 * @param deepth is the strenght of the computer
+	 * @param deepth is the strength of the computer
 	 */
 	public static void lay(Board board, BoardPanel panel, int deepth,
-			Connection conn) {
+			Connection conn, int numberOfMoves) {
 		Position inputPosition, takeAway;
 
 		System.out.println("*************************** \n"
@@ -23,11 +25,14 @@ public class Play {
 				+ "You're white, it's your turn. \n");
 		System.out.println(board);
 
-		for (int i = 0; i < 4; i++) { // [IN JEDEM FALL !<4]
+		for (int i = 0; i < numberOfMoves; i++) {
 			clickedButton = null;
 			panel.refreshButtonColor(board);
-
+			
+			if (board.getStuck(WHITE, BLACK))
+				return;
 			// The player is laying his stone
+			System.out.println("Lay your stone \n");
 			do {
 				inputPosition = clickedButton;
 
@@ -79,8 +84,9 @@ public class Play {
 			System.out.println("I'm thinking ... \n");
 
 			// Computer determines his best possible move
-			int res = Minmax.minmaxLay(board, BLACK, WHITE, deepth);
-			System.out.println(res);
+			int oldBlackMills = board.getNumberOfMills(BLACK);
+			int oldWhiteMills = board.getNumberOfMills(WHITE);
+			Minmax.minmaxDecide(board, BLACK, WHITE, deepth, 2*i+1);
 
 			// Computer put his Stone
 			board.setColor(nextTurnTo, BLACK);
@@ -100,7 +106,6 @@ public class Play {
 			// board is updated
 			panel.repaint();
 			System.out.println(board);
-			System.out.println(Minmax.deepthWhiteMill);
 
 			// ROBOTER IS MOVING
 			conn.setStone(nextTurnTo);
@@ -119,9 +124,9 @@ public class Play {
 
 	/**In This Method the Player and the Computers move or jump with their stones.
 	 */
-	public static void move(Board board, BoardPanel panel, int tiefe,
+	public static void move(Board board, BoardPanel panel, int deepth,
 			Connection conn) {
-
+		int numberOfMoves = 2*Main.numberOfStones;
 		Position inputPositionFrom, inputPositionTo, takeAway;
 
 		// board is updated
@@ -129,12 +134,14 @@ public class Play {
 
 		while (board.getNumberOfStones(BLACK) > 2
 				&& board.getNumberOfStones(WHITE) > 2) {
+			numberOfMoves++;
 			// Both still have to have 3 stones
 
 			// board is updated
 			panel.refreshButtonColor(board);
 			panel.repaint();
-
+			if (board.getStuck(WHITE, BLACK))
+				return;
 			do {
 				System.out.println("Your next move? \n" + "From where?");
 
@@ -155,7 +162,7 @@ public class Play {
 				panel.repaint();
 				System.out.println("Whereto ?");
 
-				// The player sais whereto he wants to move his stone
+				// The player says whereto he wants to move his stone
 				clickedButton = null;
 				do {
 					inputPositionTo = clickedButton;
@@ -215,23 +222,17 @@ public class Play {
 			System.out.println("I'm thinking ... \n");
 			panel.setRobotOnTurn(true);
 
-			int res;
-
-			System.out.println(board.getNumberOfStones(BLACK));
 			// Computer determines his best possible move
-
-			// If he has more than three stones (he must move)
-			if (board.getNumberOfStones(BLACK) > 3)
-				res = Minmax.minmaxMove(board, BLACK, WHITE, tiefe);
-			// or if he has just three stones (he can jump)
-			if (board.getNumberOfStones(BLACK) == 3)
-				res = Minmax.minmaxJumping(board, BLACK, WHITE, tiefe);
-
+			
 			// If he has less than three stones it will be canceled
 			if (board.getNumberOfStones(BLACK) < 3
 					|| board.getNumberOfStones(WHITE) < 3)
 				return;
-
+			int oldBlackMills = board.getNumberOfMills(BLACK);
+			int oldWhiteMills = board.getNumberOfMills(WHITE);
+			Minmax.minmaxDecide(board, BLACK, WHITE, deepth, numberOfMoves);
+			
+			numberOfMoves++;
 			// Computer move his stone
 			board.setColor(nextTurnFrom, NONE);
 			board.setColor(nextTurnTo, BLACK);
