@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-class BoardPanel extends JPanel {
+public class BoardPanel extends JPanel {
 	private Map<JButton, Position> buttons = new HashMap<JButton, Position>();
 	private boolean robotOnTurn = false;
 

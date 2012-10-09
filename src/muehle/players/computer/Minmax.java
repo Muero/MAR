@@ -1,7 +1,14 @@
-package muehle;
+package muehle.players.computer;
 
-import static muehle.Board.eColor.*;
+import static muehle.Board.eColor.BLACK;
+import static muehle.Board.eColor.NONE;
+import static muehle.Board.eColor.WHITE;
+import muehle.Board;
 import muehle.Board.eColor;
+import muehle.Evaluation;
+import muehle.Main;
+import muehle.Position;
+import muehle.players.Move;
 
 /**
  * determine the best turn for the computer
@@ -9,14 +16,23 @@ import muehle.Board.eColor;
  * @return the best value of the evaluation
  */
 public class Minmax {
+	
+	static class MinimaxResult {
+		Move bestMove;
+		int rank;
+		public MinimaxResult(Move bestMove, int rank) {
+			this.bestMove = bestMove;
+			this.rank = rank;
+		}
+	}
 
 	public static int deepthWhiteMill = 0; // not used yet
 	public static int deepthBlackMill = 0; // not used yet
 
-	public static int minmaxDecide(Board board, eColor computer, eColor player,
+	public static MinimaxResult minmaxDecide(Board board, eColor computer, eColor player,
 			int depth, int numberOfMoves) {
-		int value = 0;
-		if (!board.getStuck(player, computer)) {
+		MinimaxResult value = null;
+		if (!board.getStuck(player)) {
 			if (numberOfMoves < Main.numberOfStones * 2) {
 				value = Minmax.minmaxLay(board, computer, player, depth,
 						numberOfMoves);
@@ -28,14 +44,14 @@ public class Minmax {
 						numberOfMoves);
 			}
 		} else {
-			value = Evaluation.evaluation(board);
+			value = new MinimaxResult(null, Evaluation.evaluation(board));
 		}
 
 		return value;
 
 	}
 
-	public static int minmaxLay(Board board, eColor computer, eColor player,
+	public static MinimaxResult minmaxLay(Board board, eColor computer, eColor player,
 			int depth, int numberOfMoves) {
 
 		if (depth > 0) {
@@ -68,21 +84,21 @@ public class Minmax {
 									&& !board.isMill(takeAway, player)) {
 								board.setColor(takeAway, NONE);
 
-								int value = minmaxDecide(board, player,
+								MinimaxResult value = minmaxDecide(board, player,
 										computer, // other player has its turn
 										(depth - 1), numberOfMoves + 1);
 
 								if (computer == BLACK) {
-									if (result < value) {
-										result = value;
+									if (result < value.rank) {
+										result = value.rank;
 										nextMove = turn;
 										nextTake = takeAway;
 									}
 								}
 
 								if (computer == WHITE) {
-									if (result > value) {
-										result = value;
+									if (result > value.rank) {
+										result = value.rank;
 										nextMove = turn;
 										nextTake = takeAway;
 									}
@@ -95,22 +111,22 @@ public class Minmax {
 						// no new mill with this move
 
 						// other player has its turn
-						int value = minmaxDecide(board, player, computer,
+						MinimaxResult value = minmaxDecide(board, player, computer,
 								(depth - 1), numberOfMoves + 1);
 
 						// Depending on what color is in the series, the minimum
 						// or the maximum is stored.
 						if (computer == BLACK) {
-							if (result < value) {
-								result = value;
+							if (result < value.rank) {
+								result = value.rank;
 								nextMove = turn;
 								nextTake = null;
 							}
 						}
 
 						if (computer == WHITE) {
-							if (result > value) {
-								result = value;
+							if (result > value.rank) {
+								result = value.rank;
 								nextMove = turn;
 								nextTake = null;
 							}
@@ -124,21 +140,16 @@ public class Minmax {
 				}
 			}
 
-			// The best turn is stored
-			Play.nextTurnFrom = null;
-			Play.nextTurnTo = nextMove;
-			Play.nextTake = nextTake;
-
-			return result;
+			return new MinimaxResult(new Move(null, nextMove, nextTake), result);
 		} else {
 			// If the depth is reached, the current field rated
-			return Evaluation.evaluation(board);
+			return new MinimaxResult(null, Evaluation.evaluation(board));
 
 		}
 
 	}
 
-	public static int minmaxMove(Board board, eColor computer, eColor player,
+	public static MinimaxResult minmaxMove(Board board, eColor computer, eColor player,
 			int depth, int numberOfMoves) {
 		if (depth > 0) {
 
@@ -180,7 +191,7 @@ public class Minmax {
 																		// taken
 																		// away
 
-										int value = minmaxDecide(
+										MinimaxResult value = minmaxDecide(
 												board,
 												player, // other player has its
 														// turn
@@ -188,8 +199,8 @@ public class Minmax {
 												numberOfMoves + 1);
 
 										if (computer == BLACK) {
-											if (result < value) {
-												result = value;
+											if (result < value.rank) {
+												result = value.rank;
 												nextMoveFrom = turnFrom;
 												nextMoveTo = turnTo;
 												nextTake = takeAway;
@@ -197,8 +208,8 @@ public class Minmax {
 										}
 
 										if (computer == WHITE) {
-											if (result > value) {
-												result = value;
+											if (result > value.rank) {
+												result = value.rank;
 												nextMoveFrom = turnFrom;
 												nextMoveTo = turnTo;
 												nextTake = takeAway;
@@ -212,15 +223,15 @@ public class Minmax {
 								// no new mill with this move
 
 								// other player has its turn
-								int value = minmaxDecide(board, player,
+								MinimaxResult value = minmaxDecide(board, player,
 										computer, (depth - 1),
 										numberOfMoves + 1);
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
 								if (computer == BLACK) {
-									if (result < value) {
-										result = value;
+									if (result < value.rank) {
+										result = value.rank;
 										nextMoveFrom = turnFrom;
 										nextMoveTo = turnTo;
 										nextTake = null;
@@ -228,8 +239,8 @@ public class Minmax {
 								}
 
 								if (computer == WHITE) {
-									if (result > value) {
-										result = value;
+									if (result > value.rank) {
+										result = value.rank;
 										nextMoveFrom = turnFrom;
 										nextMoveTo = turnTo;
 										nextTake = null;
@@ -246,19 +257,16 @@ public class Minmax {
 				}
 			}
 			// The best turn is stored
-			Play.nextTurnFrom = nextMoveFrom;
-			Play.nextTurnTo = nextMoveTo;
-			Play.nextTake = nextTake;
-			return result;
+			return new MinimaxResult(new Move(nextMoveFrom, nextMoveTo, nextTake), result);
 		} else {
 			// If the depth is reached, the current field rated
-			return Evaluation.evaluation(board);
+			return new MinimaxResult(null, Evaluation.evaluation(board));
 
 		}
 
 	}
 
-	public static int minmaxJumping(Board board, eColor computer,
+	public static MinimaxResult minmaxJumping(Board board, eColor computer,
 			eColor player, int depth, int numberOfMoves) {
 		if (depth > 0) {
 
@@ -304,15 +312,15 @@ public class Minmax {
 																		// taken
 																		// away
 
-										int value = minmaxDecide(
+										MinimaxResult value = minmaxDecide(
 												board, // other player has its
 														// turn
 												player, computer, (depth - 1),
 												numberOfMoves);
 
 										if (computer == BLACK) {
-											if (result < value) {
-												result = value;
+											if (result < value.rank) {
+												result = value.rank;
 												nextMoveFrom = turnFrom;
 												nextMoveTo = turnTo;
 												nextTake = takeAway;
@@ -320,8 +328,8 @@ public class Minmax {
 										}
 
 										if (computer == WHITE) {
-											if (result > value) {
-												result = value;
+											if (result > value.rank) {
+												result = value.rank;
 												nextMoveFrom = turnFrom;
 												nextMoveTo = turnTo;
 												nextTake = takeAway;
@@ -336,15 +344,15 @@ public class Minmax {
 								// no new mill with this move
 
 								// other player has its turn
-								int value = minmaxDecide(board, player,
+								MinimaxResult value = minmaxDecide(board, player,
 										computer, (depth - 1),
 										numberOfMoves + 1);
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
 								if (computer == BLACK) {
-									if (result < value) {
-										result = value;
+									if (result < value.rank) {
+										result = value.rank;
 										nextMoveFrom = turnFrom;
 										nextMoveTo = turnTo;
 										nextTake = null;
@@ -352,8 +360,8 @@ public class Minmax {
 								}
 
 								if (computer == WHITE) {
-									if (result > value) {
-										result = value;
+									if (result > value.rank) {
+										result = value.rank;
 										nextMoveFrom = turnFrom;
 										nextMoveTo = turnTo;
 										nextTake = null;
@@ -370,14 +378,10 @@ public class Minmax {
 
 				}
 			}
-			// The best turn is stored
-			Play.nextTurnFrom = nextMoveFrom;
-			Play.nextTurnTo = nextMoveTo;
-			Play.nextTake = nextTake;
-			return result;
+			return new MinimaxResult(new Move(nextMoveFrom, nextMoveTo, nextTake), result);
 		} else {
 			// If the depth is reached, the current field rated
-			return Evaluation.evaluation(board);
+			return new MinimaxResult(null, Evaluation.evaluation(board));
 
 		}
 

@@ -25,9 +25,9 @@ public class Evaluation {
 		int openMillsBlack = board.getNumberOfOpenMills(BLACK);
 		int openMillsWhite = board.getNumberOfOpenMills(WHITE);
 
-		if (board.getStuck(BLACK, WHITE)) {
+		if (board.getStuck(BLACK)) {
 			bewertung = bewertung - 1000;
-		} else if (board.getStuck(WHITE, BLACK)) {
+		} else if (board.getStuck(WHITE)) {
 			bewertung = bewertung + 1000;
 		}
 		bewertung = bewertung + 200 * openMillsBlack;

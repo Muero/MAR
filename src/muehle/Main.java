@@ -16,6 +16,7 @@ public class Main {
 	
 	public static final int depth = 2; // playing ability
 	public static int guimode = 1;
+
 	public static Dimension size = new Dimension(542,378);
 
 
@@ -25,13 +26,9 @@ public class Main {
 	
 	
 	public static void main(String[] args){
-		//---------------------------------------------------------------------
-	
 		gui.Input.startGui(frame);
 		gui.Output.create();
 		gui.Input.startIngameGui(frame);
-		
-		
 		
 		Connection conn;
 		if(Output.userobot)
@@ -40,36 +37,14 @@ public class Main {
 			conn = new EmptyConnection();	//without robot
 		conn.openConnection();
 
-		
-					
-				
-		//---------------------------------------------------------------------
-	
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
 
-//<<<<<<< HEAD
-//		JFrame mainWindow = initializeGui(panel, conn);
-//		mainWindow.pack();
-//		mainWindow.setVisible(true);
-//
-		Play.lay(board, panel, depth, conn, numberOfStones); // first phase: placing the stones
-//=======
-//		Play.lay(board, panel, depth, conn); // first phase: placing the stones
-//>>>>>>> d341048f8c73be852c0180743cce9a43a60cf19f
+		System.out.println("*************************** \n"
+				+ "Welcome to the game Nine Men Morris !! \n \n");
 		
-		System.out.println("*********************************** \n" +
-				" It have been placed all the stones \n");
+		Play.play(board, panel, conn, numberOfStones); // first phase: placing the stones
 		
-		Play.move(board, panel, depth, conn); // second phase: moving & junmping the stones
-
-		if (board.getNumberOfStones(eColor.BLACK) < 3 || board.getStuck(eColor.WHITE, eColor.BLACK))
-			System.out.println("You win!");
-		if (board.getNumberOfStones(eColor.WHITE) < 3 || board.getStuck(eColor.BLACK, eColor.WHITE))
-			System.out.println("You lost!");
-		System.out.println("***********************************");
-		panel.repaint();
-		System.out.println(board);
 		conn.closeConnection();
 	}
 }

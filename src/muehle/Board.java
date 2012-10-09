@@ -223,20 +223,18 @@ public class Board {
 
 	}
 
-	public boolean getStuck(eColor you, eColor opp) {
-		boolean b = true;
+	public boolean getStuck(eColor you) {
 		for (Position p : Position.getAllPositions()) {
 			if (getColor(p) == you) {
 				for (Position n : Position.getNeighboursOf(p)) {
-					if (getColor(n) != opp)
-						b = false;
+					if (getColor(n) == eColor.NONE)
+						return false;
 				}
 
 			}
 
 		}
-
-		return b;
+		return true;
 	}
 
 	public int getNumberOfOpenMills(eColor stone) {
