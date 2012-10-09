@@ -1,4 +1,6 @@
-package muehle;
+package muehle.connection;
+
+import muehle.model.Position;
 
 public class EmptyConnection implements Connection {
 

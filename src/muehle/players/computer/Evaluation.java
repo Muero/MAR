@@ -1,7 +1,8 @@
-package muehle;
+package muehle.players.computer;
 
-import static muehle.Board.eColor.BLACK;
-import static muehle.Board.eColor.WHITE;
+import static muehle.model.Board.eColor.BLACK;
+import static muehle.model.Board.eColor.WHITE;
+import muehle.model.Board;
 
 public class Evaluation {
 

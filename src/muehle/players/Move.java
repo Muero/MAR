@@ -1,6 +1,6 @@
 package muehle.players;
 
-import muehle.Position;
+import muehle.model.Position;
 
 public final class Move {
 	public Position from;

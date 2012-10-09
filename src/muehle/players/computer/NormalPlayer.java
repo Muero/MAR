@@ -1,16 +1,11 @@
 package muehle.players.computer;
 
-import muehle.Board;
-import muehle.Board.eColor;
 import muehle.BoardPanel;
-import muehle.Connection;
+import muehle.model.Board;
+import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.Minmax.MinimaxResult;
-
-import static muehle.Board.eColor.BLACK;
-import static muehle.Board.eColor.WHITE;
-import static muehle.Board.eColor.NONE;
 
 public class NormalPlayer implements NineMenMorrisPlayer {
 	final int deepth = 4;
@@ -20,33 +15,22 @@ public class NormalPlayer implements NineMenMorrisPlayer {
 		return "Normal Player";
 	}
 
-	public Move layStone(Board board, eColor player, eColor opposite,
-			BoardPanel panel, Connection conn) {
+	public Move layStone(Board board, int move, int numberOfStones, eColor player, eColor opposite,
+			BoardPanel panel) {
 		panel.setRobotOnTurn(true);
 		System.out.println("I'm thinking ... \n");
 
 		// Computer determines his best possible move
 		MinimaxResult result = Minmax.minmaxDecide(board, opposite, player, deepth,
-				0); // TODO 0
+				move, numberOfStones); // TODO 0
 		// numberofstones
 		return result.bestMove;
 
 	}
 
-	public Move moveStone(Board board, eColor player, eColor opposite,
-			BoardPanel panel, Connection conn) {
-		panel.setRobotOnTurn(true);
-		System.out.println("I'm thinking ... \n");
-
-		// Computer determines his best possible move
-		MinimaxResult result = Minmax.minmaxDecide(board, opposite, player, deepth,
-				0); // TODO 0
-		// numberofstones
-
-		// numberOfMoves++;
-		// Computer move his stone
-
-		return result.bestMove;
+	public Move moveStone(Board board, int move, int numberOfStones, eColor player, eColor opposite,
+			BoardPanel panel) {
+		return layStone(board, move, numberOfStones, player, opposite, panel);
 	}
 
 }

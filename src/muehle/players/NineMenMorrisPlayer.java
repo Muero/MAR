@@ -1,9 +1,8 @@
 package muehle.players;
 
-import muehle.Board;
-import muehle.Board.eColor;
 import muehle.BoardPanel;
-import muehle.Connection;
+import muehle.model.Board;
+import muehle.model.Board.eColor;
 
 public interface NineMenMorrisPlayer {
 	/**
@@ -14,11 +13,9 @@ public interface NineMenMorrisPlayer {
 	 * @param conn
 	 * @return
 	 */
-	Move layStone(Board board, eColor player,eColor opposite, BoardPanel panel,
-			Connection conn);
+	Move layStone(Board board, int move, int numberOfStones, eColor player,eColor opposite, BoardPanel panel);
 
-	Move moveStone(Board board, eColor player, eColor opposite, BoardPanel panel,
-			Connection conn);
+	Move moveStone(Board board, int move, int numberOfStones, eColor player, eColor opposite, BoardPanel panel);
 
 	String getName();
 }

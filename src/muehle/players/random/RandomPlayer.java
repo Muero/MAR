@@ -1,9 +1,8 @@
 package muehle.players.random;
 
-import muehle.Board;
-import muehle.Board.eColor;
 import muehle.BoardPanel;
-import muehle.Connection;
+import muehle.model.Board;
+import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 
@@ -14,15 +13,13 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public Move layStone(Board board, eColor player,eColor opposite, BoardPanel panel,
-			Connection conn) {
+	public Move layStone(Board board, int move, int numberOfStones, eColor player,eColor opposite, BoardPanel panel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Move moveStone(Board board, eColor player,eColor opposite, BoardPanel panel,
-			Connection conn) {
+	public Move moveStone(Board board, int move, int numberOfStones, eColor player,eColor opposite, BoardPanel panel) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,13 +1,11 @@
 package muehle.players.computer;
 
-import static muehle.Board.eColor.BLACK;
-import static muehle.Board.eColor.NONE;
-import static muehle.Board.eColor.WHITE;
-import muehle.Board;
-import muehle.Board.eColor;
-import muehle.Evaluation;
-import muehle.Main;
-import muehle.Position;
+import static muehle.model.Board.eColor.BLACK;
+import static muehle.model.Board.eColor.NONE;
+import static muehle.model.Board.eColor.WHITE;
+import muehle.model.Board;
+import muehle.model.Position;
+import muehle.model.Board.eColor;
 import muehle.players.Move;
 
 /**
@@ -30,18 +28,18 @@ public class Minmax {
 	public static int deepthBlackMill = 0; // not used yet
 
 	public static MinimaxResult minmaxDecide(Board board, eColor computer, eColor player,
-			int depth, int numberOfMoves) {
+			int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
 		if (!board.getStuck(player)) {
-			if (numberOfMoves < Main.numberOfStones * 2) {
+			if (move < numberOfStones * 2) {
 				value = Minmax.minmaxLay(board, computer, player, depth,
-						numberOfMoves);
+						move, numberOfStones);
 			} else if (board.getNumberOfStones(computer) > 3) {
 				value = Minmax.minmaxMove(board, computer, player, depth,
-						numberOfMoves);
+						move, numberOfStones);
 			} else {
 				value = Minmax.minmaxJumping(board, computer, player, depth,
-						numberOfMoves);
+						move, numberOfStones);
 			}
 		} else {
 			value = new MinimaxResult(null, Evaluation.evaluation(board));
@@ -52,7 +50,7 @@ public class Minmax {
 	}
 
 	public static MinimaxResult minmaxLay(Board board, eColor computer, eColor player,
-			int depth, int numberOfMoves) {
+			int depth, int move, int numberOfStones) {
 
 		if (depth > 0) {
 
@@ -61,7 +59,7 @@ public class Minmax {
 			Position nextMove = null;
 			Position nextTake = null;
 
-			if (computer == BLACK) {
+			if (computer == BLACK) { //TODO stimmt das?
 				result = Integer.MIN_VALUE;
 			} else {
 				result = Integer.MAX_VALUE;
@@ -86,7 +84,7 @@ public class Minmax {
 
 								MinimaxResult value = minmaxDecide(board, player,
 										computer, // other player has its turn
-										(depth - 1), numberOfMoves + 1);
+										(depth - 1), move + 1, numberOfStones);
 
 								if (computer == BLACK) {
 									if (result < value.rank) {
@@ -112,7 +110,7 @@ public class Minmax {
 
 						// other player has its turn
 						MinimaxResult value = minmaxDecide(board, player, computer,
-								(depth - 1), numberOfMoves + 1);
+								(depth - 1), move + 1, numberOfStones);
 
 						// Depending on what color is in the series, the minimum
 						// or the maximum is stored.
@@ -150,7 +148,7 @@ public class Minmax {
 	}
 
 	public static MinimaxResult minmaxMove(Board board, eColor computer, eColor player,
-			int depth, int numberOfMoves) {
+			int depth, int move, int numberOfStones) {
 		if (depth > 0) {
 
 			int result;
@@ -196,7 +194,7 @@ public class Minmax {
 												player, // other player has its
 														// turn
 												computer, (depth - 1),
-												numberOfMoves + 1);
+												move + 1, numberOfStones);
 
 										if (computer == BLACK) {
 											if (result < value.rank) {
@@ -225,7 +223,7 @@ public class Minmax {
 								// other player has its turn
 								MinimaxResult value = minmaxDecide(board, player,
 										computer, (depth - 1),
-										numberOfMoves + 1);
+										move + 1, numberOfStones);
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
@@ -267,7 +265,7 @@ public class Minmax {
 	}
 
 	public static MinimaxResult minmaxJumping(Board board, eColor computer,
-			eColor player, int depth, int numberOfMoves) {
+			eColor player, int depth, int move, int numberOfStones) {
 		if (depth > 0) {
 
 			int result;
@@ -316,7 +314,7 @@ public class Minmax {
 												board, // other player has its
 														// turn
 												player, computer, (depth - 1),
-												numberOfMoves);
+												move, numberOfStones); // FIXME wieso move und nicht move+1
 
 										if (computer == BLACK) {
 											if (result < value.rank) {
@@ -346,7 +344,7 @@ public class Minmax {
 								// other player has its turn
 								MinimaxResult value = minmaxDecide(board, player,
 										computer, (depth - 1),
-										numberOfMoves + 1);
+										move + 1, numberOfStones);
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.

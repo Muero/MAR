@@ -1,4 +1,4 @@
-package muehle;
+package muehle.model;
 
 import java.util.HashMap;
 import java.util.HashSet;

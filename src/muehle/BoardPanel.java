@@ -12,10 +12,15 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import muehle.model.Board;
+import muehle.model.Position;
+
 @SuppressWarnings("serial")
 public class BoardPanel extends JPanel {
 	private Map<JButton, Position> buttons = new HashMap<JButton, Position>();
 	private boolean robotOnTurn = false;
+	
+	public Position clickedButton = null;
 
 	public BoardPanel() {
 		this.setPreferredSize(new Dimension(450, 450));
@@ -67,7 +72,7 @@ public class BoardPanel extends JPanel {
 			b.addActionListener(new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Play.clickedButton = p;
+					clickedButton = p;
 				}
 			});
 		}
