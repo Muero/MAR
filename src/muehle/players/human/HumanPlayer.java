@@ -1,8 +1,6 @@
 package muehle.players.human;
 
-import static muehle.model.Board.eColor.BLACK;
 import static muehle.model.Board.eColor.NONE;
-import static muehle.model.Board.eColor.WHITE;
 import muehle.BoardPanel;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
@@ -17,11 +15,9 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 
 	private String name;
-	private BoardPanel panel;
 
-	public HumanPlayer(String name, BoardPanel panel) {
+	public HumanPlayer(String name) {
 		this.name = name;
-		this.panel = panel;
 	}
 
 	public String getName() {
@@ -64,8 +60,8 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 			do {
 				takeAway = panel.clickedButton; // player can take away a stone
 				if (takeAway != null) {
-					if (board.getColor(takeAway) == BLACK //TODO currentOppositeColor
-							&& !board.isMill(takeAway, BLACK)) {
+					if (board.getColor(takeAway) == opposite
+							&& !board.isMill(takeAway, opposite)) {
 						board.setColor(takeAway, NONE);
 					} else {
 						takeAway = null;
@@ -95,10 +91,10 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 			do { // The player said which stone he wants to move
 				inputPositionFrom = panel.clickedButton;
 				if (inputPositionFrom != null) {
-					if (board.getColor(inputPositionFrom) != WHITE) {
+					if (board.getColor(inputPositionFrom) != player) {
 						inputPositionFrom = null;
 						panel.clickedButton = null;
-						System.out.println("Position not white");
+						System.out.println("Position not "+player);
 					}
 				}
 				sleep(1);
@@ -118,10 +114,10 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 					// than three stones
 							(Position.isNeighbour(inputPositionTo,
 									inputPositionFrom)
-									&& board.getNumberOfStones(WHITE) > 3
+									&& board.getNumberOfStones(player) > 3
 							// Positions mustn't be neighbours if the player
 							// has three stones --> he can jump
-							|| board.getNumberOfStones(WHITE) == 3)) {
+							|| board.getNumberOfStones(player) == 3)) {
 					} else {
 						inputPositionFrom = null;
 						System.out.println("Move not possible");
@@ -133,14 +129,14 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 		// Stones are moved
 		board.setColor(inputPositionFrom, NONE);
-		board.setColor(inputPositionTo, WHITE);
+		board.setColor(inputPositionTo, player);
 
 		// board is updated
 		System.out.println(board);
 		panel.refreshButtonColor(board);
 		panel.repaint();
 
-		if (board.isMill(inputPositionTo, WHITE)) { // if the player has a
+		if (board.isMill(inputPositionTo, player)) { // if the player has a
 													// mill
 			panel.refreshButtonColor(board);
 			panel.repaint();
@@ -149,8 +145,8 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 			do { // player can take away a stone
 				takeAway = panel.clickedButton;
 				if (takeAway != null) {
-					if (board.getColor(takeAway) == BLACK
-							&& !(board.isMill(takeAway, BLACK))) {
+					if (board.getColor(takeAway) == opposite
+							&& !(board.isMill(takeAway, opposite))) {
 						board.setColor(takeAway, NONE);
 					} else {
 						System.out.println("It's not an opponent's stone");

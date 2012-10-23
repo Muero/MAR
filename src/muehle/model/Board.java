@@ -223,8 +223,18 @@ public class Board {
 		return counter;
 
 	}
+	public boolean freePosition(eColor color){
+		for (Position p : Position.getAllPositions()){
+			if (getColor(p)==eColor.NONE)
+				return true;
+		}
+		
+		return false;
+	}
 
 	public boolean getStuck(eColor you) {
+		if (getNumberOfStones(you)==0)
+			return false;		
 		for (Position p : Position.getAllPositions()) {
 			if (getColor(p) == you) {
 				for (Position n : Position.getNeighboursOf(p)) {

@@ -24,10 +24,10 @@ import muehle.players.human.HumanPlayer;
 
 public class Main {
 
-    private static final int numberOfStones = 6; //With how many stones u will play
+    private static final int numberOfStones = 4; //With how many stones u will play
 
 	
-	public static final int depth = 2; // playing ability
+	public static final int depth = 4; // playing ability
 	public static int guimode = 1;
 
 	public static Dimension size = new Dimension(542,378);
@@ -49,7 +49,7 @@ public class Main {
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 
-		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick", panel);
+		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick");
 		Connection conn1 = new EmptyConnection();	//without robot
 		conn1.openConnection();
 		
@@ -95,71 +95,78 @@ public class Main {
 
 		int move = 0;
 		
-		while(true){
-		Move bestMove = null;
-		if (move < 2*numberOfStones)
-			bestMove = currentPlayer.layStone(board, move, numberOfStones, currentPlayerColor,
-					oppositePlayerColor, panel);
-		else if (board.getNumberOfStones(BLACK) >= 3
-				&& board.getNumberOfStones(WHITE) >= 3
-				&& !board.getStuck(currentPlayerColor))
-			bestMove = currentPlayer.moveStone(board, move, numberOfStones, currentPlayerColor,
-					oppositePlayerColor, panel);
-		else {
-			System.out.println("*********************************** \n"
-					+ " It have been placed all the stones \n");
-			System.out.println("You win!"); // TODO
-			System.out.println("You lost!");
-			System.out.println("***********************************");
+		while (true) {
+			Move bestMove = null;
+			System.out.println("move" + move);
+
+			if (move < 2 * numberOfStones) {
+				System.out.println("legen /n");
+				bestMove = currentPlayer.layStone(board, move, numberOfStones,
+						currentPlayerColor, oppositePlayerColor, panel);
+			} else if (board.getNumberOfStones(BLACK) >= 3
+					&& board.getNumberOfStones(WHITE) >= 3
+					&& !board.getStuck(currentPlayerColor)) {
+				System.out.println("bewegen /n");
+
+				bestMove = currentPlayer.moveStone(board, move, numberOfStones,
+						currentPlayerColor, oppositePlayerColor, panel);
+			} else {
+				System.out.println("*********************************** \n"
+						+ " It have been placed all the stones \n");
+				System.out.println("You win!"); // TODO
+				System.out.println("You lost!");
+				System.out.println("***********************************");
+				panel.repaint();
+				System.out.println(board);
+				return;
+			}
+
+			if (bestMove.from != null)
+				System.out.println(bestMove.from);
+			if (bestMove.from != null)
+				board.setColor(bestMove.from, NONE);
+			board.setColor(bestMove.to, currentPlayerColor);
+			if (bestMove.take != null)
+				board.setColor(bestMove.take, NONE);
+
+			panel.refreshButtonColor(board);
+			HumanPlayer.sleep(1000);
+
+			// board is updated
 			panel.repaint();
 			System.out.println(board);
-			return;
+
+			// ROBOTER IS MOVING
+			if (bestMove.from != null)
+				currentConnection.takeStone(bestMove.from);
+			currentConnection.setStone(bestMove.to);
+			if (bestMove.take != null)
+				currentConnection.takeStone(bestMove.take);
+
+			panel.setRobotOnTurn(false);
+
+			System.out.println("From " + bestMove.from);
+			System.out.println("  To " + bestMove.to + "\n");
+			if (bestMove.take != null) {
+				System.out.println("\n TakeStone: " + bestMove.take);
+				currentConnection.takeStone(bestMove.take);
+			}
+			panel.repaint();
+			System.out.println(board);
+
+			NineMenMorrisPlayer p = currentPlayer;
+			currentPlayer = oppositePlayer;
+			oppositePlayer = p;
+
+			Connection c = currentConnection;
+			currentConnection = oppositeConnection;
+			oppositeConnection = c;
+
+			eColor color = currentPlayerColor;
+			currentPlayerColor = oppositePlayerColor;
+			oppositePlayerColor = color;
+
+			move++;
 		}
-		if (bestMove.from != null)
-			board.setColor(bestMove.from, NONE);
-		board.setColor(bestMove.to, currentPlayerColor);
-		if (bestMove.take != null)
-			board.setColor(bestMove.take, NONE);
-
-		panel.refreshButtonColor(board);
-		HumanPlayer.sleep(1000);
-
-		// board is updated
-		panel.repaint();
-		System.out.println(board);
-
-		// ROBOTER IS MOVING
-		if (bestMove.from != null) // TODO ist dieses if nötig?
-			currentConnection.takeStone(bestMove.from);
-		currentConnection.setStone(bestMove.to);
-		if (bestMove.take != null)
-			currentConnection.takeStone(bestMove.take);
-
-		panel.setRobotOnTurn(false);
-
-		panel.repaint();
-
-		System.out.println("From " + bestMove.from);
-		System.out.println("  To " + bestMove.to + "\n");
-		if (bestMove.take != null) {
-			System.out.println("\n TakeStone: " + bestMove.take);
-			currentConnection.takeStone(bestMove.take);
-		}
-		System.out.println();
-		
-		NineMenMorrisPlayer p = currentPlayer;
-		currentPlayer = oppositePlayer;
-		oppositePlayer = p;
-		
-		Connection c = currentConnection;
-		currentConnection = oppositeConnection;
-		oppositeConnection = c;
-		
-		eColor color = currentPlayerColor;
-		currentPlayerColor = oppositePlayerColor;
-		oppositePlayerColor = color;
-		
-		move++;
 	}
-}
 }
