@@ -161,7 +161,7 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 		}
 
 		System.out.println(board);
-		return null;
+		return new Move(inputPositionFrom,inputPositionTo,takeAway);
 	}
 
 	public static void sleep(int i) {

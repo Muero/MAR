@@ -32,18 +32,20 @@ public class Minmax {
 
 		if (!board.getStuck(opposite) && board.freePosition(opposite)) {
 			if (move < numberOfStones * 2) {
+				//System.out.println("minimax legen");
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);
 			} else if (board.getNumberOfStones(player) > 3) {
+				//System.out.println("minimax bewegen");
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
 			} else {
+				//System.out.println("minimax springen");
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);
 			}
 		} else {
 			value = new MinimaxResult(null, Evaluation.evaluation(board));
-			System.out.println("get Stuck");
 		}
 
 		return value;
@@ -134,7 +136,7 @@ public class Minmax {
 		if (depth > 0) {
 
 			int result;
-
+			//System.out.println("hier");
 			Position nextMoveFrom = null;
 			Position nextMoveTo = null;
 			Position nextTake = null;
@@ -216,6 +218,7 @@ public class Minmax {
 				}
 			}
 			// The best turn is stored
+			//System.out.println("bestMove gesetzt");
 			return new MinimaxResult(new Move(nextMoveFrom, nextMoveTo,
 					nextTake), (-1 * result));
 		} else {

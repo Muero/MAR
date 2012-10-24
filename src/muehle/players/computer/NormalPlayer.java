@@ -9,10 +9,14 @@ import muehle.players.computer.Minmax.MinimaxResult;
 
 public class NormalPlayer implements NineMenMorrisPlayer {
 	final int deepth = 4;
+	private String name;
 
-	@Override
+	
+	public NormalPlayer(String name) {
+		this.name = name;
+	}
 	public String getName() {
-		return "Normal Player";
+		return name;
 	}
 
 	public Move layStone(Board board, int move, int numberOfStones,
