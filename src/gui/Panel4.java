@@ -12,6 +12,7 @@ import muehle.Main;
 import muehle.model.Board;
 import muehle.model.Position;
 import camera.Camera;
+import gui.cPanel1;
 
 public class Panel4 extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -42,13 +43,13 @@ public class Panel4 extends JPanel{
 			public void run(){
 				while(true){
 					for(Position p:Position.getAllPositions()){
-						button[Position.getGuiPosition(p)].setEnabled(false);
+						cPanel1.getButton(p).setEnabled(false);
 						if(board.getColor(p) == Board.eColor.WHITE){
-							button[Position.getGuiPosition(p)].setBackground(Output.humanColor);							
+							cPanel1.getButton(p).setBackground(Output.humanColor);							
 						}else if(board.getColor(p) == Board.eColor.BLACK){
-							button[Position.getGuiPosition(p)].setBackground(Output.robotColor);
+							cPanel1.getButton(p).setBackground(Output.robotColor);
 						}else{
-							button[Position.getGuiPosition(p)].setBackground(Color.gray);
+							cPanel1.getButton(p).setBackground(Color.gray);
 						}
 					}
 					repaint();

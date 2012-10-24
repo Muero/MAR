@@ -33,7 +33,6 @@ public class Minmax {
 
 	public static int deepthWhiteMill = 0; // not used yet
 	public static int deepthBlackMill = 0; // not used yet
-
 	public static MinimaxResult minmaxDecide(Board board, eColor player,
 			eColor opposite, int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
@@ -336,11 +335,12 @@ public class Minmax {
 
 	}
 	
-	public static Map<Position, Integer> getProbability(Board board, eColor player, eColor opposite, int depth, int move, int numberOfStones) {
+	public static Map<Position, Integer> getProbability(Board board, eColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
+		int depth = 4;	
 		for (Position p : Position.getAllPositions()) {
-			if (board.getColor(p) == eColor.NONE) {
-				MinimaxResult res = Minmax.minmaxDecide(board, player, opposite, 5, move,
+			if (board.getColor(p) == eColor.NONE) { //TODO gillt nur bei legen und springen
+				MinimaxResult res = Minmax.minmaxDecide(board, player, player==eColor.BLACK?eColor.WHITE:eColor.BLACK, depth, move,
 						numberOfStones);
 				probabilities.put(p, res.getRank());
 			}

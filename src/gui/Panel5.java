@@ -3,32 +3,51 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import muehle.model.Board;
+import muehle.model.Board.eColor;
 import muehle.model.Position;
-import muehle.players.human.*;
+import muehle.players.computer.Minmax;
 
 public class Panel5 extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	public JButton[] button = new JButton[24];
+
+	private Board board;
 	
-	public Panel5(){
+	public Panel5(Board board){
+		this.board = board;
 		this.setLayout(null);
 		this.repaint();
 		generateButtons();
 		thread();
 	}
 	
+	private Color[] probabilityColor = { new Color(255, 0, 0),
+		new Color(225, 25, 0), new Color(200, 50, 0),
+		new Color(175, 75, 0), new Color(150, 100, 0),
+		new Color(125, 125, 0), new Color(100, 150, 0),
+		new Color(75, 175, 0), new Color(50, 200, 0), new Color(0, 255, 0),
+		new Color(255, 255, 255) };
+	
 	private void thread(){
+		//FIXME TODO test
+		eColor player = eColor.BLACK;
+		int move = 5;
+		int numberOfStones=3;
+		Map m = Minmax.getProbability(board, player, move, numberOfStones);
+		m.get(button);
 		new Thread(){
 			public void run(){
 				while(true){
 					for(Position p:Position.getAllPositions()){
-						button[Position.getGuiPosition(p)].setEnabled(false);
-						button[Position.getGuiPosition(p)].setBackground(BestMove.probabilityColor[BestMove.probability[Position.getGuiPosition(p)]]);
+						cPanel1.getButton(p).setEnabled(false);
+						cPanel1.getButton(p).setBackground(probabilityColor[BestMove.probability[gui.cPanel1.getGuiPosition(p)]]);
 					}
 					try {
 						Thread.sleep(100);
