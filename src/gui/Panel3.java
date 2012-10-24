@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -41,9 +40,9 @@ public class Panel3 extends JPanel{
 	private boolean fieldSet = false;
 	private boolean isButton1 = false;	//0
 	private boolean isButton2 = false;	//1
-	private boolean isRb1 = false;		//2
-	private boolean isRb2 = false;		//3
-	private boolean isRb3 = false;		//4
+	private boolean isRb1 = true;		//2
+	private boolean isRb2 = true;		//3
+	private boolean isRb3 = true;		//4
 	private boolean isButton3 = false;
 	private boolean isButton4 = false;
 	

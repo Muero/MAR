@@ -14,9 +14,11 @@ public class ComputerFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	public cPanel1 cpanel1 = new cPanel1();
-	public cPanel2 cpanel2 = new cPanel2();
+	public Panel5 cpanel2 = new Panel5();
 	
 	public ComputerFrame(){
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setBounds(0,0,500,600);
 		addComponentsToPane(this.getContentPane());
 		refresh();
 	}

@@ -171,6 +171,63 @@ public final class Position {
 	public static Set<Position> getNeighboursOf(Position position) {
 		return neighbours.get(position);
 	}
+	
+	
+	public static int getGuiPosition(Position p){
+		switch(p.getId()){
+		case 10:
+			return 21;
+		case 13:
+			return 22;
+		case 16:
+			return 23;
+		case 21:
+			return 18;
+		case 23:
+			return 19;
+		case 25:
+			return 20;
+		case 32:
+			return 15;
+		case 33:
+			return 16;
+		case 34:
+			return 17;
+		case 40:
+			return 9;
+		case 41:
+			return 10;
+		case 42:
+			return 11;
+		case 44:
+			return 12;
+		case 45:
+			return 13;
+		case 46:
+			return 14;
+		case 52:
+			return 6;
+		case 53:
+			return 7;
+		case 54:
+			return 8;
+		case 61:
+			return 3;
+		case 63:
+			return 4;
+		case 65:
+			return 5;
+		case 70:
+			return 0;
+		case 73:
+			return 1;
+		case 76:
+			return 2;
+		default:
+			return -1;
+			
+		}		
+	}
 
 	
 }

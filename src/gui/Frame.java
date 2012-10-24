@@ -20,6 +20,7 @@ public class Frame extends JFrame{
 	public Panel5 panel5 = new Panel5();
 	
 	public Frame(){
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentsToPane(this.getContentPane());
 		refresh();
 	}
@@ -111,7 +112,7 @@ public class Frame extends JFrame{
 	}
 
 	public void setGuiMode(int newmode){
-		Main.guimode = newmode;
+		Output.guimode = newmode;
 		switch(newmode){
 		case 0:
 			Main.frame.setVisible(false);
