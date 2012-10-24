@@ -9,20 +9,23 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import muehle.Main;
-import muehle.model.Position;
 import muehle.model.Board;
+import muehle.model.Position;
 import camera.Camera;
 
 public class Panel4 extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	public JButton[] button = new JButton[24];
+	
+	private Board board;
 
 	private Color resourceColor[] = {Color.red,new Color(0,100,0)};
 	private String resourceText[] = {"Analysiere Bild...","Bild analysiert!  -  Warte auf Eingabe"};
 	private int bildMode = 1;
 	
-	public Panel4(){
+	public Panel4(Board board){
+		this.board = board;
 		this.setLayout(null);
 		this.repaint();
 		generateButtons();
@@ -40,9 +43,9 @@ public class Panel4 extends JPanel{
 				while(true){
 					for(Position p:Position.getAllPositions()){
 						button[Position.getGuiPosition(p)].setEnabled(false);
-						if(board.getColor(p) == WHITE){
+						if(board.getColor(p) == Board.eColor.WHITE){
 							button[Position.getGuiPosition(p)].setBackground(Output.humanColor);							
-						}else if(board.getColor(p) == BLACK){
+						}else if(board.getColor(p) == Board.eColor.BLACK){
 							button[Position.getGuiPosition(p)].setBackground(Output.robotColor);
 						}else{
 							button[Position.getGuiPosition(p)].setBackground(Color.gray);

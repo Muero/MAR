@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import muehle.model.Position;
+import muehle.players.human.*;
 
 public class Panel5 extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -27,7 +28,7 @@ public class Panel5 extends JPanel{
 				while(true){
 					for(Position p:Position.getAllPositions()){
 						button[Position.getGuiPosition(p)].setEnabled(false);
-						button[Position.getGuiPosition(p)].setBackground(Output.probabilityColor[Output.probability[Position.getGuiPosition(p)]]);
+						button[Position.getGuiPosition(p)].setBackground(BestMove.probabilityColor[BestMove.probability[Position.getGuiPosition(p)]]);
 					}
 					try {
 						Thread.sleep(100);
@@ -40,7 +41,6 @@ public class Panel5 extends JPanel{
 		for(int i=0;i<24;i++){
 			button[i] = new JButton();
 			this.add(button[i]);
-			Output.probability[i] = 10;
 		}
 	}
 
@@ -108,12 +108,15 @@ public class Panel5 extends JPanel{
 		g.setColor(Color.black);
 		g.fillRect((int) ((1*a))-s/2,(int) (8*b),(int) (c*10),s);
 		for(int i=0;i<10;i++){
-			g.setColor(Output.probabilityColor[i]);
+			// g.setColor(BestMove.probabilityColor[i]);
 			g.fillRect((int) ((1*a)+(i*c))-s/2,(int) (8*b),(int) (c),s);
 			g.setColor(Color.black);
 			g.drawRect((int) ((1*a)+(i*c))-s/2,(int) (8*b),(int) (c),s);			
 		}
 
 	}
+	
+
+
 
 }

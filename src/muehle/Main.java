@@ -33,18 +33,20 @@ public class Main {
 	public static Dimension size = new Dimension(542,378);
 
 
-	public static Frame frame = new Frame();
-	public static ComputerFrame cframe = new ComputerFrame();
+	public static Frame frame; // FIXME waeh
+	public static ComputerFrame cframe;
 	
 	
 	
 	public static void main(String[] args){
-//		gui.Input.startGui(frame);
-//		gui.Output.create();
-//		gui.Input.startIngameGui(frame);
+		gui.Input.startGui(frame);
+		gui.Output.create();
+		gui.Input.startIngameGui(frame);
 
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
+		frame = new Frame(board);
+		cframe = new ComputerFrame(board);
 		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");

@@ -1,6 +1,10 @@
 package muehle.players.computer;
 
 import static muehle.model.Board.eColor.NONE;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -16,6 +20,10 @@ public class Minmax {
 	static class MinimaxResult {
 		Move bestMove;
 		int rank;
+
+		public int getRank() {
+			return rank;
+		}
 
 		public MinimaxResult(Move bestMove, int rank) {
 			this.bestMove = bestMove;
@@ -327,4 +335,17 @@ public class Minmax {
 		}
 
 	}
+	
+	public static Map<Position, Integer> getProbability(Board board, eColor player, eColor opposite, int depth, int move, int numberOfStones) {
+		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
+		for (Position p : Position.getAllPositions()) {
+			if (board.getColor(p) == eColor.NONE) {
+				MinimaxResult res = Minmax.minmaxDecide(board, player, opposite, 5, move,
+						numberOfStones);
+				probabilities.put(p, res.getRank());
+			}
+		}
+		return probabilities;
+	}
+
 }

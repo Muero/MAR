@@ -9,16 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.border.BevelBorder;
 
 import muehle.Main;
+import muehle.model.Board;
 
 public class ComputerFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 
-	public cPanel1 cpanel1 = new cPanel1();
-	public Panel5 cpanel2 = new Panel5();
+	public cPanel1 cpanel1;
+	public Panel5 cpanel2;
 	
-	public ComputerFrame(){
+	public ComputerFrame(Board board){
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setBounds(0,0,500,600);
+		cpanel1 = new cPanel1(board);
+		cpanel2 = new Panel5();
 		addComponentsToPane(this.getContentPane());
 		refresh();
 	}

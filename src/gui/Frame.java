@@ -9,19 +9,26 @@ import javax.swing.JFrame;
 import javax.swing.border.BevelBorder;
 
 import muehle.Main;
+import muehle.model.Board;
 
 public class Frame extends JFrame{
 	private static final long serialVersionUID = 1L;
 		
-	public Panel1 panel1 = new Panel1();
-	public Panel2 panel2 = new Panel2();
-	public Panel3 panel3 = new Panel3();
-	public Panel4 panel4 = new Panel4();
-	public Panel5 panel5 = new Panel5();
+	public Panel1 panel1;
+	public Panel2 panel2;
+	public Panel3 panel3;
+	public Panel4 panel4;
+	public Panel5 panel5;
 	
-	public Frame(){
+	public Frame(Board board){
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addComponentsToPane(this.getContentPane());
+		panel1 = new Panel1();
+		panel2 = new Panel2();
+		panel3 = new Panel3();
+		panel4 = new Panel4(board);
+		panel5 = new Panel5();
+		
 		refresh();
 	}
 	
