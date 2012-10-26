@@ -18,13 +18,13 @@ import muehle.model.Board.eColor;
 public class cPanel1 extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
-	private JButton[] button = new JButton[24];
+	public static JButton[] button = new JButton[24];
 
-	public JButton getButton(Position p) {
+	public static JButton getButton(Position p) {
 		return button[getGuiPosition(p)];
 	}
 
-	private int getGuiPosition(Position p) {
+	private static int getGuiPosition(Position p) {
 		switch (p.getId()) {
 		case 10:
 			return 21;

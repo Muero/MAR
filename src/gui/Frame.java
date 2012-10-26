@@ -27,7 +27,7 @@ public class Frame extends JFrame{
 		panel2 = new Panel2();
 		panel3 = new Panel3();
 		panel4 = new Panel4(board);
-		panel5 = new Panel5();
+		panel5 = new Panel5(board);
 		
 		refresh();
 	}
