@@ -39,22 +39,24 @@ public class Main {
 	
 	
 	public static void main(String[] args){
-		gui.Input.startGui(frame);
-		gui.Output.create();
-		gui.Input.startIngameGui(frame);
 
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
 		frame = new Frame(board);
 		cframe = new ComputerFrame(board);
+
+		gui.Input.startGui(frame);
+		gui.Output.create();
+		gui.Input.startIngameGui(frame);
+
 		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 
-		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick");
 		Connection conn1 = new EmptyConnection();	//without robot
 		conn1.openConnection();
 		
+		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick");
 		NineMenMorrisPlayer player2 = new NormalPlayer("Computer");
 		Connection conn2;
 		if(Output.userobot)
