@@ -39,14 +39,16 @@ public class Main {
 	
 	
 	public static void main(String[] args){
+		Board board = new Board();
+		BoardPanel panel = new BoardPanel();
+		frame = new Frame(board, BLACK,1, numberOfStones);
+		cframe = new ComputerFrame(board);
+		
 		gui.Input.startGui(frame);
 		gui.Output.create();
 		gui.Input.startIngameGui(frame);
 
-		Board board = new Board();
-		BoardPanel panel = new BoardPanel();
-		frame = new Frame(board);
-		cframe = new ComputerFrame(board);
+
 		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
