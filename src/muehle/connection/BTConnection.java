@@ -76,6 +76,10 @@ public class BTConnection implements Connection {
 		a = getDistance(to.getId(), NXTAblage);
 		send(dos, dis, a.width, a.height);
 	}
+	
+	public void waitForButton(){
+		send(dos,dis,500,0);//Send starting
+	}
 
 	@Override
 	public void moveStone(Position from, Position to) {
@@ -96,7 +100,17 @@ public class BTConnection implements Connection {
 
 	@Override
 	public void takeStone(Position from) {
-		// TODO has to be implemented
+		Dimension a;
+		a = getDistance(Position.p96.getId(),from.getId());
+		send(dos, dis,a.width,a.height);
+		send(dos2,dis2,3);
+		send(dos2,dis2,5);
+		send(dos2,dis2,4);
+		a = getDistance(from.getId(),0);
+		send(dos, dis, a.width+300,a.height);
+		send(dos2,dis2,3);
+		send(dos2,dis2,6);
+		send(dos2,dis2,4);
 		
 	}
 

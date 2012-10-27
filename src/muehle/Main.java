@@ -12,6 +12,8 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import camera.Camera;
+
 import muehle.connection.BTConnection;
 import muehle.connection.Connection;
 import muehle.connection.EmptyConnection;
@@ -21,105 +23,116 @@ import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.NormalPlayer;
 import muehle.players.human.HumanPlayer;
+import gui.Panel4;
+import gui.cPanel1;
 
 public class Main {
 
-    private static final int numberOfStones = 9; //With how many stones u will play
+	private static final int numberOfStones = 9; // With how many stones u will
+													// play
 
-	
-	public static final int depth = 6; // playing ability
+	public static final int depth = Output.difficulty; // playing ability
 	public static int guimode = 1;
 
-	public static Dimension size = new Dimension(542,378);
-
+	public static Dimension size = new Dimension(542, 378);
 
 	public static Frame frame; // FIXME waeh
 	public static ComputerFrame cframe;
-	
-	
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		Board board = new Board();
 		BoardPanel panel = new BoardPanel();
-		frame = new Frame(board, BLACK,1, numberOfStones);
-		cframe = new ComputerFrame(board);
-		
-		gui.Input.startGui(frame);
-		gui.Output.create();
-		gui.Input.startIngameGui(frame);
 
-
-		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 
 		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick");
-		Connection conn1 = new EmptyConnection();	//without robot
+		Connection conn1 = new EmptyConnection(); // without robot
 		conn1.openConnection();
-		
+
 		NineMenMorrisPlayer player2 = new NormalPlayer("Computer");
+
 		Connection conn2;
-		if(Output.userobot)
-			conn2 = new BTConnection();		//with robot
+		if (Output.userobot)
+			conn2 = new BTConnection(); // with robot
 		else
-			conn2 = new EmptyConnection();	//without robot
+			conn2 = new EmptyConnection(); // without robot
 		conn2.openConnection();
+
+		if (new Random().nextBoolean()) {
+			Connection c = conn1;
+			conn1 = conn2;
+			conn2 = c;
+			NineMenMorrisPlayer p = player1;
+			player1 = player2;
+			player2 = p;
+		}
+
+		frame = new Frame(board, BLACK, 1, numberOfStones); //FIXME black?
+		cframe = new ComputerFrame(board);
+
+		gui.Input.startGui(frame);
+		gui.Output.create();
+		gui.Input.startIngameGui(frame);
 
 		JFrame f = new JFrame("Nüünistei");
 		f.add(panel);
 		f.pack();
 		f.setVisible(true);
 
-		if (new Random().nextBoolean()){
-			Connection c = conn1; conn1 = conn2; conn2 = c;
-			NineMenMorrisPlayer p = player1; player1 = player2; player2 = p;
-		}
+		play(board, frame.panel4, cframe.cpanel1, numberOfStones, player1,
+				player2, conn1, conn2); // first phase: placing the stones
 
-		play(board, panel, numberOfStones, player1, player2, conn1, conn2); // first phase: placing the stones
-		
 		conn1.closeConnection();
 		conn2.closeConnection();
 	}
-	
-	public static void play(Board board, BoardPanel panel, 	int numberOfStones, 
-			NineMenMorrisPlayer player1, NineMenMorrisPlayer player2,
-			Connection conn1, Connection conn2) {
 
-		
+	public static void play(Board board, Panel4 panel4, cPanel1 cPanel,
+			int numberOfStones, NineMenMorrisPlayer player1,
+			NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
+
 		NineMenMorrisPlayer currentPlayer = player1;
 		NineMenMorrisPlayer oppositePlayer = player2;
-		
+
 		Connection currentConnection = conn1;
 		Connection oppositeConnection = conn2;
-		
+
 		eColor currentPlayerColor = WHITE;
 		eColor oppositePlayerColor = BLACK;
+
+		Output.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
+				Main.frame, Camera.imageBuffer, Output.fieldPositions,
+				Output.alphaValue, Output.alphaSize);
 
 		System.out.println(board);
 
 		int move = 0;
-		
+
 		while (true) {
 			Move bestMove = null;
 
 			if (move < 2 * numberOfStones) {
-				bestMove = currentPlayer.layStone(board, move, numberOfStones,
-						currentPlayerColor, oppositePlayerColor, panel);
+				bestMove = currentPlayer
+						.layStone(board, move, numberOfStones,
+								currentPlayerColor, oppositePlayerColor,
+								panel4, cPanel);
 			} else if (board.getNumberOfStones(BLACK) >= 3
 					&& board.getNumberOfStones(WHITE) >= 3
 					&& !board.getStuck(currentPlayerColor)) {
 
-				bestMove = currentPlayer.moveStone(board, move, numberOfStones,
-						currentPlayerColor, oppositePlayerColor, panel);
+				bestMove = currentPlayer
+						.moveStone(board, move, numberOfStones,
+								currentPlayerColor, oppositePlayerColor,
+								panel4, cPanel);
 			} else {
 				System.out.println("*********************************** \n"
 						+ " It have been placed all the stones \n");
-				if(board.getNumberOfStones(currentPlayerColor)<3)
-				System.out.println(oppositePlayer.getName()+" wins!"); // TODO
-				if(board.getNumberOfStones(oppositePlayerColor)<3)
-					System.out.println(currentPlayer.getName()+" wins!");
+				if (board.getNumberOfStones(currentPlayerColor) < 3)
+					System.out.println(oppositePlayer.getName() + " wins!"); // TODO
+				if (board.getNumberOfStones(oppositePlayerColor) < 3)
+					System.out.println(currentPlayer.getName() + " wins!");
 				System.out.println("***********************************");
-				panel.repaint();
+				panel4.repaint();
 				return;
 			}
 
@@ -131,11 +144,11 @@ public class Main {
 			if (bestMove.take != null)
 				board.setColor(bestMove.take, NONE);
 
-			panel.refreshButtonColor(board);
+			// panel.refreshButtonColor(board);
 			HumanPlayer.sleep(1000);
 
 			// board is updated
-			panel.repaint();
+			panel4.repaint();
 			System.out.println(board);
 
 			// ROBOTER IS MOVING
@@ -145,7 +158,7 @@ public class Main {
 			if (bestMove.take != null)
 				currentConnection.takeStone(bestMove.take);
 
-			panel.setRobotOnTurn(false);
+			// panel.setRobotOnTurn(false);
 
 			System.out.println("From " + bestMove.from);
 			System.out.println("  To " + bestMove.to);
@@ -153,7 +166,7 @@ public class Main {
 				System.out.println(" TakeStone: " + bestMove.take);
 				currentConnection.takeStone(bestMove.take);
 			}
-			panel.repaint();
+			panel4.repaint();
 			System.out.println("");
 			System.out.println(board);
 

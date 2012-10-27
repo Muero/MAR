@@ -5,20 +5,27 @@ import muehle.model.Position;
 public class EmptyConnection implements Connection {
 
 	@Override
-	public void openConnection() {	}
+	public void openConnection() {
+	}
 
 	@Override
-	public void closeConnection() {	}
+	public void closeConnection() {
+	}
 
 	@Override
-	public void setStone(Position to) {	}
+	public void setStone(Position to) {
+	}
 
 	@Override
-	public void moveStone(Position from, Position to) { }
+	public void moveStone(Position from, Position to) {
+	}
 
 	@Override
-	public void takeStone(Position from) { }
+	public void takeStone(Position from) {
+	}
 
-
+	@Override
+	public void waitForButton() {
+	}
 
 }

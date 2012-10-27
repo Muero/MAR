@@ -8,4 +8,5 @@ public interface Connection {
 	void setStone(Position to);
 	void moveStone(Position from, Position to);
 	void takeStone(Position from);
+	void waitForButton();
 }

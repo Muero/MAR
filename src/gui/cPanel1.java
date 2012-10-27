@@ -11,17 +11,26 @@ import javax.swing.JPanel;
 
 import muehle.Main;
 import muehle.model.*;
-import muehle.model.Board;
-import muehle.model.Position;
 import muehle.model.Board.eColor;
 
 public class cPanel1 extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
 	public static JButton[] button = new JButton[24];
+	
+	private Board board;
+	
+	private Color resourceColor[] = {Color.red,new Color(0,100,0)};
+	private String resourceText[] = {"Analysiere Bild...","Bild analysiert!  -  Warte auf Eingabe"};
+	private int bildMode = 1;
+
 
 	public static JButton getButton(Position p) {
 		return button[getGuiPosition(p)];
+	}
+	
+	public static int getButtonId(Position p){
+		return getGuiPosition(p);
 	}
 
 	private static int getGuiPosition(Position p) {
