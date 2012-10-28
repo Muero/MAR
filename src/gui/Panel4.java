@@ -41,6 +41,12 @@ public class Panel4 extends JPanel{
 	private void thread(){
 		new Thread(){
 			public void run(){
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				while(true){
 					for(Position p:Position.getAllPositions()){
 						cPanel1.getButton(p).setEnabled(false);

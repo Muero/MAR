@@ -3,13 +3,12 @@ package gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import muehle.Main;
-
 import camera.Camera;
 
 public class Panel2 extends JPanel{
@@ -26,16 +25,11 @@ public class Panel2 extends JPanel{
 	public Panel2(){
 		for(int i=0;i<24;i++)
 			positions[i] = new Point(-10,-10);
-		this.addMouseListener(new MouseListener(){
+		this.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent arg0) {
 				mouseClicked = true;
 				mousePosition = new Point(arg0.getX(),arg0.getY());
 			}
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}
-			
 		});
 	}
 	

@@ -300,7 +300,15 @@ public class Panel3 extends JPanel{
 		new Thread(){
 			@SuppressWarnings("deprecation")
 			public void run(){
+				try {
+					Thread.sleep(1000); // wait until everything is initialized
+										// FIXME needs to be fixed
+				} catch (InterruptedException e1) {
+					// ignore
+				} 
+				
 				while(true){
+					System.out.println("I am still running...");
 					if(isButton1){
 						Main.frame.setCursor(Cursor.CROSSHAIR_CURSOR);
 						button1.setBackground(Color.orange);

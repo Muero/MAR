@@ -20,6 +20,8 @@ public class ComputerFrame extends JFrame{
 	public ComputerFrame(Board board){
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setBounds(0,0,500,600);
+		cpanel1 = new cPanel1(board);
+		cpanel2 = new Panel5(board);
 		addComponentsToPane(this.getContentPane());
 		refresh();
 	}
