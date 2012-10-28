@@ -172,6 +172,11 @@ public final class Position {
 		return neighbours.get(position);
 	}
 	
-	
+	public static Position getPosition(int id) {
+		for(Position p : getAllPositions()) {
+			if(p.getId() == id) return p;
+		}
+		return null;
+	}
 }
 
