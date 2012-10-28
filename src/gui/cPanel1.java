@@ -9,9 +9,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import muehle.Main;
-import muehle.model.*;
+import muehle.model.Board;
 import muehle.model.Board.eColor;
+import muehle.model.Position;
 
 public class cPanel1 extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;

@@ -6,13 +6,12 @@ import static muehle.model.Board.eColor.WHITE;
 import gui.ComputerFrame;
 import gui.Frame;
 import gui.Output;
+import gui.Panel4;
+import gui.Panel5;
+import gui.cPanel1;
 
 import java.awt.Dimension;
 import java.util.Random;
-
-import javax.swing.JFrame;
-
-import camera.Camera;
 
 import muehle.connection.BTConnection;
 import muehle.connection.Connection;
@@ -23,14 +22,12 @@ import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.NormalPlayer;
 import muehle.players.human.HumanPlayer;
-import gui.Panel4;
-import gui.cPanel1;
+import camera.Camera;
 
 public class Main {
 
 	private static final int numberOfStones = 9; // With how many stones u will
 													// play
-
 	public static final int depth = Output.difficulty; // playing ability
 	public static int guimode = 1;
 
@@ -42,9 +39,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-		BoardPanel panel = new BoardPanel();
+		//BoardPanel panel = new BoardPanel();
 
-		frame = new Frame(board); //FIXME
+		frame = new Frame(board);
 		cframe = new ComputerFrame(board);
 
 		gui.Input.startGui(frame);
@@ -54,8 +51,9 @@ public class Main {
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 
-		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick");
+	
 		Connection conn1 = new EmptyConnection(); // without robot
+		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick", conn1);
 
 		conn1.openConnection();
 
@@ -76,20 +74,19 @@ public class Main {
 			player2 = p;
 		}
 
-		frame = new Frame(board, BLACK, 1, numberOfStones); //FIXME black?
-		cframe = new ComputerFrame(board);
+
 
 		gui.Input.startGui(frame);
 		gui.Output.create();
 		gui.Input.startIngameGui(frame);
 
-		JFrame f = new JFrame("Nüünistei");
-		f.add(panel);
-		f.pack();
-		f.setVisible(true);
+//		JFrame f = new JFrame("Nüünistei");
+//		f.add(panel);
+//		f.pack();
+//		f.setVisible(true);
 
 		play(board, frame.panel4, cframe.cpanel1, numberOfStones, player1,
-				player2, conn1, conn2); // first phase: placing the stones
+				player2, conn1, conn2);
 
 		conn1.closeConnection();
 		conn2.closeConnection();
@@ -175,6 +172,8 @@ public class Main {
 				currentConnection.takeStone(bestMove.take);
 			}
 			panel4.repaint();
+			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor, move, numberOfStones);
+			
 			System.out.println("");
 			System.out.println(board);
 

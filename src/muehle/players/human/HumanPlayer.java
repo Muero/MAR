@@ -5,6 +5,7 @@ import gui.Output;
 import gui.Panel4;
 import gui.cPanel1;
 import muehle.Main;
+import muehle.connection.Connection;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -18,9 +19,11 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	public static Position inputPositionFrom, inputPositionTo;
 
 	private String name;
+	private Connection conn;
 
-	public HumanPlayer(String name) {
+	public HumanPlayer(String name, Connection conn) {
 		this.name = name;
+		this.conn = conn;
 	}
 
 	public String getName() {
@@ -125,7 +128,6 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 				} while (takeAway == null);
 			} else {
 
-				
 				conn.waitForButton();
 				inputPosition = Position.p96; // Muss leider initialisiert
 												// werden
@@ -157,27 +159,28 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 			// board is updated
 			// panel.refreshButtonColor(board);
 			// panel.repaint();
-			System.out.println(board);
-			return new Move(null, inputPosition, takeAway);
 		}
+		System.out.println(board);
+		return new Move(null, inputPosition, takeAway);
+
 	}
 
 	@Override
 	public Move moveStone(Board board, int move, int numberOfStones,
 			eColor player, eColor opposite, Panel4 panel, cPanel1 cpanel) {
-		//panel.refreshButtonColor(board);
-		//panel.repaint();
+		// panel.refreshButtonColor(board);
+		// panel.repaint();
 		do {
 			System.out.println("Your next move? \n" + "From where?");
 
-			//panel.clickedButton = null;
+			// panel.clickedButton = null;
 			Output.pressedButton = -1;
 			do { // The player said which stone he wants to move
 				inputPositionFrom = panel.getClickedButton();
 				if (inputPositionFrom != null) {
 					if (board.getColor(inputPositionFrom) != player) {
 						inputPositionFrom = null;
-						//panel.clickedButton = null;
+						// panel.clickedButton = null;
 						Output.pressedButton = -1;
 						System.out.println("Position not " + player);
 					}
@@ -185,12 +188,12 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 				sleep(1);
 			} while (inputPositionFrom == null);
 
-			//panel.refreshButtonColor(board);
-			//panel.repaint();
+			// panel.refreshButtonColor(board);
+			// panel.repaint();
 			System.out.println("Whereto ?");
 
 			// The player says whereto he wants to move his stone
-			//panel.clickedButton = null;
+			// panel.clickedButton = null;
 			Output.pressedButton = -1;
 			do {
 				inputPositionTo = panel.getClickedButton();
@@ -219,15 +222,15 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 		// board is updated
 		System.out.println(board);
-		//panel.refreshButtonColor(board);
-		//panel.repaint();
+		// panel.refreshButtonColor(board);
+		// panel.repaint();
 
 		if (board.isMill(inputPositionTo, player)) { // if the player has a
 														// mill
-			//panel.refreshButtonColor(board);
-			//panel.repaint();
+			// panel.refreshButtonColor(board);
+			// panel.repaint();
 			System.out.println("You have mill, which stone take you away?");
-			//panel.clickedButton = null;
+			// panel.clickedButton = null;
 			Output.pressedButton = -1;
 			do { // player can take away a stone
 				takeAway = panel.getClickedButton();
@@ -238,14 +241,14 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 					} else {
 						System.out.println("It's not an opponent's stone");
 						takeAway = null;
-						//panel.clickedButton = null;
+						// panel.clickedButton = null;
 						Output.pressedButton = -1;
 					}
 				}
 				sleep(1);
 			} while (takeAway == null);
-			//panel.refreshButtonColor(board);
-			//panel.repaint();
+			// panel.refreshButtonColor(board);
+			// panel.repaint();
 		}
 
 		System.out.println(board);

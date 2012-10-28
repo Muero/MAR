@@ -1,7 +1,6 @@
 package muehle.players.random;
 
-import muehle.BoardPanel;
-import gui.Output;
+//import muehle.BoardPanel;
 import gui.Panel4;
 import gui.cPanel1;
 import muehle.model.Board;

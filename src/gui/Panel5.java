@@ -15,20 +15,19 @@ import muehle.players.computer.Minmax;
 public class Panel5 extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public JButton[] button = new JButton[24];
+	public static JButton[] button = new JButton[24];
 
 	private Board board;
 
-	public Panel5(Board board, eColor player, int move, int numberOfStones) {
+	public Panel5(Board board) {
 
 		this.board = board;
 		this.setLayout(null);
 		this.repaint();
 		generateButtons();
-		thread(player, move, numberOfStones);
 	}
 
-	private Color getProbabilityColor(Integer i) {
+	private static Color getProbabilityColor(Integer i) {
 		if (i <= 100)
 			return new Color(255, 0, 0);
 		if (i <= 200)
@@ -52,26 +51,20 @@ public class Panel5 extends JPanel {
 		return new Color(0, 0, 0);
 	}
 
-	private void thread(final eColor player, final int move,
-			final int numberOfStones) {
+	public static void setBackgroundProbabilityColor(Board board, final eColor player,
+			final int move, final int numberOfStones) {
 
-		new Thread() {
-			public void run() {
-				while (true) {
-					for (Position p : Position.getAllPositions()) {
-						cPanel1.getButton(p).setEnabled(false);
-						cPanel1.getButton(p).setBackground(
-								getProbabilityColor(Minmax.getProbability(
-										board, player, move, numberOfStones)
-										.get(p)));
-					}
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-					}
-				}
-			}
-		}.start();
+		for (Position p : Position.getAllPositions()) {
+			button[cPanel1.getButtonId(p)].setEnabled(false);
+			button[cPanel1.getButtonId(p)].setBackground(
+					getProbabilityColor(Minmax.getProbability(board, player,
+							move, numberOfStones).get(p)));
+		}
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+		}
+
 	}
 
 	private void generateButtons() {

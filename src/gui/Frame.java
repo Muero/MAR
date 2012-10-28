@@ -21,15 +21,14 @@ public class Frame extends JFrame{
 	public Panel4 panel4;
 	public Panel5 panel5;
 	
-	public Frame(Board board, eColor Player, int move, int numberOfStones){
+	public Frame(Board board){
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel1 = new Panel1();
 		panel2 = new Panel2();
 		panel3 = new Panel3();
 		panel4 = new Panel4(board);
-		panel5 = new Panel5(board, Player, move, numberOfStones);
-
-		
+		panel5 = new Panel5(board);
+		addComponentsToPane(this.getContentPane());		
 		refresh();
 	}
 	
