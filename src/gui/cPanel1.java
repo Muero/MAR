@@ -24,7 +24,6 @@ public class cPanel1 extends JPanel implements MouseListener {
 	private String resourceText[] = {"Analysiere Bild...","Bild analysiert!  -  Warte auf Eingabe"};
 	private int bildMode = 1;
 
-
 	public static JButton getButton(Position p) {
 		return button[getGuiPosition(p)];
 	}
