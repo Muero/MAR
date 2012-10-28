@@ -150,7 +150,9 @@ public class Main {
 				board.setColor(bestMove.take, NONE);
 
 			// panel.refreshButtonColor(board);
-			HumanPlayer.sleep(1000);
+			
+			//TODO why? currentPlayer?
+			//HumanPlayer.sleep(1000);
 
 			// board is updated
 			panel4.repaint();
