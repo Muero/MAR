@@ -1,9 +1,6 @@
-package muehle.players.human;
+package gui;
 
 import static muehle.model.Board.eColor.NONE;
-import gui.Output;
-import gui.Panel4;
-import gui.cPanel1;
 import muehle.Main;
 import muehle.connection.Connection;
 import muehle.model.Board;
@@ -45,9 +42,7 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 				inputPosition = cpanel.getClickedButton();
 
 				if (inputPosition != null) {
-					if (board.getColor(inputPosition) == NONE) {
-						board.setColor(inputPosition, player);
-					} else {
+					if (board.getColor(inputPosition) != NONE) {
 						inputPosition = null;
 						// panel.clickedButton = null;
 						System.out.println("position occupied");

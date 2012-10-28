@@ -101,7 +101,7 @@ public class BTConnection implements Connection {
 	@Override
 	public void takeStone(Position from) {
 		Dimension a;
-		a = getDistance(Position.p96.getId(),from.getId());
+		a = getDistance(96, from.getId());
 		send(dos, dis,a.width,a.height);
 		send(dos2,dis2,3);
 		send(dos2,dis2,5);

@@ -5,6 +5,7 @@ import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
 import gui.ComputerFrame;
 import gui.Frame;
+import gui.HumanPlayer;
 import gui.Output;
 import gui.Panel4;
 import gui.Panel5;
@@ -21,7 +22,6 @@ import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.NormalPlayer;
-import muehle.players.human.HumanPlayer;
 import camera.Camera;
 
 public class Main {
@@ -141,10 +141,10 @@ public class Main {
 				return;
 			}
 
-			if (bestMove.from != null)
+			if (bestMove.from != null) {
 				System.out.println(bestMove.from);
-			if (bestMove.from != null)
 				board.setColor(bestMove.from, NONE);
+			}
 			board.setColor(bestMove.to, currentPlayerColor);
 			if (bestMove.take != null)
 				board.setColor(bestMove.take, NONE);
