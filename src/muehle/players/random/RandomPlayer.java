@@ -9,6 +9,8 @@ import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 
 public class RandomPlayer implements NineMenMorrisPlayer {
+	
+	private eColor color;
 
 	public String getName() {
 		return "Random Player";
@@ -24,6 +26,16 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 	public Move moveStone(Board board, int move, int numberOfStones, eColor player,eColor opposite, Panel4 panel,  cPanel1 cpanel) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setColor(eColor color) {
+		this.color = color;
+	}
+
+	@Override
+	public eColor getColor() {
+		return color;
 	}
 
 }

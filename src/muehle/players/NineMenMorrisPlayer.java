@@ -19,5 +19,8 @@ public interface NineMenMorrisPlayer {
 	Move moveStone(Board board, int move, int numberOfStones, eColor player, eColor opposite,Panel4 panel, cPanel1 cpanel1);
 
 	String getName();
+	
+	void setColor(eColor color);
+	eColor getColor();
 }
 

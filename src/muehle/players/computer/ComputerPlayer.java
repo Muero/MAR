@@ -8,16 +8,26 @@ import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.Minmax.MinimaxResult;
 
-public class NormalPlayer implements NineMenMorrisPlayer {
+public class ComputerPlayer implements NineMenMorrisPlayer {
 	final int deepth = 4;
 	private String name;
-
+	private eColor color;
 	
-	public NormalPlayer(String name) {
+	public ComputerPlayer(String name) {
 		this.name = name;
 	}
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public void setColor(eColor color) {
+		this.color = color;
+	}
+
+	@Override
+	public eColor getColor() {
+		return color;
 	}
 
 	public Move layStone(Board board, int move, int numberOfStones,

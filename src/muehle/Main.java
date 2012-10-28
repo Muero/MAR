@@ -5,7 +5,6 @@ import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
 import gui.ComputerFrame;
 import gui.Frame;
-import gui.HumanPlayer;
 import gui.Output;
 import gui.Panel4;
 import gui.Panel5;
@@ -21,7 +20,11 @@ import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
-import muehle.players.computer.NormalPlayer;
+import muehle.players.computer.ComputerPlayer;
+import muehle.players.human.ButtonInput;
+import muehle.players.human.HumanPlayer;
+import muehle.players.human.HumanPositionInput;
+import muehle.players.human.WebCamInput;
 import camera.Camera;
 
 public class Main {
@@ -47,17 +50,26 @@ public class Main {
 		gui.Input.startGui(frame);
 		gui.Output.create();
 		gui.Input.startIngameGui(frame);
-
+		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 
 	
 		Connection conn1 = new EmptyConnection(); // without robot
-		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick", conn1);
+		
+		HumanPositionInput input = null;
+		
+		if(Output.usewebcam) {
+			input = new WebCamInput(board, conn1);
+		} else {
+			input = new ButtonInput(board, cframe.cpanel1, frame.panel4);
+		}
+		
+		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick", conn1, input);
 
 		conn1.openConnection();
 
-		NineMenMorrisPlayer player2 = new NormalPlayer("Computer");
+		NineMenMorrisPlayer player2 = new ComputerPlayer("Computer");
 		Connection conn2;
 		if (Output.userobot)
 			conn2 = new BTConnection(); // with robot
@@ -86,7 +98,7 @@ public class Main {
 //		f.setVisible(true);
 
 		play(board, frame.panel4, cframe.cpanel1, numberOfStones, player1,
-				player2, conn1, conn2);
+				player2, conn1, conn2); // TODO check whether parameter panel4 and cpanel1 are still necessary
 
 		conn1.closeConnection();
 		conn2.closeConnection();
@@ -104,6 +116,9 @@ public class Main {
 
 		eColor currentPlayerColor = WHITE;
 		eColor oppositePlayerColor = BLACK;
+		
+		player1.setColor(currentPlayerColor);
+		player2.setColor(oppositePlayerColor);
 
 		Output.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
 				Main.frame, Camera.imageBuffer, Output.fieldPositions,
