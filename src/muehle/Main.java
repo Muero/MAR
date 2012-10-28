@@ -3,12 +3,6 @@ package muehle;
 import static muehle.model.Board.eColor.BLACK;
 import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
-import gui.ComputerFrame;
-import gui.Frame;
-import gui.Output;
-import gui.Panel4;
-import gui.Panel5;
-import gui.cPanel1;
 
 import java.awt.Dimension;
 import java.util.Random;
@@ -16,16 +10,21 @@ import java.util.Random;
 import muehle.connection.BTConnection;
 import muehle.connection.Connection;
 import muehle.connection.EmptyConnection;
+import muehle.gui.ButtonInput;
+import muehle.gui.ComputerFrame;
+import muehle.gui.Frame;
+import muehle.gui.Output;
+import muehle.gui.Panel4;
+import muehle.gui.Panel5;
+import muehle.gui.cPanel1;
+import muehle.gui.camera.WebCamInput;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.ComputerPlayer;
-import muehle.players.human.ButtonInput;
 import muehle.players.human.HumanPlayer;
 import muehle.players.human.HumanPositionInput;
-import muehle.players.human.WebCamInput;
-import camera.Camera;
 
 public class Main {
 
@@ -47,9 +46,9 @@ public class Main {
 		frame = new Frame(board);
 		cframe = new ComputerFrame(board);
 
-		gui.Input.startGui(frame);
-		gui.Output.create();
-		gui.Input.startIngameGui(frame);
+		muehle.gui.Input.startGui(frame);
+		muehle.gui.Output.create();
+		muehle.gui.Input.startIngameGui(frame);
 		
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
@@ -88,9 +87,9 @@ public class Main {
 
 
 
-		gui.Input.startGui(frame);
-		gui.Output.create();
-		gui.Input.startIngameGui(frame);
+		muehle.gui.Input.startGui(frame);
+		muehle.gui.Output.create();
+		muehle.gui.Input.startIngameGui(frame);
 
 //		JFrame f = new JFrame("Nüünistei");
 //		f.add(panel);
@@ -120,10 +119,6 @@ public class Main {
 		player1.setColor(currentPlayerColor);
 		player2.setColor(oppositePlayerColor);
 
-		Output.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
-				Main.frame, Camera.imageBuffer, Output.fieldPositions,
-				Output.alphaValue, Output.alphaSize);
-
 		System.out.println(board);
 
 		int move = 0;
@@ -133,17 +128,13 @@ public class Main {
 
 			if (move < 2 * numberOfStones) {
 				bestMove = currentPlayer
-						.layStone(board, move, numberOfStones,
-								currentPlayerColor, oppositePlayerColor,
-								panel4, cPanel);
+						.layStone(board, move, numberOfStones);
 			} else if (board.getNumberOfStones(BLACK) >= 3
 					&& board.getNumberOfStones(WHITE) >= 3
 					&& !board.getStuck(currentPlayerColor)) {
 
 				bestMove = currentPlayer
-						.moveStone(board, move, numberOfStones,
-								currentPlayerColor, oppositePlayerColor,
-								panel4, cPanel);
+						.moveStone(board, move, numberOfStones);
 			} else {
 				System.out.println("*********************************** \n"
 						+ " It have been placed all the stones \n");

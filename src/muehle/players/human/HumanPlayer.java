@@ -1,27 +1,19 @@
 package muehle.players.human;
 
 import static muehle.model.Board.eColor.NONE;
-import gui.Output;
-import gui.Panel4;
-import gui.cPanel1;
-import muehle.Main;
 import muehle.connection.Connection;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
-import camera.Camera;
 
 public class HumanPlayer implements NineMenMorrisPlayer {
-
-	private Position inputPosition, takeAway;
-	private Position inputPositionFrom, inputPositionTo;
-
 	private String name;
-	private eColor color;
 	private Connection conn;
 	private HumanPositionInput input;
+
+	private eColor color;
 
 	public HumanPlayer(String name, Connection conn, HumanPositionInput input) {
 		this.name = name;
@@ -45,14 +37,14 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public Move layStone(Board board, int move, int numberOfStones,
-			eColor player, eColor opposite, Panel4 panel, cPanel1 cpanel) {
+	public Move layStone(Board board, int move, int numberOfStones) {
 
 		// The player is laying his stone
-		inputPosition = input.layStonePosition();
-		board.setColor(inputPosition, player);
+		Position inputPosition = input.layStonePosition();
+		board.setColor(inputPosition, color);
 
-		if (board.isMill(inputPosition, player)) { // if the player has a mill
+		Position takeAway = null;
+		if (board.isMill(inputPosition, color)) { // if the player has a mill
 			// TODO: Regelabklärung: Was wenn Gegner nur geschlossene Muehlen?
 			takeAway = input.takeStonePosition();
 		}
@@ -60,10 +52,8 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public Move moveStone(Board board, int move, int numberOfStones,
-			eColor player, eColor opposite, Panel4 panel, cPanel1 cpanel) {
-		// panel.refreshButtonColor(board);
-		// panel.repaint();
+	public Move moveStone(Board board, int move, int numberOfStones) {
+		Position inputPositionFrom, inputPositionTo;
 		do {
 			inputPositionFrom = input.fromStonePosition();
 			inputPositionTo = input.toStonePosition(inputPositionFrom);
@@ -71,14 +61,15 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 		// Stones are moved
 		board.setColor(inputPositionFrom, NONE);
-		board.setColor(inputPositionTo, player);
+		board.setColor(inputPositionTo, color);
 
 		// board is updated
 		System.out.println(board);
 		// panel.refreshButtonColor(board);
 		// panel.repaint();
 
-		if (board.isMill(inputPositionTo, player)) { // if the player has a mill
+		Position takeAway = null;
+		if (board.isMill(inputPositionTo, color)) { // if the player has a mill
 			// TODO: Regelabklärung: Was wenn Gegner nur geschlossene Muehlen?
 			takeAway = input.takeStonePosition();
 		}

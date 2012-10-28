@@ -1,14 +1,14 @@
-package muehle.players.human;
+package muehle.gui.camera;
 
 import static muehle.model.Board.eColor.NONE;
-import gui.Output;
-import gui.cPanel1;
 import muehle.Main;
 import muehle.connection.Connection;
+import muehle.gui.Output;
+import muehle.gui.cPanel1;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
-import camera.Camera;
+import muehle.players.human.HumanPositionInput;
 
 public class WebCamInput implements HumanPositionInput {
 	private Board board;
@@ -19,6 +19,11 @@ public class WebCamInput implements HumanPositionInput {
 	public WebCamInput(Board board, Connection conn) {
 		this.board = board;
 		this.conn = conn;
+		
+		Output.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
+				Main.frame, Camera.imageBuffer, Output.fieldPositions,
+				Output.alphaValue, Output.alphaSize);
+
 	}
 
 	@Override

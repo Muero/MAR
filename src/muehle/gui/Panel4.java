@@ -1,4 +1,4 @@
-package gui;
+package muehle.gui;
 
 
 import java.awt.Color;
@@ -9,10 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import muehle.Main;
+import muehle.gui.cPanel1;
+import muehle.gui.camera.Camera;
 import muehle.model.Board;
 import muehle.model.Position;
-import camera.Camera;
-import gui.cPanel1;
 
 public class Panel4 extends JPanel{
 	private static final long serialVersionUID = 1L;

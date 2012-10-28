@@ -1,6 +1,5 @@
-package camera;
+package muehle.gui.camera;
 
-import gui.Output;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -20,6 +19,8 @@ import javax.media.control.FrameGrabbingControl;
 import javax.media.format.VideoFormat;
 import javax.media.util.BufferToImage;
 import javax.swing.JFrame;
+
+import muehle.gui.Output;
 
 public class Camera {
 

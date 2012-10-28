@@ -1,7 +1,7 @@
-package gui;
+package muehle.gui;
 
 import muehle.Main;
-import camera.Camera;
+import muehle.gui.camera.Camera;
 
 public class Input {
 	public static void startGui(Frame frame){

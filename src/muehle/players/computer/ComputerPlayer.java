@@ -1,7 +1,5 @@
 package muehle.players.computer;
 
-import gui.Panel4;
-import gui.cPanel1;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.players.Move;
@@ -11,7 +9,8 @@ import muehle.players.computer.Minmax.MinimaxResult;
 public class ComputerPlayer implements NineMenMorrisPlayer {
 	final int deepth = 4;
 	private String name;
-	private eColor color;
+	private eColor player;
+	private eColor opposite;
 	
 	public ComputerPlayer(String name) {
 		this.name = name;
@@ -22,16 +21,16 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 
 	@Override
 	public void setColor(eColor color) {
-		this.color = color;
+		this.player = color;
+		if(color == eColor.BLACK) opposite = eColor.WHITE; else opposite = eColor.BLACK;
 	}
 
 	@Override
 	public eColor getColor() {
-		return color;
+		return player;
 	}
 
-	public Move layStone(Board board, int move, int numberOfStones,
-			eColor player, eColor opposite, Panel4 panel,  cPanel1 cpanel) {
+	public Move layStone(Board board, int move, int numberOfStones) {
 		//panel.setRobotOnTurn(true);
 		System.out.println("I'm thinking ... \n");
 
@@ -42,9 +41,8 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 
 	}
 
-	public Move moveStone(Board board, int move, int numberOfStones,
-			eColor player, eColor opposite, Panel4 panel, cPanel1 cpanel) {
-		return layStone(board, move, numberOfStones, player, opposite, panel, cpanel);
+	public Move moveStone(Board board, int move, int numberOfStones) {
+		return layStone(board, move, numberOfStones);
 	}
 
 }

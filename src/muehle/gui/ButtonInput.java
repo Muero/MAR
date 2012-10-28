@@ -1,12 +1,10 @@
-package muehle.players.human;
+package muehle.gui;
 
 import static muehle.model.Board.eColor.NONE;
-import gui.Output;
-import gui.Panel4;
-import gui.cPanel1;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
+import muehle.players.human.HumanPositionInput;
 
 public class ButtonInput implements HumanPositionInput {
 	

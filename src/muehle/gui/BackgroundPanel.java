@@ -1,4 +1,4 @@
-package gui;
+package muehle.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;

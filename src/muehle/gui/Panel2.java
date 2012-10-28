@@ -1,4 +1,4 @@
-package gui;
+package muehle.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import muehle.Main;
-import camera.Camera;
+import muehle.gui.camera.Camera;
 
 public class Panel2 extends JPanel{
 	private static final long serialVersionUID = 1L;

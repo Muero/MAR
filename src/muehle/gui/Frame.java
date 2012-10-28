@@ -1,4 +1,4 @@
-package gui;
+package muehle.gui;
 
 import java.awt.ComponentOrientation;
 import java.awt.Container;

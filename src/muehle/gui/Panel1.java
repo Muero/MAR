@@ -1,10 +1,11 @@
-package gui;
+package muehle.gui;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import camera.Camera;
+import muehle.gui.camera.Camera;
+
 
 public class Panel1 extends JPanel{
 	private static final long serialVersionUID = 1L;
