@@ -11,7 +11,7 @@ public class Board {
 		NONE, BLACK, WHITE // The three modes that a "Position" may have.
 	}
 
-	private Map<Position, eColor> board = new HashMap<Position, eColor>();
+	private Map<Position, eColor>board = new HashMap<Position, eColor>();
 
 	/**
 	 * Returns the Color on the Position p. If on the Position is no Color it

@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import muehle.Main;
+import muehle.Linker;
 import muehle.gui.camera.Camera;
 
 public class Panel2 extends JPanel{
@@ -76,7 +76,7 @@ public class Panel2 extends JPanel{
 		for(int i=0;i<Camera.imageColor.length;i++){
 			for(int j=0;j<Camera.imageColor[0].length;j++){
 				if(!alphacheck(Camera.imageColor[i][j]))
-					g.setColor(new Color(Camera.imageColor[i][j].getRed(),Camera.imageColor[i][j].getGreen(),Camera.imageColor[i][j].getBlue(),Main.frame.panel3.getValue(0)));
+					g.setColor(new Color(Camera.imageColor[i][j].getRed(),Camera.imageColor[i][j].getGreen(),Camera.imageColor[i][j].getBlue(),Linker.frame.panel3.getValue(0)));
 				else
 					g.setColor(Camera.imageColor[i][j]);
 				g.drawLine(i-a, j-b, i-a, j-b);
@@ -93,13 +93,13 @@ public class Panel2 extends JPanel{
 	}
 
 	private boolean alphacheck(Color c){
-		if(Main.frame.panel3.isStarterSet()){
+		if(Linker.frame.panel3.isStarterSet()){
 			Color alphapixel = Camera.imageColor[starterPosition.x][starterPosition.y];
 			int r = Math.abs(c.getRed()-alphapixel.getRed());
 			int g = Math.abs(c.getGreen()-alphapixel.getGreen());
 			int b = Math.abs(c.getBlue()-alphapixel.getBlue());
 				
-			int a = Main.frame.panel3.getValue(1);
+			int a = Linker.frame.panel3.getValue(1);
 		
 			return r<a && g<a && b<a;
 		}else{

@@ -28,25 +28,14 @@ import muehle.players.human.HumanPositionInput;
 
 public class Main {
 
-	private static final int numberOfStones = 9; // With how many stones u will
-													// play
-	public static final int depth = Output.difficulty; // playing ability
-	public static int guimode = 1;
-
-	public static Dimension size = new Dimension(542, 378);
-
-	public static Frame frame; // FIXME waeh
-	public static ComputerFrame cframe;
-
-
 	public static void main(String[] args) {
-		Board board = new Board();
-		//BoardPanel panel = new BoardPanel();
-
-		frame = new Frame(board);
-		cframe = new ComputerFrame(board);
-
-		muehle.gui.Input.startGui(frame);
+		
+		Linker.createObjects();
+		Linker.finish();
+		
+		Linker.startupGui();
+		
+/*		muehle.gui.Input.startGui(frame);
 		muehle.gui.Output.create();
 		muehle.gui.Input.startIngameGui(frame);
 		
@@ -101,8 +90,14 @@ public class Main {
 
 		conn1.closeConnection();
 		conn2.closeConnection();
+		
+		*/
 	}
 
+	
+	
+	
+	
 	public static void play(Board board, Panel4 panel4, cPanel1 cPanel,
 			int numberOfStones, NineMenMorrisPlayer player1,
 			NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {

@@ -12,7 +12,7 @@ public class Output {
 	public static final int alphaSize = 5;
 	public static Point starterPosition = new Point(0,0);
 	public static int guimode = 1;
-	public static int difficulty = 0;
+//	public static int difficulty = 0;
 	public static boolean[] cluster = new boolean[24];
 	
 	public static boolean userobot = false;
