@@ -19,14 +19,16 @@ public class Panel0 extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	
 	public JCheckBox jcb1;	//Webcam
-	public JCheckBox jcb2;	//Robot
 	public JCheckBox jcb3;	//Algorithm
 	public JButton jb1;		//NextButton
 	public JComboBox<String> jc1;
+	public JComboBox<String> jc2;
 	
 	public Panel0(){
+		jc2 = new JComboBox<String>();
+		for(String s:Linker.modes)
+			jc2.addItem(s);
 		jcb1 = new JCheckBox("Mit Webcam?");
-		jcb2 = new JCheckBox("Mit Roboter?");
 		jcb3 = new JCheckBox("Mit Algorithmus?");
 		jb1 = new JButton("Next Step");
 		jc1 = new JComboBox<String>();
@@ -45,7 +47,7 @@ public class Panel0 extends JPanel implements MouseListener{
 			c.weighty = 1;
 			c.fill = GridBagConstraints.BOTH;
 			c.gridx = 0;
-			c.gridy = 0;
+			c.gridy = 1;
 			c.gridwidth = 1;
 			c.gridheight = 1;
 			c.insets = new Insets(10,10,10,10);
@@ -55,11 +57,11 @@ public class Panel0 extends JPanel implements MouseListener{
 			c.weighty = 1;
 			c.fill = GridBagConstraints.BOTH;
 			c.gridx = 0;
-			c.gridy = 1;
+			c.gridy = 0;
 			c.gridwidth = 1;
 			c.gridheight = 1;
 			c.insets = new Insets(10,10,10,10);
-		this.add(jcb2,c);
+		this.add(jc2,c);
 		
 			c.weightx = 1;
 			c.weighty = 1;
@@ -101,11 +103,6 @@ public class Panel0 extends JPanel implements MouseListener{
 		}else{
 			jcb1.setBackground(null);
 		}
-		if(jcb2.isSelected()){
-			jcb2.setBackground(Color.green);
-		}else{
-			jcb2.setBackground(null);
-		}
 		if(jcb3.isSelected()){
 			jcb3.setBackground(Color.green);
 			jc1.enable();
@@ -117,7 +114,7 @@ public class Panel0 extends JPanel implements MouseListener{
 	
 	public void mouseClicked(MouseEvent e) {
 		Linker.usealgorithm = jcb3.isSelected();
-		Linker.userobot = jcb2.isSelected();
+		Linker.robotMode = jc2.getSelectedIndex();
 		Linker.usewebcam = jcb1.isSelected();
 		Linker.difficulty = jc1.getSelectedIndex();
 		Linker.waitForGui = false;

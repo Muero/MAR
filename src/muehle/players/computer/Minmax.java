@@ -339,7 +339,7 @@ public class Minmax {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
 		int depth = 4;	
 		for (Position p : Position.getAllPositions()) {
-			if (board.getColor(p) == eColor.NONE) { //TODO gillt nur bei legen und springen
+			if (board.getColor(p) == eColor.NONE) { //TODO gilt nur bei legen und springen
 				MinimaxResult res = Minmax.minmaxDecide(board, player, player==eColor.BLACK?eColor.WHITE:eColor.BLACK, depth, move,
 						numberOfStones);
 				probabilities.put(p, res.getRank());

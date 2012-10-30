@@ -51,37 +51,37 @@ public final class Position {
 		return name;
 	}
 	
-	static Position p70 = new Position("70", 70);
-	static Position p73 = new Position("73", 73);
-	static Position p76 = new Position("76", 76);
+	public static Position p70 = new Position("70", 70);
+	public static Position p73 = new Position("73", 73);
+	public static Position p76 = new Position("76", 76);
 
-	static Position p61 = new Position("61", 61);
-	static Position p63 = new Position("63", 63);
-	static Position p65 = new Position("65", 65);
+	public static Position p61 = new Position("61", 61);
+	public static Position p63 = new Position("63", 63);
+	public static Position p65 = new Position("65", 65);
 
-	static Position p52 = new Position("52", 52);
-	static Position p53 = new Position("53", 53);
-	static Position p54 = new Position("54", 54);
+	public static Position p52 = new Position("52", 52);
+	public static Position p53 = new Position("53", 53);
+	public static Position p54 = new Position("54", 54);
 
-	static Position p10 = new Position("10", 10);
-	static Position p13 = new Position("13", 13);
-	static Position p16 = new Position("16", 16);
+	public static Position p10 = new Position("10", 10);
+	public static Position p13 = new Position("13", 13);
+	public static Position p16 = new Position("16", 16);
 
-	static Position p21 = new Position("21", 21);
-	static Position p23 = new Position("23", 23);
-	static Position p25 = new Position("25", 25);
+	public static Position p21 = new Position("21", 21);
+	public static Position p23 = new Position("23", 23);
+	public static Position p25 = new Position("25", 25);
 
-	static Position p32 = new Position("32", 32);
-	static Position p33 = new Position("33", 33);
-	static Position p34 = new Position("34", 34);
+	public static Position p32 = new Position("32", 32);
+	public static Position p33 = new Position("33", 33);
+	public static Position p34 = new Position("34", 34);
 
-	static Position p40 = new Position("40", 40);
-	static Position p41 = new Position("41", 41);
-	static Position p42 = new Position("42", 42);
+	public static Position p40 = new Position("40", 40);
+	public static Position p41 = new Position("41", 41);
+	public static Position p42 = new Position("42", 42);
 
-	static Position p44 = new Position("44", 44);
-	static Position p45 = new Position("45", 45);
-	static Position p46 = new Position("46", 46);
+	public static Position p44 = new Position("44", 44);
+	public static Position p45 = new Position("45", 45);
+	public static Position p46 = new Position("46", 46);
 
 	static Set<Position> positions = new HashSet<Position>();
 	static {

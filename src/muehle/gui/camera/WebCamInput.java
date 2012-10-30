@@ -1,10 +1,9 @@
 package muehle.gui.camera;
 
 import static muehle.model.Board.eColor.NONE;
+import muehle.Linker;
 import muehle.Main;
 import muehle.connection.Connection;
-import muehle.gui.Output;
-import muehle.gui.cPanel1;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -20,9 +19,9 @@ public class WebCamInput implements HumanPositionInput {
 		this.board = board;
 		this.conn = conn;
 		
-		Output.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
-				Main.frame, Camera.imageBuffer, Output.fieldPositions,
-				Output.alphaValue, Output.alphaSize);
+		Linker.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
+				Main.frame, Camera.imageBuffer, Linker.fieldPositions,
+				Linker.alphaValue, Linker.alphaSize);
 
 	}
 
@@ -42,14 +41,14 @@ public class WebCamInput implements HumanPositionInput {
 		while (retry) {
 			conn.waitForButton();
 
-			boolean[] vorher = Output.cluster;
+			boolean[] vorher = Linker.cluster;
 			boolean[] nachher = new boolean[24];
 			for (int k = 0; k < 24; k++) {
 				nachher[k] = true;
 			}
 			nachher = Camera.createPlayerFieldClusterFromWebcamImage(
-					Main.frame, Camera.imageBuffer, Output.fieldPositions,
-					Output.alphaValue, Output.alphaSize);
+					Main.frame, Camera.imageBuffer, Linker.fieldPositions,
+					Linker.alphaValue, Linker.alphaSize);
 			int stone = -1;
 			for (int j = 0; j < 24; j++) {
 				if (vorher[j] != nachher[j]) {
@@ -71,7 +70,7 @@ public class WebCamInput implements HumanPositionInput {
 					}
 				}
 			}
-			Output.cluster = nachher;
+			Linker.cluster = nachher;
 		}
 		return inputPosition;
 	}
@@ -97,11 +96,11 @@ public class WebCamInput implements HumanPositionInput {
 		Position takePosition = null;
 		conn.waitForButton();
 		takePosition = null; // null entspricht p96
-		boolean[] vorher = Output.cluster;
+		boolean[] vorher = Linker.cluster;
 		boolean[] nachher = Camera
 				.createPlayerFieldClusterFromWebcamImage(Main.frame,
-						Camera.imageBuffer, Output.fieldPositions,
-						Output.alphaValue, Output.alphaSize);
+						Camera.imageBuffer, Linker.fieldPositions,
+						Linker.alphaValue, Linker.alphaSize);
 		int stone = -1;
 		for (int j = 0; j < 24; j++) {
 			if (vorher[j] != nachher[j]) {
@@ -120,7 +119,7 @@ public class WebCamInput implements HumanPositionInput {
 		}
 		// FIXME was wenn stone hier == -1 ist, also falls kein Unterschied zwischen vorher und nachher?
 		// 
-		Output.cluster = nachher;
+		Linker.cluster = nachher;
 		return takePosition;
 	}
 

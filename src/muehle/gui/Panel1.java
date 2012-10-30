@@ -12,7 +12,6 @@ public class Panel1 extends JPanel{
 	
 	public Panel1(){
 		this.setLayout(null);
-		this.repaint();
 	}
 	
 	public void paintComponent(Graphics g){

@@ -4,101 +4,31 @@ import static muehle.model.Board.eColor.BLACK;
 import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
 
-import java.awt.Dimension;
-import java.util.Random;
-
-import muehle.connection.BTConnection;
 import muehle.connection.Connection;
-import muehle.connection.EmptyConnection;
-import muehle.gui.ButtonInput;
-import muehle.gui.ComputerFrame;
-import muehle.gui.Frame;
-import muehle.gui.Output;
 import muehle.gui.Panel4;
 import muehle.gui.Panel5;
-import muehle.gui.cPanel1;
-import muehle.gui.camera.WebCamInput;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
-import muehle.players.computer.ComputerPlayer;
-import muehle.players.human.HumanPlayer;
-import muehle.players.human.HumanPositionInput;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Linker.createObjects();
-		Linker.finish();
-		
+		Linker.createObjects();		//Startup Gui and Board
+		Linker.finish();			//Show Panel0 and get Information about Robot, Webcam and Difficulty
+		Linker.setupGamePlay();
 		Linker.startupGui();
 		
-/*		muehle.gui.Input.startGui(frame);
-		muehle.gui.Output.create();
-		muehle.gui.Input.startIngameGui(frame);
-		
-		System.out.println("*************************** \n"
-				+ "Welcome to the game Nine Men Morris !! \n \n");
+		System.out.println("*************************** \n"+ "Welcome to the game Nine Men Morris !! \n \n");
+		Linker.play();
+				
+		Linker.closeGame();
 
-	
-		Connection conn1 = new EmptyConnection(); // without robot
-		
-		HumanPositionInput input = null;
-		
-		if(Output.usewebcam) {
-			input = new WebCamInput(board, conn1);
-		} else {
-			input = new ButtonInput(board, cframe.cpanel1, frame.panel4);
-		}
-		
-		NineMenMorrisPlayer player1 = new HumanPlayer("Patrick", conn1, input);
-
-		conn1.openConnection();
-
-		NineMenMorrisPlayer player2 = new ComputerPlayer("Computer");
-		Connection conn2;
-		if (Output.userobot)
-			conn2 = new BTConnection(); // with robot
-		else
-			conn2 = new EmptyConnection(); // without robot
-		conn2.openConnection();
-
-		if (new Random().nextBoolean()) {
-			Connection c = conn1;
-			conn1 = conn2;
-			conn2 = c;
-			NineMenMorrisPlayer p = player1;
-			player1 = player2;
-			player2 = p;
-		}
-
-
-
-		muehle.gui.Input.startGui(frame);
-		muehle.gui.Output.create();
-		muehle.gui.Input.startIngameGui(frame);
-
-//		JFrame f = new JFrame("Nüünistei");
-//		f.add(panel);
-//		f.pack();
-//		f.setVisible(true);
-
-		play(board, frame.panel4, cframe.cpanel1, numberOfStones, player1,
-				player2, conn1, conn2); // TODO check whether parameter panel4 and cpanel1 are still necessary
-
-		conn1.closeConnection();
-		conn2.closeConnection();
-		
-		*/
 	}
-
 	
-	
-	
-	
-	public static void play(Board board, Panel4 panel4, cPanel1 cPanel,
+	public static void play(Board board, Panel4 panel4,
 			int numberOfStones, NineMenMorrisPlayer player1,
 			NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
 

@@ -44,7 +44,6 @@ public class Panel3 extends JPanel{
 		this.setLayout(null);
 		addListenersToObjects();
 		addComponentsToPane();
-		thread();
 	}		
 	
 	private void addComponentsToPane(){

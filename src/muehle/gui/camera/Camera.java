@@ -20,7 +20,7 @@ import javax.media.format.VideoFormat;
 import javax.media.util.BufferToImage;
 import javax.swing.JFrame;
 
-import muehle.gui.Output;
+import muehle.Linker;
 
 public class Camera {
 
@@ -121,7 +121,7 @@ public class Camera {
 		}
 	}
 
-	private static BufferedImage toBufferedImage(Image i) {
+	public static BufferedImage toBufferedImage(Image i) {
 		BufferedImage bi = new BufferedImage(i.getWidth(null),
 				i.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = bi.createGraphics();
@@ -153,11 +153,11 @@ public class Camera {
 		for (int j = -alphaSize / 2; j < alphaSize / 2; j++) {
 			for (int k = -alphaSize / 2; k < alphaSize / 2; k++) {
 				try {
-					sumRs += imageColor[Output.starterPosition.x + j][Output.starterPosition.y
+					sumRs += imageColor[Linker.starterPosition.x + j][Linker.starterPosition.y
 							+ k].getRed();
-					sumGs += imageColor[Output.starterPosition.x + j][Output.starterPosition.y
+					sumGs += imageColor[Linker.starterPosition.x + j][Linker.starterPosition.y
 							+ k].getGreen();
-					sumBs += imageColor[Output.starterPosition.x + j][Output.starterPosition.y
+					sumBs += imageColor[Linker.starterPosition.x + j][Linker.starterPosition.y
 							+ k].getBlue();
 				} catch (Exception e) {
 				}
@@ -166,7 +166,7 @@ public class Camera {
 		int Rs = sumRs / (alphaSize * alphaSize);
 		int Gs = sumGs / (alphaSize * alphaSize);
 		int Bs = sumBs / (alphaSize * alphaSize);
-		int alpha = Output.alphaValue;
+		int alpha = Linker.alphaValue;
 
 		for (int i = 0; i < 24; i++) {
 

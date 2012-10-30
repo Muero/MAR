@@ -10,11 +10,8 @@ import java.util.Scanner;
 
 import muehle.connection.Connection;
 import muehle.connection.EmptyConnection;
-import muehle.gui.ComputerFrame;
 import muehle.gui.Frame;
-import muehle.gui.Output;
 import muehle.gui.Panel4;
-import muehle.gui.cPanel1;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -28,13 +25,12 @@ public class Main2 {
 
 	private static final int numberOfStones = 9; // With how many stones u will
 													// play
-	public static final int depth = Output.difficulty; // playing ability
+	public static final int depth = Linker.difficulty; // playing ability
 	public static int guimode = 1;
 
 	public static Dimension size = new Dimension(542, 378);
 
 	public static Frame frame; // FIXME waeh
-	public static ComputerFrame cframe;
 
 
 	public static void main(String[] args) {

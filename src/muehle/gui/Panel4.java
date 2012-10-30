@@ -4,23 +4,24 @@ package muehle.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import muehle.Main;
-import muehle.gui.cPanel1;
+import muehle.Linker;
 import muehle.gui.camera.Camera;
 import muehle.model.Board;
 import muehle.model.Position;
 
-public class Panel4 extends JPanel{
+public class Panel4 extends JPanel implements MouseListener{
 	private static final long serialVersionUID = 1L;
 
 	public JButton[] button = new JButton[24];
 	
 	private Board board;
-
+	
 	private Color resourceColor[] = {Color.red,new Color(0,100,0)};
 	private String resourceText[] = {"Analysiere Bild...","Bild analysiert!  -  Warte auf Eingabe"};
 	private int bildMode = 1;
@@ -28,9 +29,7 @@ public class Panel4 extends JPanel{
 	public Panel4(Board board){
 		this.board = board;
 		this.setLayout(null);
-		this.repaint();
 		generateButtons();
-		thread();
 	}
 	
 	public void paintComponent(Graphics g){
@@ -38,41 +37,31 @@ public class Panel4 extends JPanel{
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawField(g);
 	}
-	private void thread(){
-		new Thread(){
-			public void run(){
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				while(true){
-					for(Position p:Position.getAllPositions()){
-						cPanel1.getButton(p).setEnabled(false);
-						if(board.getColor(p) == Board.eColor.WHITE){
-							cPanel1.getButton(p).setBackground(Output.humanColor);							
-						}else if(board.getColor(p) == Board.eColor.BLACK){
-							cPanel1.getButton(p).setBackground(Output.robotColor);
-						}else{
-							cPanel1.getButton(p).setBackground(Color.gray);
-						}
-					}
-					repaint();
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e){}
-				}
-			}
-		}.start();
+	public void thread(){
+		for(Position p : Position.getAllPositions()){
+			if(Linker.usewebcam)
+				button[Frame.getGuiPosition(p)].setEnabled(false);
+			if(board.getColor(p) == muehle.model.Board.eColor.BLACK)
+				button[Frame.getGuiPosition(p)].setBackground(Linker.opponentColor);
+			else if(board.getColor(p) == muehle.model.Board.eColor.WHITE)
+				button[Frame.getGuiPosition(p)].setBackground(Linker.humanColor);			
+			else
+				button[Frame.getGuiPosition(p)].setBackground(null);
+				
+		}
+		
 	}
+
 	private void generateButtons(){
 		for(int i=0;i<24;i++){
 			button[i] = new JButton();
-			button[i].setEnabled(false);
 			button[i].setBackground(Color.gray);
 			this.add(button[i]);
 		}
+			for(Position p : Position.getAllPositions()){
+				button[Frame.getGuiPosition(p)].setName(""+p.getId());
+				button[Frame.getGuiPosition(p)].addMouseListener(this);
+			}
 	}
 
 	private void drawField(Graphics g){
@@ -128,24 +117,38 @@ public class Panel4 extends JPanel{
 		g.setFont(new Font("Arial",Font.BOLD,15));
 		g.drawString("Roboter",(int) (1*a)-(s/2)+s+5,(int) (8*b)+s-3);
 		g.drawString("Mensch",(int) (4*a)-(s/2)+s+5,(int) (8*b)+s-3);
-		g.setColor(resourceColor[bildMode]);
-		g.drawString(resourceText[bildMode],(int) (0*a)-(s/2)+s+5,(int) (8*b)-9);
+		
+		if(Linker.usewebcam){
+			g.setColor(resourceColor[bildMode]);
+			g.drawString(resourceText[bildMode],(int) (0*a)-(s/2)+s+5,(int) (8*b)-9);			
+		}
+		
 		g.setColor(Color.black);
 		g.drawLine(0,(int) (8*b)-7,this.getWidth(),(int) (8*b)-7);
-		g.setColor(Output.robotColor);
+		g.setColor(Linker.opponentColor);
 		g.fillRect((int) (1*a)-(s/2),(int) (8*b),s,s);
-		g.setColor(Output.humanColor);
+		g.setColor(Linker.humanColor);
 		g.fillRect((int) (4*a)-(s/2),(int) (8*b),s,s);
 		g.setColor(Color.black);
 	}
 	
 	public Position getClickedButton(){
-		Camera.importPictureFromPlayer(Main.frame);
+		if(Linker.usewebcam){
+			Camera.importPictureFromPlayer(Linker.frame);
+		}
 		for(Position p:Position.getAllPositions()){
-			if(Output.pressedButton == p.getId())
+			if(Linker.pressedButton == p.getId())
 				return p;
 		}
 		return null;
 	}
+
+	public void mouseClicked(MouseEvent arg0) {
+		Linker.pressedButton = Integer.parseInt(arg0.getComponent().getName());
+	}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 
 }

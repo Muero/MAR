@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import muehle.Linker;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -23,11 +24,10 @@ public class Panel5 extends JPanel {
 
 		this.board = board;
 		this.setLayout(null);
-		this.repaint();
 		generateButtons();
 	}
 
-	private static Color getProbabilityColor(Integer i) {
+	private static Color getProbabilityColor(int i) {
 		if (i <= 100)
 			return new Color(255, 0, 0);
 		if (i <= 200)
@@ -51,25 +51,21 @@ public class Panel5 extends JPanel {
 		return new Color(0, 0, 0);
 	}
 
-	public static void setBackgroundProbabilityColor(Board board, final eColor player,
-			final int move, final int numberOfStones) {
-
+	public static void setBackgroundProbabilityColor(Board board, final eColor player,final int move, final int numberOfStones) {
 		for (Position p : Position.getAllPositions()) {
-			button[cPanel1.getButtonId(p)].setEnabled(false);
-			button[cPanel1.getButtonId(p)].setBackground(
-					getProbabilityColor(Minmax.getProbability(board, player,
-							move, numberOfStones).get(p)));
+			button[Frame.getGuiPosition(p)].setEnabled(false);
+			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(Minmax.getProbability(board, player,move, numberOfStones).get(p)));
 		}
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 		}
-
 	}
 
 	private void generateButtons() {
 		for (int i = 0; i < 24; i++) {
 			button[i] = new JButton();
+			button[i].setEnabled(false);
 			this.add(button[i]);
 		}
 	}
@@ -162,7 +158,7 @@ public class Panel5 extends JPanel {
 		g.setColor(Color.black);
 		g.fillRect((int) ((1 * a)) - s / 2, (int) (8 * b), (int) (c * 10), s);
 		for (int i = 0; i < 10; i++) {
-			// g.setColor(BestMove.probabilityColor[i]);
+			g.setColor(Linker.probabilityColor[i]);
 			g.fillRect((int) ((1 * a) + (i * c)) - s / 2, (int) (8 * b),
 					(int) (c), s);
 			g.setColor(Color.black);
@@ -172,4 +168,7 @@ public class Panel5 extends JPanel {
 
 	}
 
+	public void thread(){
+		//TODO something to update?
+	}
 }

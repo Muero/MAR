@@ -10,14 +10,15 @@ import javax.swing.border.BevelBorder;
 
 import muehle.Linker;
 import muehle.model.Board;
+import muehle.model.Position;
 
 public class Frame extends JFrame{
 	private static final long serialVersionUID = 1L;
 		
 	public Panel0 panel0;	//StartupPanel
-	public Panel1 panel1;	//StartGameGuiPanel left
-	public Panel2 panel2;	//StartGameGuiPanel right
-	public Panel3 panel3;	//StartGameGuiPanel bottom
+	public Panel1 panel1;	//StartGameGuiPanel left		only Webcam
+	public Panel2 panel2;	//StartGameGuiPanel right		only Webcam
+	public Panel3 panel3;	//StartGameGuiPanel bottom		only Webcam
 	public Panel4 panel4;	//GameGuiPanel left
 	public Panel5 panel5;	//GameGuiPanel right
 	
@@ -27,12 +28,16 @@ public class Frame extends JFrame{
 	 */
 	public Frame(Board board){
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		panel0 = new Panel0();
+
 		panel1 = new Panel1();
 		panel2 = new Panel2();
 		panel3 = new Panel3();
+
 		panel4 = new Panel4(board);
 		panel5 = new Panel5(board);
+		
 		addComponentsToPane(this.getContentPane());		
 		setGuiMode(0);
 		th.start();
@@ -46,9 +51,14 @@ public class Frame extends JFrame{
 		public void run(){
 			while(true){
 				Linker.frame.repaint();
-				Linker.frame.panel0.thread();
+				if(Linker.frame.panel0.isVisible())
+					Linker.frame.panel0.thread();
+				if(Linker.frame.panel4.isVisible())
+					Linker.frame.panel4.thread();
+				if(Linker.frame.panel5.isVisible())
+					Linker.frame.panel5.thread();
 				try{
-					Thread.sleep(50);
+					Thread.sleep(100);
 				}catch(Exception e){}
 				
 			}
@@ -164,6 +174,7 @@ public class Frame extends JFrame{
 			break;
 		case 2:	//StartGameGui
 			this.setVisible(true);
+			this.setSize(542, 378);
 			panel0.setVisible(false);
 			panel1.setVisible(true);
 			panel2.setVisible(true);
@@ -173,11 +184,21 @@ public class Frame extends JFrame{
 			break;
 		case 3:	//Webcam-Human Gui
 			this.setVisible(true);
+			this.setSize(700,400);
+			panel0.setVisible(false);
+			panel1.setVisible(false);
+			panel2.setVisible(false);
+			panel3.setVisible(false);
 			panel4.setVisible(true);
 			panel5.setVisible(true);
 			break;
 		case 4:	//Computer-Human Gui
 			this.setVisible(true);
+			this.setSize(700,400);
+			panel0.setVisible(false);
+			panel1.setVisible(false);
+			panel2.setVisible(false);
+			panel3.setVisible(false);
 			panel4.setVisible(true);
 			panel5.setVisible(true);
 			break;
@@ -203,4 +224,58 @@ public class Frame extends JFrame{
 		th.interrupt();
 	}
 
+	public static int getGuiPosition(Position p) {
+		switch (p.getId()) {
+		case 10:
+			return 21;
+		case 13:
+			return 22;
+		case 16:
+			return 23;
+		case 21:
+			return 18;
+		case 23:
+			return 19;
+		case 25:
+			return 20;
+		case 32:
+			return 15;
+		case 33:
+			return 16;
+		case 34:
+			return 17;
+		case 40:
+			return 9;
+		case 41:
+			return 10;
+		case 42:
+			return 11;
+		case 44:
+			return 12;
+		case 45:
+			return 13;
+		case 46:
+			return 14;
+		case 52:
+			return 6;
+		case 53:
+			return 7;
+		case 54:
+			return 8;
+		case 61:
+			return 3;
+		case 63:
+			return 4;
+		case 65:
+			return 5;
+		case 70:
+			return 0;
+		case 73:
+			return 1;
+		case 76:
+			return 2;
+		default:
+			return -1;
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package muehle.gui;
 
 import static muehle.model.Board.eColor.NONE;
+import muehle.Linker;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.model.Position;
@@ -8,15 +9,14 @@ import muehle.players.human.HumanPositionInput;
 
 public class ButtonInput implements HumanPositionInput {
 	
-	private cPanel1 cpanel;
 	private Board board;
 	private eColor player;
 	private eColor opposite;
 	private Panel4 panel4;
 
-	public ButtonInput(Board board, cPanel1 cpanel, Panel4 panel4) {
-		this.cpanel = cpanel;
+	public ButtonInput(Board board,Panel4 panel4) {
 		this.board = board;
+		this.panel4 = panel4;
 	}
 
 	@Override
@@ -29,9 +29,9 @@ public class ButtonInput implements HumanPositionInput {
 	public Position layStonePosition() {
 		System.out.println("Lay your stone \n");
 		Position inputPosition = null;
-		Output.pressedButton = -1;
+		Linker.pressedButton = -1;
 		do {
-			inputPosition = cpanel.getClickedButton();
+			inputPosition = panel4.getClickedButton();
 
 			if (inputPosition != null) {
 				if (board.getColor(inputPosition) != NONE) {
@@ -42,7 +42,7 @@ public class ButtonInput implements HumanPositionInput {
 			}
 			sleep(1);
 		} while (inputPosition == null);
-		Output.pressedButton = -1;
+		Linker.pressedButton = -1;
 		// board is updated
 		// panel.refreshButtonColor(board);
 		// panel.repaint();
@@ -55,14 +55,14 @@ public class ButtonInput implements HumanPositionInput {
 		
 		Position inputPositionFrom = null;
 		// panel4.clickedButton = null;
-		Output.pressedButton = -1;
+		Linker.pressedButton = -1;
 		do { // The player said which stone he wants to move
 			inputPositionFrom = panel4.getClickedButton();
 			if (inputPositionFrom != null) {
 				if (board.getColor(inputPositionFrom) != player) {
 					inputPositionFrom = null;
 					// panel4.clickedButton = null;
-					Output.pressedButton = -1;
+					Linker.pressedButton = -1;
 					System.out.println("Position not " + player);
 				}
 			}
@@ -78,7 +78,7 @@ public class ButtonInput implements HumanPositionInput {
 		boolean moveNotPossible = false;
 		// The player says whereto he wants to move his stone
 		// panel.clickedButton = null;
-		Output.pressedButton = -1;
+		Linker.pressedButton = -1;
 		do {
 			inputPositionTo = panel4.getClickedButton();
 			if (inputPositionTo != null) {
@@ -107,7 +107,7 @@ public class ButtonInput implements HumanPositionInput {
 		
 		Position takeAway = null;
 		do {
-			takeAway = cpanel.getClickedButton(); // player can take
+			takeAway = panel4.getClickedButton(); // player can take
 													// away a stone
 			if (takeAway != null) {
 				if (board.getColor(takeAway) == opposite
