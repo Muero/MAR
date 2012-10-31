@@ -32,7 +32,7 @@ public class Linker {
 	public static Connection conn2;
 	public static NineMenMorrisPlayer player1;											//Default is Human
 	public static NineMenMorrisPlayer player2;											//Default is Robot
-	public static HumanPositionInput input = null;													//TODO HEEEEEEEEEELP!!!
+	public static HumanPositionInput input = null;										//lol
 	
 	//Final Fields
 	public static final int numberOfStones = 9;											//How many Stones to lay
@@ -56,17 +56,18 @@ public class Linker {
 	//Will be generated in Startup-Gui
 	public static boolean usewebcam = false;											//Webcam or no Webcam
 	public static boolean usealgorithm = false;											//RandomPlayer or ComputerPlayer
-	public static int difficulty = 0;													//Difficulty of ComputerPlayer.
+	public static int difficulty = 2;													//Difficulty of ComputerPlayer.
 	public static int robotMode = 0;
 	
 	//Will be generated in StartGameGui
 	public static int alphaValue = 0;													//Value to determine the Field Colors
+	public static int alphaSize = 20;
 	public static Point[] fieldPositions = new Point[24];								//Positions on the picture where the colored Pixels are
 	public static Point starterPosition = new Point(0,0);								//related Position to Black
 	
 	//Dynamic
 	public static Map<Position, Integer> probability = new HashMap<Position, Integer>();
-	public static Map<Position,eColor> webcamCluster = new HashMap<Position,eColor>();	//Is used from muehle.gui.camera.Camera
+	public static boolean[] webcamCluster = new boolean[24];	//Is used from muehle.gui.camera.Camera
 	public static boolean waitForGui = true;											//Waits for a specific GuiMode. The GuiMode will be set in frame.setGuiMode(int mode)
 	public static int pressedButton = -1;
 	

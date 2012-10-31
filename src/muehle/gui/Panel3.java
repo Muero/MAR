@@ -54,7 +54,7 @@ public class Panel3 extends JPanel{
 								
 		c.weightx = 1;
 		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 2;
+		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 1;
 		c.gridheight = 1;

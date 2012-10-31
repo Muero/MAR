@@ -3,6 +3,8 @@ package muehle.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -28,6 +30,9 @@ public class Panel5 extends JPanel {
 	}
 
 	private static Color getProbabilityColor(int i) {
+		if(i==0){
+			return null;
+		}
 		if (i <= 100)
 			return new Color(255, 0, 0);
 		if (i <= 200)
@@ -52,9 +57,13 @@ public class Panel5 extends JPanel {
 	}
 
 	public static void setBackgroundProbabilityColor(Board board, final eColor player,final int move, final int numberOfStones) {
+
+		Map<Position, Integer> prob = new HashMap<Position, Integer>();
+		prob = Minmax.getProbability(board, player,move, numberOfStones);
+		
 		for (Position p : Position.getAllPositions()) {
-			button[Frame.getGuiPosition(p)].setEnabled(false);
-			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(Minmax.getProbability(board, player,move, numberOfStones).get(p)));
+			button[Frame.getGuiPosition(p)].setEnabled(false); //You sho
+			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(prob.get(p)));
 		}
 		try {
 			Thread.sleep(100);

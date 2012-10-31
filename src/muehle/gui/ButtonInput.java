@@ -31,7 +31,7 @@ public class ButtonInput implements HumanPositionInput {
 		Position inputPosition = null;
 		Linker.pressedButton = -1;
 		do {
-			inputPosition = panel4.getClickedButton();
+			inputPosition = panel4.getLayedButton();
 
 			if (inputPosition != null) {
 				if (board.getColor(inputPosition) != NONE) {
@@ -57,7 +57,7 @@ public class ButtonInput implements HumanPositionInput {
 		// panel4.clickedButton = null;
 		Linker.pressedButton = -1;
 		do { // The player said which stone he wants to move
-			inputPositionFrom = panel4.getClickedButton();
+			inputPositionFrom = panel4.getLayedButton();
 			if (inputPositionFrom != null) {
 				if (board.getColor(inputPositionFrom) != player) {
 					inputPositionFrom = null;
@@ -80,7 +80,7 @@ public class ButtonInput implements HumanPositionInput {
 		// panel.clickedButton = null;
 		Linker.pressedButton = -1;
 		do {
-			inputPositionTo = panel4.getClickedButton();
+			inputPositionTo = panel4.getLayedButton();
 			if (inputPositionTo != null) {
 				if (board.getColor(inputPositionTo) == NONE &&
 				// Position must be neighbours if the player has more
@@ -107,7 +107,7 @@ public class ButtonInput implements HumanPositionInput {
 		
 		Position takeAway = null;
 		do {
-			takeAway = panel4.getClickedButton(); // player can take
+			takeAway = panel4.getLayedButton(); // player can take
 													// away a stone
 			if (takeAway != null) {
 				if (board.getColor(takeAway) == opposite

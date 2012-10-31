@@ -1,8 +1,6 @@
 package muehle.gui.camera;
 
-import static muehle.model.Board.eColor.NONE;
 import muehle.Linker;
-import muehle.Main;
 import muehle.connection.Connection;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
@@ -19,9 +17,6 @@ public class WebCamInput implements HumanPositionInput {
 		this.board = board;
 		this.conn = conn;
 		
-		Linker.cluster = Camera.createPlayerFieldClusterFromWebcamImage(
-				Main.frame, Camera.imageBuffer, Linker.fieldPositions,
-				Linker.alphaValue, Linker.alphaSize);
 
 	}
 
@@ -33,96 +28,147 @@ public class WebCamInput implements HumanPositionInput {
 	
 	@Override
 	public Position layStonePosition() {
+
 		System.out.println("Lay your stone \n");
-		
-		Position inputPosition = null;
-		
+
 		boolean retry = true;
 		while (retry) {
 			conn.waitForButton();
+			
+			boolean[] old = new boolean[24];
+			boolean[] neu = new boolean[24];
+			
+			int stein = -1;
+			old = Linker.webcamCluster;
+			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			for(int i=0;i<24;i++){
+				if(neu[i] != old[i])
+					stein = i;
+			}
+			if(!(stein==-1)){
+				retry=false;
+			}else{
+				System.out.println("NOOOOOOOOT ERKANNT");
+			}
+				
+			Linker.webcamCluster = neu;
+			Linker.pressedButton = stein;		
+		
 
-			boolean[] vorher = Linker.cluster;
-			boolean[] nachher = new boolean[24];
-			for (int k = 0; k < 24; k++) {
-				nachher[k] = true;
-			}
-			nachher = Camera.createPlayerFieldClusterFromWebcamImage(
-					Main.frame, Camera.imageBuffer, Linker.fieldPositions,
-					Linker.alphaValue, Linker.alphaSize);
-			int stone = -1;
-			for (int j = 0; j < 24; j++) {
-				if (vorher[j] != nachher[j]) {
-					stone = j;
-					break;
-				}
-			}
-			if (stone != -1) {
-				for (Position p : Position.getAllPositions()) {
-					System.err.println(p);
-					if (cPanel1.getButtonId(p) == stone) {
-						inputPosition = p;
-						System.out.println("inputPosition = "
-								+ inputPosition.getId());
-						if (board.getColor(inputPosition) == NONE) {
-							retry = false;
-						}
-						break;
-					}
-				}
-			}
-			Linker.cluster = nachher;
 		}
-		return inputPosition;
+		for(Position p:Position.getAllPositions()){
+			if(Linker.pressedButton == p.getId())
+				return p;
+		}
+		return null;
 	}
 
 	@Override
 	public Position fromStonePosition() {
 		System.out.println("Your next move? \n" + "From where?");
-		// TODO Auto-generated method stub
+		System.out.println("Lay your stone \n");
+
+		boolean retry = true;
+		while (retry) {
+			conn.waitForButton();
+			
+			boolean[] old = new boolean[24];
+			boolean[] neu = new boolean[24];
+			
+			int stein = -1;
+			old = Linker.webcamCluster;
+			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			for(int i=0;i<24;i++){
+				if(neu[i] != old[i])
+					stein = i;
+			}
+			if(!(stein==-1)){
+				retry=false;
+			}else{
+				System.out.println("NOOOOOOOOT ERKANNT");
+			}
+				
+			Linker.webcamCluster = neu;
+			Linker.pressedButton = stein;		
+		
+
+		}
+		for(Position p:Position.getAllPositions()){
+			if(Linker.pressedButton == p.getId())
+				return p;
+		}
 		return null;
-	}
+}
 
 	@Override
 	public Position toStonePosition(Position inputPositionFrom) {
 		System.out.println("Whereto ?");
-		// TODO Auto-generated method stub
+		boolean retry = true;
+		while (retry) {
+			conn.waitForButton();
+			
+			boolean[] old = new boolean[24];
+			boolean[] neu = new boolean[24];
+			
+			int stein = -1;
+			old = Linker.webcamCluster;
+			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			for(int i=0;i<24;i++){
+				if(neu[i] != old[i])
+					stein = i;
+			}
+			if(!(stein==-1)){
+				retry=false;
+			}else{
+				System.out.println("NOOOOOOOOT ERKANNT");
+			}
+				
+			Linker.webcamCluster = neu;
+			Linker.pressedButton = stein;		
+		
+
+		}
+		for(Position p:Position.getAllPositions()){
+			if(Linker.pressedButton == p.getId())
+				return p;
+		}
 		return null;
 	}
 
 	@Override
 	public Position takeStonePosition() {
-		System.out.println("You have mill, which stone take you away?");
 		
-		Position takePosition = null;
-		conn.waitForButton();
-		takePosition = null; // null entspricht p96
-		boolean[] vorher = Linker.cluster;
-		boolean[] nachher = Camera
-				.createPlayerFieldClusterFromWebcamImage(Main.frame,
-						Camera.imageBuffer, Linker.fieldPositions,
-						Linker.alphaValue, Linker.alphaSize);
-		int stone = -1;
-		for (int j = 0; j < 24; j++) {
-			if (vorher[j] != nachher[j]) {
-				stone = j;
-				break;
+		boolean retry = true;
+		while (retry) {
+			conn.waitForButton();
+			
+			boolean[] old = new boolean[24];
+			boolean[] neu = new boolean[24];
+			
+			int stein = -1;
+			old = Linker.webcamCluster;
+			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			for(int i=0;i<24;i++){
+				if(neu[i] != old[i])
+					stein = i;
 			}
-		}
-		if (stone != -1) {
-			System.err.println(stone);
-			for (Position p : Position.getAllPositions()) {
-				if (cPanel1.getButtonId(p) == stone) {
-					takePosition = p;
-					break;
-				}
+			if(!(stein==-1)){
+				retry=false;
+			}else{
+				System.out.println("NOOOOOOOOT ERKANNT");
 			}
+				
+			Linker.webcamCluster = neu;
+			Linker.pressedButton = stein;		
+		
+
 		}
-		// FIXME was wenn stone hier == -1 ist, also falls kein Unterschied zwischen vorher und nachher?
-		// 
-		Linker.cluster = nachher;
-		return takePosition;
+		for(Position p:Position.getAllPositions()){
+			if(Linker.pressedButton == p.getId())
+				return p;
+		}
+		return null;
+
 	}
-
-
 
 }
