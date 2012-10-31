@@ -23,7 +23,7 @@ public class Panel0 extends JPanel implements MouseListener{
 	public JButton jb1;		//NextButton
 	public JComboBox<String> jc1;
 	public JComboBox<String> jc2;
-	
+
 	public Panel0(){
 		jc2 = new JComboBox<String>();
 		for(String s:Linker.modes)
