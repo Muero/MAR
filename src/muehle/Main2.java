@@ -24,8 +24,7 @@ import muehle.players.human.HumanPositionInput;
 public class Main2 {
 
 	private static final int numberOfStones = 9; // With how many stones u will
-													// play
-	public static final int depth = Linker.difficulty; // playing ability
+													// plays
 	public static int guimode = 1;
 
 	public static Dimension size = new Dimension(542, 378);
@@ -109,14 +108,14 @@ public class Main2 {
 			player2 = p;
 		}
 
-		play(board, null, null, numberOfStones, player1,
+		Main2.play(board, null, numberOfStones, player1,
 				player2, conn1, conn2); // TODO check whether parameter panel4 and cpanel1 are still necessary
 
 		conn1.closeConnection();
 		conn2.closeConnection();
 	}
 
-	public static void play(Board board, Panel4 panel4, cPanel1 cPanel,
+	public static void play(Board board, Panel4 panel4,
 			int numberOfStones, NineMenMorrisPlayer player1,
 			NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
 

@@ -39,7 +39,6 @@ public class Minmax {
 
 		if (!board.getStuck(opposite) && board.freePosition(opposite)) {
 			if (move < numberOfStones * 2) {
-				//System.out.println("minimax legen");
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);
 			} else if (board.getNumberOfStones(player) > 3) {
@@ -63,9 +62,7 @@ public class Minmax {
 	// false == player
 	public static MinimaxResult minmaxLay(Board board, eColor player,
 			eColor opposite, int depth, int move, int numberOfStones) {
-
 		if (depth > 0) {
-
 			int result;
 
 			Position nextMove = null;
@@ -337,14 +334,17 @@ public class Minmax {
 	
 	public static Map<Position, Integer> getProbability(Board board, eColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
-		int depth = 4;	
+		int depth = 4;
 		for (Position p : Position.getAllPositions()) {
 			if (board.getColor(p) == eColor.NONE) { //TODO gilt nur bei legen und springen
 				MinimaxResult res = Minmax.minmaxDecide(board, player, player==eColor.BLACK?eColor.WHITE:eColor.BLACK, depth, move,
 						numberOfStones);
-				probabilities.put(p, res.getRank());
+				probabilities.put(p,res.getRank());
+			}else{
+				probabilities.put(p, 0);
 			}
 		}
+		System.err.println(probabilities);
 		return probabilities;
 	}
 

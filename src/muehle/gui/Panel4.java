@@ -132,10 +132,8 @@ public class Panel4 extends JPanel implements MouseListener{
 		g.setColor(Color.black);
 	}
 	
-	public Position getClickedButton(){
-		if(Linker.usewebcam){
-			Camera.importPictureFromPlayer(Linker.frame);
-		}
+	public Position getLayedButton(){
+		
 		for(Position p:Position.getAllPositions()){
 			if(Linker.pressedButton == p.getId())
 				return p;

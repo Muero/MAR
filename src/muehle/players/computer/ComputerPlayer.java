@@ -1,5 +1,6 @@
 package muehle.players.computer;
 
+import muehle.Linker;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 import muehle.players.Move;
@@ -7,7 +8,6 @@ import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.Minmax.MinimaxResult;
 
 public class ComputerPlayer implements NineMenMorrisPlayer {
-	final int deepth = 4;
 	private String name;
 	private eColor player;
 	private eColor opposite;
@@ -36,7 +36,7 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 
 		// Computer determines his best possible move
 		MinimaxResult result = Minmax.minmaxDecide(board, player, opposite,
-				deepth, move, numberOfStones);
+				Linker.difficulty, move, numberOfStones);
 		return result.bestMove;
 
 	}

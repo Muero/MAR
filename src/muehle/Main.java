@@ -29,8 +29,8 @@ public class Main {
 	}
 	
 	public static void play(Board board, Panel4 panel4,
-			int numberOfStones, NineMenMorrisPlayer player1,
-			NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
+		int numberOfStones, NineMenMorrisPlayer player1,
+		NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
 
 		NineMenMorrisPlayer currentPlayer = player1;
 		NineMenMorrisPlayer oppositePlayer = player2;
@@ -86,7 +86,6 @@ public class Main {
 			//HumanPlayer.sleep(1000);
 
 			// board is updated
-			panel4.repaint();
 			System.out.println(board);
 
 			// ROBOTER IS MOVING
@@ -106,7 +105,6 @@ public class Main {
 			}
 			panel4.repaint();
 			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor, move, numberOfStones);
-			
 			System.out.println("");
 			System.out.println(board);
 
