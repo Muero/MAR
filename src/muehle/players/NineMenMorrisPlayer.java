@@ -20,5 +20,6 @@ public interface NineMenMorrisPlayer {
 	
 	void setColor(eColor color);
 	eColor getColor();
+	eColor getOppositeColor();
 }
 

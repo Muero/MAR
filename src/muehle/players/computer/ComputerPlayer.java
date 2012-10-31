@@ -29,6 +29,13 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 	public eColor getColor() {
 		return player;
 	}
+	
+	@Override
+	public eColor getOppositeColor() {
+		if (getColor() == eColor.BLACK)
+			return eColor.WHITE;
+		else return eColor.BLACK;
+	}
 
 	public Move layStone(Board board, int move, int numberOfStones) {
 		//panel.setRobotOnTurn(true);
