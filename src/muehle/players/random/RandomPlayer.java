@@ -37,11 +37,11 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 		Position take = null;
 		boolean haveLayPosition = true;
 		while (haveLayPosition) {
-			from = positions[rand.nextInt(positions.length)];
-			if (board.getColor(from) == eColor.NONE)
+			to = positions[rand.nextInt(positions.length)];
+			if (board.getColor(to) == eColor.NONE)
 				haveLayPosition = false;
 		}
-		if (board.isMill(from, color)) { // TODO geht das wenn lay = null?
+		if (board.isMill(to, color)) { // TODO geht das wenn from = null?
 			boolean haveTakePosition = true;
 			while (haveTakePosition) {
 				take = positions[rand.nextInt(positions.length)];
