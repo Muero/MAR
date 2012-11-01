@@ -33,15 +33,15 @@ public class Panel5 extends JPanel {
 		if(i==0){
 			return null;
 		}
-		if (i <= -500)
+		if (i <= -120)
 			return new Color(255, 0, 0);
-		if (i <= -300)
+		if (i <= -80)
 			return new Color(255, 25, 0);
-		if (i <= -100)
+		if (i <= -50)
 			return new Color(255, 75, 0);
-		if (i <= 0)
+		if (i <= -30)
 			return new Color(150, 100, 0);
-		if (i <= 50)
+		if (i <= 0)
 			return new Color(125, 125, 0);
 		if (i <= 70)
 			return new Color(100, 150, 0);
@@ -51,7 +51,7 @@ public class Panel5 extends JPanel {
 			return new Color(50, 200, 0);
 		if (i <= 300)
 			return new Color(0, 255, 0);
-		if (i <= 500)
+		if (i <= 1000)
 			return new Color(255, 255, 255);
 		return new Color(0, 0, 0);
 	}
@@ -62,7 +62,7 @@ public class Panel5 extends JPanel {
 		prob = Minmax.getProbability(board, player,move, numberOfStones);
 		
 		for (Position p : Position.getAllPositions()) {
-			button[Frame.getGuiPosition(p)].setEnabled(false); //You sho
+			button[Frame.getGuiPosition(p)].setEnabled(false); //TODO die sind immer auf false
 			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(prob.get(p)));
 		}
 		try {
