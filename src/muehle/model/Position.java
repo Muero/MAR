@@ -50,6 +50,7 @@ public final class Position {
 	public String toString() {
 		return name;
 	}
+	public static Position p96 = new Position("96", 96);
 	
 	public static Position p70 = new Position("70", 70);
 	public static Position p73 = new Position("73", 73);

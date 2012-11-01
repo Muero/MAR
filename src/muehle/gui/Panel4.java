@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import muehle.Linker;
-import muehle.gui.camera.Camera;
 import muehle.model.Board;
 import muehle.model.Position;
 

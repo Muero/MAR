@@ -113,21 +113,22 @@ public class Panel0 extends JPanel implements MouseListener{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		jb1.setText("Please wait...");
 		Linker.usealgorithm = jcb3.isSelected();
 		Linker.robotMode = jc2.getSelectedIndex();
 		Linker.usewebcam = jcb1.isSelected();
 		switch(jc1.getSelectedIndex()){
 		case 0:
-			Linker.difficulty = 2;
-			break;
-		case 1:
 			Linker.difficulty = 4;
 			break;
+		case 1:
+			Linker.difficulty = 8;
+			break;
 		case 2:
-			Linker.difficulty = 6;
+			Linker.difficulty = 10;
 			break;
 		case 3:
-			Linker.difficulty = 8;
+			Linker.difficulty = 12;
 			break;
 		default:
 			Linker.difficulty = 2;

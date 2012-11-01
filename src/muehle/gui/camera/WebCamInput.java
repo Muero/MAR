@@ -35,12 +35,12 @@ public class WebCamInput implements HumanPositionInput {
 		while (retry) {
 			conn.waitForButton();
 			
-			boolean[] old = new boolean[24];
-			boolean[] neu = new boolean[24];
+			int[] old = new int[24];
+			int[] neu = new int[24];
 			
 			int stein = -1;
 			old = Linker.webcamCluster;
-			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			neu = ImageGrabber.createRawData(Linker.frame,Linker.alphaSize,Linker.alphaValue,Linker.fieldPositions);
 			for(int i=0;i<24;i++){
 				if(neu[i] != old[i])
 					stein = i;
@@ -50,11 +50,8 @@ public class WebCamInput implements HumanPositionInput {
 			}else{
 				System.out.println("NOOOOOOOOT ERKANNT");
 			}
-				
 			Linker.webcamCluster = neu;
-			Linker.pressedButton = stein;		
-		
-
+			Linker.pressedButton = stein;
 		}
 		for(Position p:Position.getAllPositions()){
 			if(Linker.pressedButton == p.getId())
@@ -147,7 +144,7 @@ public class WebCamInput implements HumanPositionInput {
 			
 			int stein = -1;
 			old = Linker.webcamCluster;
-			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Camera.imageBuffer,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
+			neu = Camera.createPlayerFieldClusterFromWebcamImage(Linker.frame,Linker.fieldPositions,Linker.alphaValue,Linker.alphaSize);
 			for(int i=0;i<24;i++){
 				if(neu[i] != old[i])
 					stein = i;

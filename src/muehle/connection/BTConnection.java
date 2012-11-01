@@ -42,10 +42,10 @@ public class BTConnection implements Connection {
 
 	@Override
 	public void openConnection() {
-		conn = start(conn, "NXT1");
+		conn = start(conn, "M1");
 		dos = new DataOutputStream(conn.getOutputStream());
 		dis = new DataInputStream(conn.getInputStream());
-		conn2 = start(conn2, "NXT2");
+		conn2 = start(conn2, "M2");
 		dos2 = new DataOutputStream(conn2.getOutputStream());
 		dis2 = new DataInputStream(conn2.getInputStream());
 		System.out.println("NXT's ready!!!");
@@ -63,17 +63,19 @@ public class BTConnection implements Connection {
 		stop(conn2, dis2, dos2);
 	}
 
-	@Override
 	public void setStone(Position to) {
-		send(dos2, dis2, 3);
-		send(dos2, dis2, 5);
-		send(dos2, dis2, 4);
-		Dimension a = getDistance(NXTAblage, to.getId());
-		send(dos, dis, a.width, a.height);
-		send(dos2, dis2, 3);
-		send(dos2, dis2, 6);
-		send(dos2, dis2, 4);
-		a = getDistance(to.getId(), NXTAblage);
+		send(dos2,dis2,4);	//auf
+		Dimension a = getDistance(Position.p96.getId(),0);
+		send(dos,dis,a.width+100,a.height);	//100, da er in Ablage geht
+		send(dos2, dis2, 3);	//ab
+		send(dos2, dis2, 5);	//schliessen
+		send(dos2, dis2, 4);	//auf
+		a = getDistance(0,to.getId());
+		send(dos, dis,a.width+200,a.height);	//200, da er aus Ablage fährt
+		send(dos2, dis2, 3);	//ab
+		send(dos2, dis2, 6);	//öffnen
+		send(dos2, dis2, 4);	//auf
+		a = getDistance(to.getId(),Position.p96.getId());
 		send(dos, dis, a.width, a.height);
 	}
 	
@@ -81,27 +83,26 @@ public class BTConnection implements Connection {
 		send(dos,dis,500,0);//Send starting
 	}
 
-	@Override
 	public void moveStone(Position from, Position to) {
 		Dimension a;
-		a = getDistance(0, from.getId());
+		a = getDistance(Position.p96.getId(), from.getId());
 		send(dos, dis, a.width, a.height);
-		send(dos2, dis2, 3);
-		send(dos2, dis2, 5);
-		send(dos2, dis2, 4);
+		send(dos2, dis2, 3);	//ab
+		send(dos2, dis2, 5);	//schliessen
+		send(dos2, dis2, 4);	//auf
 		a = getDistance(from.getId(), to.getId());
+		System.out.println(a.getHeight());
 		send(dos, dis, a.width, a.height);
-		send(dos2, dis2, 3);
-		send(dos2, dis2, 6);
-		send(dos2, dis2, 4);
-		a = getDistance(to.getId(), 0);
+		send(dos2, dis2, 3);	//ab
+		send(dos2, dis2, 6);	//öffnen
+		send(dos2, dis2, 4);	//auf
+		a = getDistance(to.getId(),Position.p96.getId());
 		send(dos, dis, a.width, a.height);
 	}
 
-	@Override
 	public void takeStone(Position from) {
 		Dimension a;
-		a = getDistance(96, from.getId());
+		a = getDistance(Position.p96.getId(),from.getId());
 		send(dos, dis,a.width,a.height);
 		send(dos2,dis2,3);
 		send(dos2,dis2,5);
@@ -111,9 +112,7 @@ public class BTConnection implements Connection {
 		send(dos2,dis2,3);
 		send(dos2,dis2,6);
 		send(dos2,dis2,4);
-		
 	}
-
 	
 	/**Connection is made with the NXT. If you couldn't connect with the NXT, it publishes a message.
 	 * @param name is the name by which it connects 

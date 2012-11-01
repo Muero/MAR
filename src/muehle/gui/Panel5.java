@@ -20,7 +20,7 @@ public class Panel5 extends JPanel {
 
 	public static JButton[] button = new JButton[24];
 
-	private Board board;
+	public Board board;
 
 	public Panel5(Board board) {
 
@@ -177,7 +177,4 @@ public class Panel5 extends JPanel {
 
 	}
 
-	public void thread(){
-		//TODO something to update?
-	}
 }

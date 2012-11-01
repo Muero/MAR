@@ -68,7 +68,6 @@ public class Main {
 				if (board.getNumberOfStones(oppositePlayerColor) < 3)
 					System.out.println(currentPlayer.getName() + " wins!");
 				System.out.println("***********************************");
-				panel4.repaint();
 				return;
 			}
 
@@ -103,7 +102,6 @@ public class Main {
 				System.out.println(" TakeStone: " + bestMove.take);
 				currentConnection.takeStone(bestMove.take);
 			}
-			panel4.repaint();
 			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor, move, numberOfStones);
 			System.out.println("");
 			System.out.println(board);
