@@ -34,7 +34,7 @@ public class Main2 {
 
 	public static void main(String[] args) {
 		Board board = new Board();
-
+		Linker.difficulty = 5;
 		System.out.println("*************************** \n"
 				+ "Welcome to the game Nine Men Morris !! \n \n");
 

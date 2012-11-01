@@ -31,13 +31,11 @@ public class Minmax {
 		}
 	}
 
-	public static int deepthWhiteMill = 0; // not used yet
-	public static int deepthBlackMill = 0; // not used yet
 	public static MinimaxResult minmaxDecide(Board board, eColor player,
 			eColor opposite, int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
 
-		if (!board.getStuck(opposite) && board.freePosition(opposite)) {
+		if (!board.getStuck(player) && board.freePosition(player)) {
 			if (move < numberOfStones * 2) {
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);

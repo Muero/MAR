@@ -119,16 +119,16 @@ public class Panel0 extends JPanel implements MouseListener{
 		Linker.usewebcam = jcb1.isSelected();
 		switch(jc1.getSelectedIndex()){
 		case 0:
-			Linker.difficulty = 4;
+			Linker.difficulty = 2; //easy
 			break;
 		case 1:
-			Linker.difficulty = 8;
+			Linker.difficulty = 4; //normal
 			break;
 		case 2:
-			Linker.difficulty = 10;
+			Linker.difficulty = 6; //hard
 			break;
 		case 3:
-			Linker.difficulty = 12;
+			Linker.difficulty = 8; //insane
 			break;
 		default:
 			Linker.difficulty = 2;

@@ -1,7 +1,5 @@
 package muehle.players.computer;
 
-import static muehle.model.Board.eColor.BLACK;
-import static muehle.model.Board.eColor.WHITE;
 import muehle.model.Board;
 import muehle.model.Board.eColor;
 
@@ -17,7 +15,7 @@ public class Evaluation {
 	public static int evaluation(Board board, eColor player, eColor opposite) {
 
 		int bewertung = (int) Math.round(Math.random() * 40);
-
+		bewertung = 30;
 		int playerMills = board.getNumberOfMills(player);
 		int oppositeMills = board.getNumberOfMills(opposite);
 
