@@ -141,7 +141,7 @@ public class Linker {
 	}
 
 	public static void play(){
-		Main.play(board, frame.panel4, numberOfStones, player1, player2, conn1, conn2); // TODO check whether parameter panel4 and cpanel1 are still necessary
+		Main.play(board, frame.panel4, numberOfStones, player1, player2, conn1, conn2);
 	}
 
 	public static void closeGame(){

@@ -23,7 +23,7 @@ public class Panel0 extends JPanel implements MouseListener{
 	public JButton jb1;		//NextButton
 	public JComboBox<String> jc1;
 	public JComboBox<String> jc2;
-	
+
 	public Panel0(){
 		jc2 = new JComboBox<String>();
 		for(String s:Linker.modes)
@@ -116,6 +116,23 @@ public class Panel0 extends JPanel implements MouseListener{
 		Linker.usealgorithm = jcb3.isSelected();
 		Linker.robotMode = jc2.getSelectedIndex();
 		Linker.usewebcam = jcb1.isSelected();
+		switch(jc1.getSelectedIndex()){
+		case 0:
+			Linker.difficulty = 2;
+			break;
+		case 1:
+			Linker.difficulty = 4;
+			break;
+		case 2:
+			Linker.difficulty = 6;
+			break;
+		case 3:
+			Linker.difficulty = 8;
+			break;
+		default:
+			Linker.difficulty = 2;
+			break;
+		}
 		Linker.difficulty = jc1.getSelectedIndex();
 		Linker.waitForGui = false;
 	}
