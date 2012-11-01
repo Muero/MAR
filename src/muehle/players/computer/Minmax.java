@@ -51,7 +51,7 @@ public class Minmax {
 						move, numberOfStones);
 			}
 		} else {
-			value = new MinimaxResult(null, Evaluation.evaluation(board));
+			value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 		}
 
 		return value;
@@ -129,7 +129,7 @@ public class Minmax {
 					(-1 * result));
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, Evaluation.evaluation(board));
+			return new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 
 		}
 
@@ -227,7 +227,7 @@ public class Minmax {
 					nextTake), (-1 * result));
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, Evaluation.evaluation(board));
+			return new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 
 		}
 
@@ -326,7 +326,7 @@ public class Minmax {
 					nextTake), (-1 * result));
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, Evaluation.evaluation(board));
+			return new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 
 		}
 
@@ -334,7 +334,7 @@ public class Minmax {
 	
 	public static Map<Position, Integer> getProbability(Board board, eColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
-		int depth = 4;
+		int depth = 2;
 		for (Position p : Position.getAllPositions()) {
 			if (board.getColor(p) == eColor.NONE) { //TODO gilt nur bei legen und springen
 				MinimaxResult res = Minmax.minmaxDecide(board, player, player==eColor.BLACK?eColor.WHITE:eColor.BLACK, depth, move,

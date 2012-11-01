@@ -35,7 +35,13 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	public eColor getColor() {
 		return color;
 	}
-
+	
+	@Override
+	public eColor getOppositeColor() {
+		if (getColor() == eColor.BLACK)
+			return eColor.WHITE;
+		else return eColor.BLACK;
+	}
 	@Override
 	public Move layStone(Board board, int move, int numberOfStones) {
 

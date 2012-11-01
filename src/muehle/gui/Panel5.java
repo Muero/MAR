@@ -33,25 +33,25 @@ public class Panel5 extends JPanel {
 		if(i==0){
 			return null;
 		}
-		if (i <= 100)
+		if (i <= -500)
 			return new Color(255, 0, 0);
-		if (i <= 200)
+		if (i <= -300)
 			return new Color(255, 25, 0);
-		if (i <= 300)
-			return new Color(275, 75, 0);
-		if (i <= 400)
+		if (i <= -100)
+			return new Color(255, 75, 0);
+		if (i <= 0)
 			return new Color(150, 100, 0);
-		if (i <= 500)
+		if (i <= 50)
 			return new Color(125, 125, 0);
-		if (i <= 600)
+		if (i <= 70)
 			return new Color(100, 150, 0);
-		if (i <= 700)
+		if (i <= 100)
 			return new Color(75, 175, 0);
-		if (i <= 800)
+		if (i <= 200)
 			return new Color(50, 200, 0);
-		if (i <= 900)
+		if (i <= 300)
 			return new Color(0, 255, 0);
-		if (i <= 1000)
+		if (i <= 500)
 			return new Color(255, 255, 255);
 		return new Color(0, 0, 0);
 	}
