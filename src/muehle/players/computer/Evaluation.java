@@ -19,27 +19,33 @@ public class Evaluation {
 		int playerMills = board.getNumberOfMills(player);
 		int oppositeMills = board.getNumberOfMills(opposite);
 
-//		int numberOfWhiteStones = board.getNumberOfStones(WHITE);
-//		int numberOfBlackStones = board.getNumberOfStones(BLACK);
+		int numberOfPlayerStones = board.getNumberOfStones(player);
+		int numberOfOppositeStones = board.getNumberOfStones(opposite);
 
 		int openMillsPlayer = board.getNumberOfOpenMills(player);
 		int openMillsOpposite = board.getNumberOfOpenMills(opposite);
 
 		if (board.getStuck(player)) {
-			bewertung = bewertung - 1000;
+			bewertung = bewertung - 100;
 		} else if (board.getStuck(opposite)) {
-			bewertung = bewertung + 1000;
+			bewertung = bewertung + 100;
 		}
-		bewertung = bewertung + 200 * openMillsPlayer;
-		bewertung = bewertung - 200 * openMillsOpposite;
+		bewertung = bewertung + 20 * openMillsPlayer;
+		bewertung = bewertung - 20 * openMillsOpposite;
 
 		if (playerMills > oppositeMills) {
-			bewertung = bewertung + 100 * (playerMills - oppositeMills);
+			bewertung = bewertung + 10 * (playerMills - oppositeMills); //TODO wenn springt sollte er seine mühlen zu machen
 		} else if (playerMills < oppositeMills) {
-			bewertung = bewertung + 200 * (playerMills - oppositeMills);
+			bewertung = bewertung + 20 * (playerMills - oppositeMills);
 		}
-
+		if(numberOfPlayerStones<3)
+			bewertung=bewertung-1000;
+		if(numberOfOppositeStones<3)
+			bewertung=bewertung+1000;
+		
 		return bewertung;
+		
+		
 	}
 
 }

@@ -43,7 +43,7 @@ public class Minmax {
 				//System.out.println("minimax bewegen");
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
-			} else {
+			} else{
 				//System.out.println("minimax springen");
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);

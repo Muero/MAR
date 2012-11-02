@@ -34,9 +34,9 @@ public class Linker {
 	public static HumanPositionInput input = null;										//lol
 	
 	//Final Fields
-	public static final int numberOfStones = 9;											//How many Stones to lay
-	public static final Color opponentColor = new Color(255,255,255);					//Color of the virtual Opponent
-	public static final Color humanColor = new Color(0,0,0);							//Color of the Human Player
+	public static final int numberOfStones = 5;											//How many Stones to lay
+	public static final Color opponentColor = new Color(255,0,0);						//Color of the Human Player
+	public static final Color humanColor = new Color(0,0,255);							//Color of the OpponentPlayer
 	public static final Dimension guiSize = new Dimension(542, 378);					//Size of the Gui Window
 	public static final String[] difficultyNames = {"Easy","Normal","Hard","Insane"};	//Used in Panel0
 	public static final String[] modes = 

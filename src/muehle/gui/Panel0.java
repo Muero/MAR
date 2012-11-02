@@ -134,7 +134,6 @@ public class Panel0 extends JPanel implements MouseListener{
 			Linker.difficulty = 2;
 			break;
 		}
-		Linker.difficulty = jc1.getSelectedIndex();
 		Linker.waitForGui = false;
 	}
 	public void mouseEntered(MouseEvent e) {}
