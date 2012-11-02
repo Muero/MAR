@@ -34,7 +34,7 @@ public class Linker {
 	public static HumanPositionInput input = null;										//lol
 	
 	//Final Fields
-	public static final int numberOfStones = 5;											//How many Stones to lay
+	public static final int numberOfStones = 3;											//How many Stones to lay
 	public static final Color opponentColor = new Color(255,0,0);						//Color of the Human Player
 	public static final Color humanColor = new Color(0,0,255);							//Color of the OpponentPlayer
 	public static final Dimension guiSize = new Dimension(542, 378);					//Size of the Gui Window
@@ -85,8 +85,8 @@ public class Linker {
 		
 		//SetUp Connections to NXT's
 		if(robotMode == 0){			//Robot - Human
-			conn1 = new BTConnection();
-			conn2 = new EmptyConnection();
+			conn1 = new EmptyConnection();
+			conn2 = new BTConnection();
 		}else if(robotMode == 1){	//Computer - Human
 			conn1 = new EmptyConnection();
 			conn2 = new EmptyConnection();
@@ -155,5 +155,6 @@ public class Linker {
 		conn1.closeConnection();
 		conn2.closeConnection();
 		frame.stop();
+		System.exit(0);
 	}
 }

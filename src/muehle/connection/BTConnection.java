@@ -85,6 +85,7 @@ public class BTConnection implements Connection {
 	}
 
 	public void moveStone(Position from, Position to) {
+		System.err.println("MOVE STONE");
 		Dimension a;
 		a = getDistance(Position.p96.getId(), from.getId());
 		send(dos, dis, a.width, a.height);
@@ -102,13 +103,14 @@ public class BTConnection implements Connection {
 	}
 
 	public void takeStone(Position from) {
+		System.err.println("TAKE STONE");
 		Dimension a;
 		a = getDistance(Position.p96.getId(),from.getId());
 		send(dos, dis,a.width,a.height);
 		send(dos2,dis2,3);
 		send(dos2,dis2,5);
 		send(dos2,dis2,4);
-		a = getDistance(from.getId(),0);
+		a = getDistance(from.getId(),Position.p96.getId());
 		send(dos, dis, a.width+300,a.height);
 		send(dos2,dis2,3);
 		send(dos2,dis2,6);

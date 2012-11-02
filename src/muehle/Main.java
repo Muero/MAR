@@ -102,9 +102,11 @@ public class Main {
 			System.out.println(board);
 
 			// ROBOTER IS MOVING
-			if (bestMove.from != null)
-				currentConnection.takeStone(bestMove.from);
-			currentConnection.setStone(bestMove.to);
+			if (bestMove.from != null){
+				currentConnection.moveStone(bestMove.from,bestMove.to);
+			}else{
+				currentConnection.setStone(bestMove.to);
+			}
 			if (bestMove.take != null)
 				currentConnection.takeStone(bestMove.take);
 
