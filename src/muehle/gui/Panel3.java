@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 import muehle.Linker;
+import muehle.gui.camera.ImageGrabber;
 
 public class Panel3 extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,7 @@ public class Panel3 extends JPanel{
 	public JButton button3 = new JButton("Punkt hinzufügen [0|24]");
 	public JButton button4 = new JButton("Letzten Punkt entfernen");
 	public JButton button5 = new JButton("Automatisch setzen");
+	public JButton button6 = new JButton("Update Bild");
 	public JSlider sl1 = new JSlider();
 	public JSlider sl2 = new JSlider();
 	public JLabel l1 = new JLabel("Starter setzen");
@@ -61,6 +64,15 @@ public class Panel3 extends JPanel{
 		button1.setBackground(Color.orange);
 	this.add(button1,c);
 
+		c.weightx = 1;
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 2;
+		c.gridy = 0;
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		button1.setBackground(Color.green);
+	this.add(button6,c);
+		
 		c.weightx = 1;
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 3;
@@ -167,8 +179,15 @@ public class Panel3 extends JPanel{
 		public void mouseClicked(MouseEvent arg0) {
 //TODO
 //			if(starterSet&&fieldSet)
-			if(starterSet)
-				isButton2 = true;
+			if(starterSet){
+				for(int i=0;i<24;i++){
+					Linker.fieldPositions[i] = new Point(0,0);
+					Linker.fieldPositions[i] = Linker.frame.panel2.getFieldPosition(i);
+				}
+				Linker.alphaValue = Linker.frame.panel3.getValue(1);
+				Linker.done = true;
+				Linker.waitForGui = false;
+			}
 		}
 		public void mouseEntered(MouseEvent arg0) {}
 		public void mouseExited(MouseEvent arg0) {}
@@ -193,7 +212,47 @@ public class Panel3 extends JPanel{
 			public void mousePressed(MouseEvent arg0) {}
 			public void mouseReleased(MouseEvent arg0) {}
 		});
+		button6.addMouseListener(new MouseListener(){
 
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Linker.allowRepaint = false;
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				ImageGrabber.takePicture();
+				ImageGrabber.importPicture(Linker.frame);
+				ImageGrabber.readColor(Linker.frame);
+				Linker.allowRepaint = true;
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 }
 	
 	public boolean isStarterSet(){
@@ -227,11 +286,8 @@ public class Panel3 extends JPanel{
 		}
 	}
 	
-	private void thread(){
-		new Thread(){
-			@SuppressWarnings("deprecation")
-			public void run(){
-			while(true){
+	@SuppressWarnings("deprecation")
+	public void thread(){
 					if(isButton1){
 						Linker.frame.setCursor(Cursor.CROSSHAIR_CURSOR);
 						button1.setBackground(Color.orange);
@@ -287,9 +343,6 @@ public class Panel3 extends JPanel{
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}				
-				}
-			}
-		}.start();
 	}
 	
 }

@@ -20,7 +20,7 @@ public class Panel5 extends JPanel {
 
 	public static JButton[] button = new JButton[24];
 
-	private Board board;
+	public Board board;
 
 	public Panel5(Board board) {
 
@@ -36,9 +36,9 @@ public class Panel5 extends JPanel {
 		if (i <= -120)
 			return new Color(255, 0, 0);
 		if (i <= -80)
-			return new Color(255, 25, 0);
+			return new Color(240, 25, 0);
 		if (i <= -50)
-			return new Color(255, 75, 0);
+			return new Color(210, 75, 0);
 		if (i <= -30)
 			return new Color(150, 100, 0);
 		if (i <= 0)
@@ -106,7 +106,6 @@ public class Panel5 extends JPanel {
 				s, s);
 		button[23].setBounds((int) (7 * a) - (s / 2), (int) (7 * b) - (s / 2),
 				s, s);
-
 		button[3].setBounds((int) (2 * a) - (s / 2), (int) (2 * b) - (s / 2),
 				s, s);
 		button[4].setBounds((int) (4 * a) - (s / 2), (int) (2 * b) - (s / 2),
@@ -177,7 +176,4 @@ public class Panel5 extends JPanel {
 
 	}
 
-	public void thread(){
-		//TODO something to update?
-	}
 }

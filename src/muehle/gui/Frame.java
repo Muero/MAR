@@ -53,10 +53,12 @@ public class Frame extends JFrame{
 				Linker.frame.repaint();
 				if(Linker.frame.panel0.isVisible())
 					Linker.frame.panel0.thread();
+				if(Linker.frame.panel2.isVisible())
+					Linker.frame.panel2.thread();
+				if(Linker.frame.panel3.isVisible())
+					Linker.frame.panel3.thread();
 				if(Linker.frame.panel4.isVisible())
 					Linker.frame.panel4.thread();
-				if(Linker.frame.panel5.isVisible())
-					Linker.frame.panel5.thread();
 				try{
 					Thread.sleep(100);
 				}catch(Exception e){}
@@ -153,7 +155,7 @@ public class Frame extends JFrame{
 	 *Sets the specific Gui Mode:
 	 *0 = Make frame invisible
 	 *1 = StartupGui
-	 *2 = StartGameGui
+	 *2 = StartGameGui (Webcam only)
 	 *3 = Start Webcam-HumanGui
 	 *4 = Start Computer-HumanGui 
 	 */

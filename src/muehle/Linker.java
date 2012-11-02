@@ -12,10 +12,9 @@ import muehle.connection.Connection;
 import muehle.connection.EmptyConnection;
 import muehle.gui.ButtonInput;
 import muehle.gui.Frame;
-import muehle.gui.camera.Camera;
+import muehle.gui.camera.ImageGrabber;
 import muehle.gui.camera.WebCamInput;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
 import muehle.model.Position;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.ComputerPlayer;
@@ -35,9 +34,9 @@ public class Linker {
 	public static HumanPositionInput input = null;										//lol
 	
 	//Final Fields
-	public static final int numberOfStones = 9;											//How many Stones to lay
-	public static final Color opponentColor = new Color(255,255,255);					//Color of the virtual Opponent
-	public static final Color humanColor = new Color(0,0,0);							//Color of the Human Player
+	public static final int numberOfStones = 5;											//How many Stones to lay
+	public static final Color opponentColor = new Color(255,0,0);						//Color of the Human Player
+	public static final Color humanColor = new Color(0,0,255);							//Color of the OpponentPlayer
 	public static final Dimension guiSize = new Dimension(542, 378);					//Size of the Gui Window
 	public static final String[] difficultyNames = {"Easy","Normal","Hard","Insane"};	//Used in Panel0
 	public static final String[] modes = 
@@ -58,6 +57,7 @@ public class Linker {
 	public static boolean usealgorithm = false;											//RandomPlayer or ComputerPlayer
 	public static int difficulty = 2;													//Difficulty of ComputerPlayer.
 	public static int robotMode = 0;
+	public static boolean done = false;
 	
 	//Will be generated in StartGameGui
 	public static int alphaValue = 0;													//Value to determine the Field Colors
@@ -67,9 +67,11 @@ public class Linker {
 	
 	//Dynamic
 	public static Map<Position, Integer> probability = new HashMap<Position, Integer>();
-	public static boolean[] webcamCluster = new boolean[24];	//Is used from muehle.gui.camera.Camera
+	public static int[] webcamCluster = new int[24];									//Is used from muehle.gui.camera.WebCamInput
 	public static boolean waitForGui = true;											//Waits for a specific GuiMode. The GuiMode will be set in frame.setGuiMode(int mode)
 	public static int pressedButton = -1;
+	public static boolean allowRepaint = true;
+	public static boolean takePicture = false;
 	
 	public static void createObjects(){
 		board = new Board();
@@ -101,10 +103,15 @@ public class Linker {
 		//If Webcam is in use
 		if(usewebcam) {
 			input = new WebCamInput(board, conn1);
-			Camera.generatePlayer();
-			Camera.importPictureFromPlayer(frame);
-			Camera.readColor(frame);
-			Camera.closePlayer();
+			ImageGrabber.startImaging();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ImageGrabber.takePicture();
+			ImageGrabber.importPicture(frame);
+			ImageGrabber.readColor(frame);			
 		} else {
 			input = new ButtonInput(board, frame.panel4);
 		}

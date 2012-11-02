@@ -43,7 +43,7 @@ public class Minmax {
 				//System.out.println("minimax bewegen");
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
-			} else {
+			} else{
 				//System.out.println("minimax springen");
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);
@@ -328,7 +328,7 @@ public class Minmax {
 		}
 
 	}
-	
+
 	public static Map<Position, Integer> getProbability(Board board, eColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
 		int depth = 4;

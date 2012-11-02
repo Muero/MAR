@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import muehle.Linker;
-import muehle.gui.camera.Camera;
+import muehle.gui.camera.ImageGrabber;
 
 public class Panel2 extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -70,15 +70,24 @@ public class Panel2 extends JPanel{
 		}
 	}
 	
+	public void thread(){
+		if(Linker.allowRepaint){
+			this.setIgnoreRepaint(false);
+			this.repaint();			
+		}else{
+			this.setIgnoreRepaint(true);
+		}
+	}
+	
 	public void paintComponent(Graphics g){
 		g.setColor(Color.black);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		for(int i=0;i<Camera.imageColor.length;i++){
-			for(int j=0;j<Camera.imageColor[0].length;j++){
-				if(!alphacheck(Camera.imageColor[i][j]))
-					g.setColor(new Color(Camera.imageColor[i][j].getRed(),Camera.imageColor[i][j].getGreen(),Camera.imageColor[i][j].getBlue(),Linker.frame.panel3.getValue(0)));
+		for(int i=0;i<ImageGrabber.getImageColor().length;i++){
+			for(int j=0;j<ImageGrabber.getImageColor()[0].length;j++){
+				if(!alphacheck(ImageGrabber.getImageColor()[i][j]))
+					g.setColor(new Color(ImageGrabber.getImageColor()[i][j].getRed(),ImageGrabber.getImageColor()[i][j].getGreen(),ImageGrabber.getImageColor()[i][j].getBlue(),Linker.frame.panel3.getValue(0)));
 				else
-					g.setColor(Camera.imageColor[i][j]);
+					g.setColor(ImageGrabber.getImageColor()[i][j]);
 				g.drawLine(i-a, j-b, i-a, j-b);
 			}
 		}
@@ -94,7 +103,7 @@ public class Panel2 extends JPanel{
 
 	private boolean alphacheck(Color c){
 		if(Linker.frame.panel3.isStarterSet()){
-			Color alphapixel = Camera.imageColor[starterPosition.x][starterPosition.y];
+			Color alphapixel = ImageGrabber.getImageColor()[starterPosition.x][starterPosition.y];
 			int r = Math.abs(c.getRed()-alphapixel.getRed());
 			int g = Math.abs(c.getGreen()-alphapixel.getGreen());
 			int b = Math.abs(c.getBlue()-alphapixel.getBlue());

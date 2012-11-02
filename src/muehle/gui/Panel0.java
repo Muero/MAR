@@ -113,6 +113,7 @@ public class Panel0 extends JPanel implements MouseListener{
 	}
 	
 	public void mouseClicked(MouseEvent e) {
+		jb1.setText("Please wait...");
 		Linker.usealgorithm = jcb3.isSelected();
 		Linker.robotMode = jc2.getSelectedIndex();
 		Linker.usewebcam = jcb1.isSelected();
@@ -133,7 +134,6 @@ public class Panel0 extends JPanel implements MouseListener{
 			Linker.difficulty = 2;
 			break;
 		}
-		Linker.difficulty = jc1.getSelectedIndex();
 		Linker.waitForGui = false;
 	}
 	public void mouseEntered(MouseEvent e) {}

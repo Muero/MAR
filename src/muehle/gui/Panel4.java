@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import muehle.Linker;
-import muehle.gui.camera.Camera;
 import muehle.model.Board;
 import muehle.model.Position;
 
@@ -125,9 +124,9 @@ public class Panel4 extends JPanel implements MouseListener{
 		
 		g.setColor(Color.black);
 		g.drawLine(0,(int) (8*b)-7,this.getWidth(),(int) (8*b)-7);
-		g.setColor(Linker.opponentColor);
-		g.fillRect((int) (1*a)-(s/2),(int) (8*b),s,s);
 		g.setColor(Linker.humanColor);
+		g.fillRect((int) (1*a)-(s/2),(int) (8*b),s,s);
+		g.setColor(Linker.opponentColor);
 		g.fillRect((int) (4*a)-(s/2),(int) (8*b),s,s);
 		g.setColor(Color.black);
 	}
