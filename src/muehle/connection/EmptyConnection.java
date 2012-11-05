@@ -26,6 +26,8 @@ public class EmptyConnection implements Connection {
 
 	@Override
 	public void waitForButton() {
+
+		System.out.println("Empty Connection Wait For Button");
 	}
 
 }

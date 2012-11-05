@@ -51,14 +51,12 @@ public class Main {
 			Move bestMove = null;
 
 			if (move < 2 * numberOfStones) {
-				bestMove = currentPlayer
-						.layStone(board, move, numberOfStones);
+				bestMove = currentPlayer.layStone(board, move, numberOfStones);
 			} else if (board.getNumberOfStones(BLACK) >= 3
 					&& board.getNumberOfStones(WHITE) >= 3
 					&& !board.getStuck(currentPlayerColor)) {
 
-				bestMove = currentPlayer
-						.moveStone(board, move, numberOfStones);
+				bestMove = currentPlayer.moveStone(board, move, numberOfStones);
 			} else {
 				System.out.println("*********************************** \n"
 						+ " It have been placed all the stones \n");
