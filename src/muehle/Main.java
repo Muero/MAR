@@ -3,21 +3,6 @@ package muehle;
 import static muehle.model.Board.eColor.BLACK;
 import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
-
-import muehle.connection.Connection;
-import muehle.gui.Panel4;
-import muehle.gui.Panel5;
-import muehle.model.Board;
-import muehle.model.Board.eColor;
-import muehle.players.Move;
-import muehle.players.NineMenMorrisPlayer;
-
-
-
-import static muehle.model.Board.eColor.BLACK;
-import static muehle.model.Board.eColor.NONE;
-import static muehle.model.Board.eColor.WHITE;
-
 import muehle.connection.Connection;
 import muehle.gui.Panel4;
 import muehle.gui.Panel5;
