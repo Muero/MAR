@@ -43,7 +43,7 @@ public class WebCamInput implements HumanPositionInput {
 
 		boolean retry = true;
 		while (retry) {
-			System.out.println("conn.waitForButton");
+			System.out.println("WebCamInput.waitForButton");
 			conn.waitForButton();
 			
 			int[] neu = new int[24];

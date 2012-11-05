@@ -16,6 +16,10 @@ public class Main2{
 	public static void main(String[] args){
 		Connection conn = new BTConnection();
 		conn.openConnection();
+		
+		
+			conn.waitForButton();
+		System.out.println("PRESSED");
 	}
 	
 }
