@@ -35,7 +35,7 @@ public class Minmax {
 			eColor opposite, int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
 
-		if (!board.getStuck(player) && board.freePosition(player)) {
+		if (!board.getStuck(player)) {
 			if (move < numberOfStones * 2) {
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);
@@ -43,12 +43,16 @@ public class Minmax {
 				//System.out.println("minimax bewegen");
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
-			} else{
+			} else if (board.getNumberOfStones(player) == 3){
 				//System.out.println("minimax springen");
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);
+			} else{
+				//player lost
+				value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 			}
 		} else {
+			//player get stuck / lost
 			value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 		}
 

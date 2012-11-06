@@ -46,6 +46,7 @@ public class Main {
 		System.out.println(board);
 
 		int move = 0;
+		System.out.println("Difficulty: "+Linker.difficulty);
 
 		while (true) {
 			Move bestMove = null;
@@ -101,6 +102,9 @@ public class Main {
 				System.out.println(" TakeStone: " + bestMove.take);
 				currentConnection.takeStone(bestMove.take);
 			}
+			System.out.println(board.getNumberOfOpenMills(currentPlayerColor));
+			System.out.println(board.getNumberOfMills(currentPlayerColor));
+			System.out.println(board.getStuck(currentPlayerColor));
 			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor, move, numberOfStones);
 			System.out.println("");
 			System.out.println(board);
