@@ -9,4 +9,5 @@ public interface Connection {
 	void moveStone(Position from, Position to);
 	void takeStone(Position from);
 	void waitForButton();
+	String getName();
 }

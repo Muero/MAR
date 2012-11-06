@@ -119,9 +119,9 @@ public class ImageGrabber {
 			int G = sumG / (alphaSize * alphaSize);
 			int B = sumB / (alphaSize * alphaSize);
 			
-			if(R>alphaValue && G<255-alphaValue && B<255-alphaValue)
+			if(R>150-alphaValue && G<255-alphaValue && B<255-alphaValue)
 				fieldMap[i] = 1;		//1 = Rot
-			else if(R<255-alphaValue && G>100+alphaValue && B>255-alphaValue)
+			else if(R>150-alphaValue && G>100+alphaValue && B>255-alphaValue)
 				fieldMap[i] = 2;		//2 = Blau
 			else
 				fieldMap[i] = 0;		//0 = Schwarz

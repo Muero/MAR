@@ -102,7 +102,12 @@ public class Linker {
 		
 		//If Webcam is in use
 		if(usewebcam) {
-			input = new WebCamInput(board, conn1);
+			input = new WebCamInput(board,conn2);
+			
+			System.out.println(conn1.getName());
+			System.out.println(conn2.getName());
+			
+			
 			ImageGrabber.startImaging();
 			try {
 				Thread.sleep(5000);

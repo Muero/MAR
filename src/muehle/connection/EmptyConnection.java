@@ -29,5 +29,9 @@ public class EmptyConnection implements Connection {
 
 		System.out.println("Empty Connection Wait For Button");
 	}
+	
+	public String getName(){
+		return "Empty";
+	}
 
 }
