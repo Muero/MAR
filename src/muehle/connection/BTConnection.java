@@ -185,5 +185,8 @@ public class BTConnection implements Connection {
 		}
 	}
 
+	public String getName(){
+		return "Robot";
+	}
 
 }

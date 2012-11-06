@@ -112,10 +112,8 @@ public class Main {
 
 			System.out.println("From " + bestMove.from);
 			System.out.println("  To " + bestMove.to);
-			if (bestMove.take != null) {
-				System.out.println(" TakeStone: " + bestMove.take);
-				currentConnection.takeStone(bestMove.take);
-			}
+			System.out.println(" TakeStone: " + bestMove.take);
+			
 			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor, move, numberOfStones);
 			System.out.println("");
 			System.out.println(board);
