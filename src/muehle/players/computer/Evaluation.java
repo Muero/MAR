@@ -35,10 +35,10 @@ public class Evaluation {
 		bewertung = bewertung + 20 * openMillsPlayer;
 		bewertung = bewertung - 20 * openMillsOpposite;
 
-		if (playerMills > oppositeMills) {
-			bewertung = bewertung + 10 * (playerMills - oppositeMills); //TODO wenn springt sollte er seine mühlen zu machen
-		} else if (playerMills < oppositeMills) {
-			bewertung = bewertung + 20 * (playerMills - oppositeMills);
+		if (playerMills > 0) {
+			bewertung = bewertung + 40 * (playerMills - oppositeMills); //TODO wenn springt sollte er seine mühlen zu machen
+		} else if (playerMills < 0) {
+			bewertung = bewertung + 50 * (playerMills - oppositeMills);
 		}
 		if(numberOfPlayerStones<3)
 			bewertung=bewertung-1000;
