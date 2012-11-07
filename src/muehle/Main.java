@@ -3,6 +3,7 @@ package muehle;
 import static muehle.model.Board.eColor.BLACK;
 import static muehle.model.Board.eColor.NONE;
 import static muehle.model.Board.eColor.WHITE;
+import muehle.connection.BTConnection;
 import muehle.connection.Connection;
 import muehle.gui.Panel4;
 import muehle.gui.Panel5;
@@ -14,6 +15,9 @@ import muehle.players.NineMenMorrisPlayer;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		Connection conn = new BTConnection();
+		conn.openConnection();
 		
 		Linker.createObjects();		//Startup Gui and Board
 		Linker.finish();			//Show Panel0 and get Information about Robot, Webcam and Difficulty
