@@ -29,6 +29,10 @@ public class Panel5 extends JPanel {
 		generateButtons();
 	}
 
+	/**
+	 * @param i
+	 * @return
+	 */
 	private static Color getProbabilityColor(int i) {
 		if(i==0){
 			return null;
