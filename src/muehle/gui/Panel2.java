@@ -33,34 +33,68 @@ public class Panel2 extends JPanel{
 		});
 	}
 	
+	/**
+	 * Returns the Index of the last set Position
+	 * @return index
+	 */
 	public int getPositionIndex(){
 		return index;
 	}
-	
+	/**
+	 * Checks if Mouse clicked on a button
+	 * @return
+	 */
 	public boolean mouseClicked(){
 		return mouseClicked;
 	}
+	/**
+	 * MouseClick can be done automatically
+	 * @param click
+	 */
 	public void setMouseClick(boolean click){
 		mouseClicked = click;
 	}
+	/**
+	 * Returns MousePosition on the Panel
+	 */
 	public Point getMousePosition(){
 		return mousePosition;
 	}
+	/**
+	 * Returns StarterPosition to determine color values
+	 * @return
+	 */
 	public Point getStarterPosition(){
 		return starterPosition;
 	}
+	/**
+	 * Sets the starterPosition
+	 * @param start
+	 */
 	public void setStarterPosition(Point start){
 		this.starterPosition = new Point(start);
 	}
+	/**
+	 * Sets the fieldPosition
+	 * @param field
+	 */
 	public void setFieldPosition(Point field){
 		if(index<24){
 			positions[index] = new Point(field);
 			this.index++;
 		}
 	}
+	/**
+	 * Returns the actual fieldPosition from index a
+	 * @param a
+	 * @return positions
+	 */
 	public Point getFieldPosition(int a){
 		return positions[a];
 	}
+	/**
+	 * Clears the last Field Position and subtracts index by 1
+	 */
 	public void clearLastFieldPosition(){
 		if(index>0){
 			positions[index-1] = new Point(-10,-10);
@@ -69,7 +103,9 @@ public class Panel2 extends JPanel{
 			this.index--;
 		}
 	}
-	
+	/**
+	 * Is called from frame. Updates Picture
+	 */
 	public void thread(){
 		if(Linker.allowRepaint){
 			this.setIgnoreRepaint(false);
@@ -78,7 +114,9 @@ public class Panel2 extends JPanel{
 			this.setIgnoreRepaint(true);
 		}
 	}
-	
+	/**
+	 * Paints the Picture in Form of a Pixel-Array to easily change specific Pixels
+	 */
 	public void paintComponent(Graphics g){
 		g.setColor(Color.black);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
@@ -100,7 +138,11 @@ public class Panel2 extends JPanel{
 		}
 		
 	}
-
+	/**
+	 * Checks if a Pixel is in the range of Starterposition's Color and the alphavalue. Returns true if this happens
+	 * @param c
+	 * @return boolean
+	 */
 	private boolean alphacheck(Color c){
 		if(Linker.frame.panel3.isStarterSet()){
 			Color alphapixel = ImageGrabber.getImageColor()[starterPosition.x][starterPosition.y];

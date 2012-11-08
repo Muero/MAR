@@ -38,6 +38,9 @@ public class Panel0 extends JPanel implements MouseListener{
 		addComponentsToPane();
 	}
 	
+	/**
+	 * Adds all Components to the pane and makes them resizable
+	 */
 	private void addComponentsToPane(){
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.setLayout(new GridBagLayout());
@@ -96,6 +99,10 @@ public class Panel0 extends JPanel implements MouseListener{
 		
 	}
 	
+	/**
+	 * thread will be executed from frame every 50ms. It updates
+	 * the colors of the buttons
+	 */
 	@SuppressWarnings("deprecation")
 	public void thread(){
 		if(jcb1.isSelected()){
@@ -112,6 +119,9 @@ public class Panel0 extends JPanel implements MouseListener{
 		}
 	}
 	
+	/**
+	 * Listeners of all Buttons. Only mouseClicked is used
+	 */
 	public void mouseClicked(MouseEvent e) {
 		jb1.setText("Please wait...");
 		Linker.usealgorithm = jcb3.isSelected();
