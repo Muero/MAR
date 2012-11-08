@@ -29,14 +29,14 @@ public class WebCamInput implements HumanPositionInput {
 	
 	@Override
 	public Position layStonePosition() {
-		int[] old = new int[24];
+		boolean[] old = new boolean[24];
 		for(Position p:Position.getAllPositions()){
 			if(Linker.board.getColor(p)==eColor.BLACK)
-				old[Frame.getGuiPosition(p)] = 1;
+				old[Frame.getGuiPosition(p)] = true;
 			else if(Linker.board.getColor(p)==eColor.WHITE)
-				old[Frame.getGuiPosition(p)] = 2;
+				old[Frame.getGuiPosition(p)] = true;
 			else
-				old[Frame.getGuiPosition(p)] = 0;
+				old[Frame.getGuiPosition(p)] = false;
 		}
 		
 		System.out.println("Lay your stone \n");
@@ -46,7 +46,7 @@ public class WebCamInput implements HumanPositionInput {
 			System.out.println("WebCamInput.waitForButton");
 			conn.waitForButton();
 			
-			int[] neu = new int[24];
+			boolean[] neu = new boolean[24];
 			
 			int stein = -1;
 			neu = ImageGrabber.createRawData(Linker.frame,Linker.alphaSize,Linker.alphaValue,Linker.fieldPositions);
@@ -74,14 +74,14 @@ public class WebCamInput implements HumanPositionInput {
 
 	@Override
 	public Position fromStonePosition() {
-		int[] old = new int[24];
+		boolean[] old = new boolean[24];
 		for(Position p:Position.getAllPositions()){
 			if(Linker.board.getColor(p)==eColor.BLACK)
-				old[Frame.getGuiPosition(p)] = 1;
+				old[Frame.getGuiPosition(p)] = true;
 			else if(Linker.board.getColor(p)==eColor.WHITE)
-				old[Frame.getGuiPosition(p)] = 2;
+				old[Frame.getGuiPosition(p)] = true;
 			else
-				old[Frame.getGuiPosition(p)] = 0;
+				old[Frame.getGuiPosition(p)] = false;
 		}
 		
 		System.out.println("Lay your stone \n");
@@ -91,7 +91,7 @@ public class WebCamInput implements HumanPositionInput {
 			System.out.println("conn.waitForButton");
 			conn.waitForButton();
 			
-			int[] neu = new int[24];
+			boolean[] neu = new boolean[24];
 			
 			int stein = -1;
 			neu = ImageGrabber.createRawData(Linker.frame,Linker.alphaSize,Linker.alphaValue,Linker.fieldPositions);
@@ -119,14 +119,14 @@ public class WebCamInput implements HumanPositionInput {
 
 	@Override
 	public Position toStonePosition(Position inputPositionFrom) {
-		int[] old = new int[24];
+		boolean[] old = new boolean[24];
 		for(Position p:Position.getAllPositions()){
 			if(Linker.board.getColor(p)==eColor.BLACK)
-				old[Frame.getGuiPosition(p)] = 1;
+				old[Frame.getGuiPosition(p)] = true;
 			else if(Linker.board.getColor(p)==eColor.WHITE)
-				old[Frame.getGuiPosition(p)] = 2;
+				old[Frame.getGuiPosition(p)] = true;
 			else
-				old[Frame.getGuiPosition(p)] = 0;
+				old[Frame.getGuiPosition(p)] = false;
 		}
 		
 		System.out.println("Lay your stone \n");
@@ -136,7 +136,7 @@ public class WebCamInput implements HumanPositionInput {
 			System.out.println("conn.waitForButton");
 			conn.waitForButton();
 			
-			int[] neu = new int[24];
+			boolean[] neu = new boolean[24];
 			
 			int stein = -1;
 			neu = ImageGrabber.createRawData(Linker.frame,Linker.alphaSize,Linker.alphaValue,Linker.fieldPositions);
@@ -164,14 +164,14 @@ public class WebCamInput implements HumanPositionInput {
 
 	@Override
 	public Position takeStonePosition() {
-		int[] old = new int[24];
+		boolean[] old = new boolean[24];
 		for(Position p:Position.getAllPositions()){
 			if(Linker.board.getColor(p)==eColor.BLACK)
-				old[Frame.getGuiPosition(p)] = 1;
+				old[Frame.getGuiPosition(p)] = true;
 			else if(Linker.board.getColor(p)==eColor.WHITE)
-				old[Frame.getGuiPosition(p)] = 2;
+				old[Frame.getGuiPosition(p)] = true;
 			else
-				old[Frame.getGuiPosition(p)] = 0;
+				old[Frame.getGuiPosition(p)] = false;
 		}
 		
 		System.out.println("Lay your stone \n");
@@ -181,7 +181,7 @@ public class WebCamInput implements HumanPositionInput {
 			System.out.println("conn.waitForButton");
 			conn.waitForButton();
 			
-			int[] neu = new int[24];
+			boolean[] neu = new boolean[24];
 			
 			int stein = -1;
 			neu = ImageGrabber.createRawData(Linker.frame,Linker.alphaSize,Linker.alphaValue,Linker.fieldPositions);

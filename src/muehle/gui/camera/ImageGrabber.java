@@ -34,7 +34,7 @@ public class ImageGrabber {
 		ImageGrabber t = new ImageGrabber();
 		t.getCam();
 	}	
-	public static int[] createRawData(JFrame a,int alphaSize,int alphaValue,Point[] fieldpositions){
+	public static boolean[] createRawData(JFrame a,int alphaSize,int alphaValue,Point[] fieldpositions){
 		
 		Linker.allowRepaint = false;
 		
@@ -95,8 +95,8 @@ public class ImageGrabber {
 		}
 	}
 	
-	private static int[] rawDataAlgorithm(int alphaSize,int alphaValue,Point[] fieldpositions){
-		int[] fieldMap = new int[24];
+	private static boolean[] rawDataAlgorithm(int alphaSize,int alphaValue,Point[] fieldpositions){
+		boolean[] fieldMap = new boolean[24];
 		for (int i = 0; i < 24; i++) {
 
 			int sumR = 0;
@@ -119,12 +119,12 @@ public class ImageGrabber {
 			int G = sumG / (alphaSize * alphaSize);
 			int B = sumB / (alphaSize * alphaSize);
 			
-			if(R>150-alphaValue && G<255-alphaValue && B<255-alphaValue)
-				fieldMap[i] = 1;		//1 = Rot
-			else if(R>150-alphaValue && G>100+alphaValue && B>255-alphaValue)
-				fieldMap[i] = 2;		//2 = Blau
+			if(R>150-alphaValue)
+				fieldMap[i] = true;		//1 = Rot
+			else if(B>150-alphaValue)
+				fieldMap[i] = true;		//2 = Blau
 			else
-				fieldMap[i] = 0;		//0 = Schwarz
+				fieldMap[i] = false;		//0 = Schwarz
 			System.err.println(alphaValue);
 			System.err.println(i+": "+fieldMap[i]+"  -  "+R+"|"+G+"|"+B);
 			

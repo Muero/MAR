@@ -15,13 +15,10 @@ import muehle.players.NineMenMorrisPlayer;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		Connection conn = new BTConnection();
-		conn.openConnection();
-		
+				
 		Linker.createObjects();		//Startup Gui and Board
 		Linker.finish();			//Show Panel0 and get Information about Robot, Webcam and Difficulty
-		Linker.setupGamePlay();
+		Linker.setupGamePlay();		//Sets up Players, 
 		Linker.startupGui();
 		
 		System.out.println("*************************** \n"+ "Welcome to the game Nine Men Morris !! \n \n");
