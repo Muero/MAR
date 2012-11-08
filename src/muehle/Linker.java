@@ -27,11 +27,11 @@ public class Linker {
 	//Objects - Warning! Have to be defined!
 	public static Frame frame;															//Generates Constructor of muehle.gui.Frame
 	public static Board board;															//Generates Constructor of muehle.model.Board
-	public static Connection conn1;
-	public static Connection conn2;
+	public static Connection conn1;														//Connections can be BTConnection or EmptyConnection, if NXT's are used or not
+	public static Connection conn2;														//Same for this Connection
 	public static NineMenMorrisPlayer player1;											//Default is Human
 	public static NineMenMorrisPlayer player2;											//Default is Robot
-	public static HumanPositionInput input = null;										//lol
+	public static HumanPositionInput input = null;										//Can be ButtonInput or WebcamInput. Is defined in setupGamePlay()
 	
 	//Final Fields
 	public static final int numberOfStones = 4;											//How many Stones to lay
@@ -39,7 +39,7 @@ public class Linker {
 	public static final Color humanColor = new Color(0,0,255);							//Color of the OpponentPlayer
 	public static final Dimension guiSize = new Dimension(542, 378);					//Size of the Gui Window
 	public static final String[] difficultyNames = {"Easy","Normal","Hard","Insane"};	//Used in Panel0
-	public static final String[] modes = 
+	public static final String[] modes = 												//DropupMenu in the StartupGui
 		{"   Robot - Human",
 		 "Computer - Human",
 		 "   Robot - Robot",
@@ -56,22 +56,23 @@ public class Linker {
 	public static boolean usewebcam = false;											//Webcam or no Webcam
 	public static boolean usealgorithm = false;											//RandomPlayer or ComputerPlayer
 	public static int difficulty = 2;													//Difficulty of ComputerPlayer.
-	public static int robotMode = 0;
-	public static boolean done = false;
+	public static int robotMode = 0;													//Returnvalue of the StartupGui-Dropdownmenu
+	public static boolean done = false;													//Determines if Startup-Gui is finished or not
 	
 	//Will be generated in StartGameGui
 	public static int alphaValue = 0;													//Value to determine the Field Colors
-	public static int alphaSize = 20;
+	public static int alphaSize = 20;													//Size of the PixelCluster the Algorithm uses to determine the color median
 	public static Point[] fieldPositions = new Point[24];								//Positions on the picture where the colored Pixels are
 	public static Point starterPosition = new Point(0,0);								//related Position to Black
 	
 	//Dynamic
-	public static Map<Position, Integer> probability = new HashMap<Position, Integer>();
+	public static Map<Position, Integer> probability = new HashMap<Position, Integer>();//Probabilities of all Positions on the Mühlefield
 	public static int[] webcamCluster = new int[24];									//Is used from muehle.gui.camera.WebCamInput
 	public static boolean waitForGui = true;											//Waits for a specific GuiMode. The GuiMode will be set in frame.setGuiMode(int mode)
-	public static int pressedButton = -1;
-	public static boolean allowRepaint = true;
-	public static boolean takePicture = false;
+	public static int pressedButton = -1;												//If ButtonInput is used, this method will not be -1 if a button is pressed
+	public static boolean allowRepaint = true;											//During the camera updates the picture it should not be pained because it generates Nullpointer Exceptions
+	public static boolean takePicture = false;											//True if camera takes a picture
+	
 	
 	public static void createObjects(){
 		board = new Board();

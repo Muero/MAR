@@ -14,6 +14,9 @@ public class Panel1 extends JPanel{
 		this.setLayout(null);
 	}
 	
+	/**
+	 * Paints the actual Picture imported from the Webcam
+	 */
 	public void paintComponent(Graphics g){
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(ImageGrabber.getBufferedImage(),0,0,this.getWidth(),this.getHeight(),this);

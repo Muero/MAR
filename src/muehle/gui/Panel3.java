@@ -48,7 +48,8 @@ public class Panel3 extends JPanel{
 		addListenersToObjects();
 		addComponentsToPane();
 	}		
-	
+
+	//Adds all Buttons and Sliders to the Component
 	private void addComponentsToPane(){
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.setLayout(new GridBagLayout());
@@ -165,6 +166,9 @@ public class Panel3 extends JPanel{
 	this.add(button2,c);
 
 	}
+	/**
+	 * Adds to every Component its specific MouseListener
+	 */
 	private void addListenersToObjects(){
 		button1.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {
@@ -254,11 +258,17 @@ public class Panel3 extends JPanel{
 			
 		});
 }
-	
+	/*
+	 * Returns true if Starter is set
+	 */
 	public boolean isStarterSet(){
 		return starterSet;
 	}
-	
+	/**
+	 * If the button[number] is pressed, this method returns true
+	 * @param number
+	 * @return
+	 */
 	public boolean isPressed(int number){
 		switch(number){
 		case 0:
@@ -275,6 +285,11 @@ public class Panel3 extends JPanel{
 			return false;
 		}
 	}
+	/**
+	 * Gets the value of one of the slider, called by number
+	 * @param number
+	 * @return
+	 */
 	public int getValue(int number){
 		switch(number){
 		case 0:
@@ -285,7 +300,9 @@ public class Panel3 extends JPanel{
 			return 0;
 		}
 	}
-	
+	/**
+	 * Called by frame. Updates ButtonColors
+	 */
 	@SuppressWarnings("deprecation")
 	public void thread(){
 					if(isButton1){

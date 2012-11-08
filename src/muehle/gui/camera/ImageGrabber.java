@@ -22,18 +22,29 @@ import muehle.Linker;
 
 public class ImageGrabber {
 	
-	private static final String file = "datei";
-	private static final String fileEnding = "png";
-	private Player p;
-	private static Image image = null;
-	private static BufferedImage imageBuffer = null;
-	private static Color[][] imageColor;
+	private static final String file = "datei";				//Dateiname, unter dem das Bild gespeichert wird
+	private static final String fileEnding = "png";			//Dateiformat
+	private Player p;										//Generiert ein Player, um einen Livestream zu starten
+	private static Image image = null;						//BildObjekt
+	private static BufferedImage imageBuffer = null;		//BildBuffer wird benötigt, um vom Bild die entsprechenden Colors zu entnehmen
+	private static Color[][] imageColor;					//ImageColor speichert alle Pixel des Bildes in einem Array ab
 	
+	/**
+	 * Startet die Klasse getCam
+	 */
 	public static void startImaging(){
 		System.err.println("Imaging started!");
 		ImageGrabber t = new ImageGrabber();
 		t.getCam();
 	}	
+	/**
+	 * Diese Methode wird von aussen aufgerufen, um ein Bild zu importieren, zu laden und die Farben an den Positionen zu berechnen
+	 * @param a
+	 * @param alphaSize
+	 * @param alphaValue
+	 * @param fieldpositions
+	 * @return
+	 */
 	public static int[] createRawData(JFrame a,int alphaSize,int alphaValue,Point[] fieldpositions){
 		
 		Linker.allowRepaint = false;
@@ -46,12 +57,24 @@ public class ImageGrabber {
 		
 		return rawDataAlgorithm(alphaSize,alphaValue,fieldpositions);
 	}
+	/**
+	 * Returns BufferedImage
+	 * @return
+	 */
 	public static BufferedImage getBufferedImage(){
 		return imageBuffer;
 	}
+	/**
+	 * Returns ImageColors
+	 * @return
+	 */
 	public static Color[][] getImageColor(){
 		return imageColor;
 	}
+	/**
+	 * Liest die Farben aus dem ImageBuffer und speichert sie in ImageColor
+	 * @param a
+	 */
 	public static void readColor(JFrame a) {
 		System.out.println("Creating ImageColors...");
 		imageColor = new Color[imageBuffer.getWidth()][imageBuffer.getHeight()];
@@ -62,6 +85,10 @@ public class ImageGrabber {
 		}
 		System.out.println("ImageColors created!");
 	}
+	/**
+	 * Importiert ein Bild vom Computer
+	 * @param a
+	 */
 	public static void importPicture(JFrame a){
 		try {
 			image = ImageIO.read(new File(file + "." + fileEnding));
@@ -84,6 +111,9 @@ public class ImageGrabber {
 		}
 		System.out.println("Bild importiert");
 	}
+	/**
+	 * Nimmt ein Bild von der Webcam
+	 */
 	public static void takePicture(){
 		Linker.takePicture = true;
 		while(Linker.takePicture){
@@ -95,6 +125,13 @@ public class ImageGrabber {
 		}
 	}
 	
+	/**
+	* Berechnet aus den Positionen vom Panel2 die Farben der jeweiligen Pixel
+	 * @param alphaSize
+	 * @param alphaValue
+	 * @param fieldpositions
+	 * @return
+	 */
 	private static int[] rawDataAlgorithm(int alphaSize,int alphaValue,Point[] fieldpositions){
 		int[] fieldMap = new int[24];
 		for (int i = 0; i < 24; i++) {
@@ -131,6 +168,9 @@ public class ImageGrabber {
 		}
 		return fieldMap;
 	}
+/**
+ 	* Generiert ein JFrame, indem der Livestream angezeigt wird.
+ */
 	private void getCam(){
 		try{
 			 
@@ -214,6 +254,9 @@ public class ImageGrabber {
 		}
 		return false;
 	}
+	/**
+	 * Speichert das importierte Bild auf der Harddisk
+	 */
 	private static void savePicture(){
 		Linker.takePicture = true;
 		System.out.println("Saving");
