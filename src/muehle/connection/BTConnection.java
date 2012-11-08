@@ -121,7 +121,7 @@ public class BTConnection implements Connection {
 	 * @param name is the name by which it connects 
 	 * @return the connection
 	 */
-	public static NXTConnector start(NXTConnector conn, String name) {
+	private static NXTConnector start(NXTConnector conn, String name) {
 		boolean connected = conn.connectTo(name);
 		if (!connected) {
 			System.err.println("Failed to connect to any NXT");
@@ -131,7 +131,7 @@ public class BTConnection implements Connection {
 	}
 
 	//Sends two commands to the NXT in form of two integers.
-	public static void send(DataOutputStream dos, DataInputStream dis, int a,
+	private static void send(DataOutputStream dos, DataInputStream dis, int a,
 			int b) {
 		try {
 			System.out.println("Sending " + a + " && " + b);
@@ -148,7 +148,7 @@ public class BTConnection implements Connection {
 	}
 
 	//Sends one command to the NXT in form of an integer
-	public static void send(DataOutputStream dos, DataInputStream dis, int a) {
+	private static void send(DataOutputStream dos, DataInputStream dis, int a) {
 		try {
 			System.out.println("Sending " + a);
 			dos.writeInt(a);
@@ -162,7 +162,7 @@ public class BTConnection implements Connection {
 	}
 
 	//stops the Connection and orders the NXTs to stop.
-	public static void stop(NXTConnector conn, DataInputStream dis,
+	private static void stop(NXTConnector conn, DataInputStream dis,
 			DataOutputStream dos) {
 		try {
 			dis.close();

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import muehle.Linker;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.computer.Minmax;
 
@@ -60,7 +60,7 @@ public class Panel5 extends JPanel {
 		return new Color(0, 0, 0);
 	}
 
-	public static void setBackgroundProbabilityColor(Board board, final eColor player,final int move, final int numberOfStones) {
+	public static void setBackgroundProbabilityColor(Board board, final StoneColor player,final int move, final int numberOfStones) {
 
 		Map<Position, Integer> prob = new HashMap<Position, Integer>();
 		prob = Minmax.getProbability(board, player,move, numberOfStones);

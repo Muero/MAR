@@ -4,15 +4,15 @@ import muehle.Linker;
 import muehle.connection.Connection;
 import muehle.gui.Frame;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.human.HumanPositionInput;
 
 public class WebCamInput implements HumanPositionInput {
 	private Board board;
 	private Connection conn;
-	private eColor color;
-	private eColor opposite;
+	private StoneColor color;
+	private StoneColor opposite;
 
 	public WebCamInput(Board board, Connection conn) {
 		this.board = board;
@@ -22,18 +22,18 @@ public class WebCamInput implements HumanPositionInput {
 	}
 
 	@Override
-	public void setColor(eColor color) {
+	public void setColor(StoneColor color) {
 		this.color = color;
-		if(color == eColor.BLACK) opposite = eColor.WHITE; else opposite = eColor.BLACK;
+		if(color == StoneColor.BLACK) opposite = StoneColor.WHITE; else opposite = StoneColor.BLACK;
 	}
 	
 	@Override
 	public Position layStonePosition() {
 		int[] old = new int[24];
 		for(Position p:Position.getAllPositions()){
-			if(Linker.board.getColor(p)==eColor.BLACK)
+			if(Linker.board.getColor(p)==StoneColor.BLACK)
 				old[Frame.getGuiPosition(p)] = 1;
-			else if(Linker.board.getColor(p)==eColor.WHITE)
+			else if(Linker.board.getColor(p)==StoneColor.WHITE)
 				old[Frame.getGuiPosition(p)] = 2;
 			else
 				old[Frame.getGuiPosition(p)] = 0;
@@ -76,9 +76,9 @@ public class WebCamInput implements HumanPositionInput {
 	public Position fromStonePosition() {
 		int[] old = new int[24];
 		for(Position p:Position.getAllPositions()){
-			if(Linker.board.getColor(p)==eColor.BLACK)
+			if(Linker.board.getColor(p)==StoneColor.BLACK)
 				old[Frame.getGuiPosition(p)] = 1;
-			else if(Linker.board.getColor(p)==eColor.WHITE)
+			else if(Linker.board.getColor(p)==StoneColor.WHITE)
 				old[Frame.getGuiPosition(p)] = 2;
 			else
 				old[Frame.getGuiPosition(p)] = 0;
@@ -121,9 +121,9 @@ public class WebCamInput implements HumanPositionInput {
 	public Position toStonePosition(Position inputPositionFrom) {
 		int[] old = new int[24];
 		for(Position p:Position.getAllPositions()){
-			if(Linker.board.getColor(p)==eColor.BLACK)
+			if(Linker.board.getColor(p)==StoneColor.BLACK)
 				old[Frame.getGuiPosition(p)] = 1;
-			else if(Linker.board.getColor(p)==eColor.WHITE)
+			else if(Linker.board.getColor(p)==StoneColor.WHITE)
 				old[Frame.getGuiPosition(p)] = 2;
 			else
 				old[Frame.getGuiPosition(p)] = 0;
@@ -166,9 +166,9 @@ public class WebCamInput implements HumanPositionInput {
 	public Position takeStonePosition() {
 		int[] old = new int[24];
 		for(Position p:Position.getAllPositions()){
-			if(Linker.board.getColor(p)==eColor.BLACK)
+			if(Linker.board.getColor(p)==StoneColor.BLACK)
 				old[Frame.getGuiPosition(p)] = 1;
-			else if(Linker.board.getColor(p)==eColor.WHITE)
+			else if(Linker.board.getColor(p)==StoneColor.WHITE)
 				old[Frame.getGuiPosition(p)] = 2;
 			else
 				old[Frame.getGuiPosition(p)] = 0;

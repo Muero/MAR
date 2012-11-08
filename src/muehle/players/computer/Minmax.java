@@ -1,12 +1,12 @@
 package muehle.players.computer;
 
-import static muehle.model.Board.eColor.NONE;
+import static muehle.model.Board.StoneColor.NONE;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.Move;
 
@@ -31,8 +31,8 @@ public class Minmax {
 		}
 	}
 
-	public static MinimaxResult minmaxDecide(Board board, eColor player,
-			eColor opposite, int depth, int move, int numberOfStones) {
+	public static MinimaxResult minmaxDecide(Board board, StoneColor player,
+			StoneColor opposite, int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
 
 		if (!board.getStuck(player)) {
@@ -62,8 +62,8 @@ public class Minmax {
 
 	// true == oppposite(computer) ist dran
 	// false == player
-	public static MinimaxResult minmaxLay(Board board, eColor player,
-			eColor opposite, int depth, int move, int numberOfStones) {
+	public static MinimaxResult minmaxLay(Board board, StoneColor player,
+			StoneColor opposite, int depth, int move, int numberOfStones) {
 		if (depth > 0) {
 			int result;
 
@@ -136,8 +136,8 @@ public class Minmax {
 
 	}
 
-	public static MinimaxResult minmaxMove(Board board, eColor player,
-			eColor opposite, int depth, int move, int numberOfStones) {
+	public static MinimaxResult minmaxMove(Board board, StoneColor player,
+			StoneColor opposite, int depth, int move, int numberOfStones) {
 		if (depth > 0) {
 
 			int result;
@@ -234,8 +234,8 @@ public class Minmax {
 
 	}
 
-	public static MinimaxResult minmaxJumping(Board board, eColor player,
-			eColor opposite, int depth, int move, int numberOfStones) {
+	public static MinimaxResult minmaxJumping(Board board, StoneColor player,
+			StoneColor opposite, int depth, int move, int numberOfStones) {
 		if (depth > 0) {
 
 			int result;
@@ -333,16 +333,16 @@ public class Minmax {
 
 	}
 
-	public static Map<Position, Integer> getProbability(Board board, eColor player, int move, int numberOfStones) {
+	public static Map<Position, Integer> getProbability(Board board, StoneColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
 		int depth = 4;
 		for (Position p : Position.getAllPositions()) {
-			if (board.getColor(p) == eColor.NONE) { //TODO gilt nur bei legen und springen
+			if (board.getColor(p) == StoneColor.NONE) { //TODO gilt nur bei legen und springen
 				board.setColor(p, player);
-				MinimaxResult res = Minmax.minmaxDecide(board, player==eColor.BLACK?eColor.WHITE:eColor.BLACK, player, depth-1, move+1,
+				MinimaxResult res = Minmax.minmaxDecide(board, player==StoneColor.BLACK?StoneColor.WHITE:StoneColor.BLACK, player, depth-1, move+1,
 						numberOfStones);
 				probabilities.put(p,-res.getRank());
-				board.setColor(p, eColor.NONE);
+				board.setColor(p, StoneColor.NONE);
 			}else{
 				probabilities.put(p, 0);
 			}

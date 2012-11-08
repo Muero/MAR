@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
@@ -24,7 +24,7 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 		rand = new Random();
 	}
 
-	private eColor color;
+	private StoneColor color;
 
 	public String getName() {
 		return "Random Player";
@@ -38,7 +38,7 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 		boolean haveLayPosition = true;
 		while (haveLayPosition) {
 			to = positions[rand.nextInt(positions.length)];
-			if (board.getColor(to) == eColor.NONE)
+			if (board.getColor(to) == StoneColor.NONE)
 				haveLayPosition = false;
 		}
 		if (board.isMill(to, color)) { // TODO geht das wenn from = null?
@@ -62,7 +62,7 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 		boolean haveFromPosition = true;
 		while (haveFromPosition) {
 			from = positions[rand.nextInt(positions.length)];
-			if (board.getColor(from) == eColor.NONE)
+			if (board.getColor(from) == StoneColor.NONE)
 				haveFromPosition = false;
 		}
 		Set<Position> neigh = Position.getNeighboursOf(from);
@@ -77,7 +77,7 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 			to = neighbs[rand.nextInt(neighbs.length)];
 			else
 			to = positions[rand.nextInt(positions.length)];			
-			if (board.getColor(to) == eColor.NONE)
+			if (board.getColor(to) == StoneColor.NONE)
 				haveToPosition = false;
 		}
 		if (board.isMill(to, color)) {
@@ -96,21 +96,21 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public void setColor(eColor color) {
+	public void setColor(StoneColor color) {
 		this.color = color;
 	}
 
 	@Override
-	public eColor getColor() {
+	public StoneColor getColor() {
 		return color;
 	}
 
 	@Override
-	public eColor getOppositeColor() {
-		if (getColor() == eColor.BLACK)
-			return eColor.WHITE;
+	public StoneColor getOppositeColor() {
+		if (getColor() == StoneColor.BLACK)
+			return StoneColor.WHITE;
 		else
-			return eColor.BLACK;
+			return StoneColor.BLACK;
 	}
 
 }
