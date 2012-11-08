@@ -36,9 +36,7 @@ public class Panel2 extends JPanel{
 	public int getPositionIndex(){
 		return index;
 	}
-	public void resetIndex(){
-		this.index = 0;
-	}
+	
 	public boolean mouseClicked(){
 		return mouseClicked;
 	}

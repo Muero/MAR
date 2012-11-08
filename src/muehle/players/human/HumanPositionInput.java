@@ -1,7 +1,7 @@
 package muehle.players.human;
 
 import muehle.model.Position;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 
 public interface HumanPositionInput {
 	Position layStonePosition();
@@ -9,5 +9,5 @@ public interface HumanPositionInput {
 	Position toStonePosition(Position inputPositionFrom);
 	Position takeStonePosition();
 	
-	public void setColor(eColor color);
+	public void setColor(StoneColor color);
 }

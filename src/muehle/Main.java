@@ -1,24 +1,27 @@
 package muehle;
 
-import static muehle.model.Board.eColor.BLACK;
-import static muehle.model.Board.eColor.NONE;
-import static muehle.model.Board.eColor.WHITE;
+import static muehle.model.Board.StoneColor.BLACK;
+import static muehle.model.Board.StoneColor.NONE;
+import static muehle.model.Board.StoneColor.WHITE;
 import muehle.connection.BTConnection;
 import muehle.connection.Connection;
 import muehle.gui.Panel4;
 import muehle.gui.Panel5;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 
 public class Main {
 
 	public static void main(String[] args) {
-				
+		
+		Connection conn = new BTConnection();
+		conn.openConnection();
+		
 		Linker.createObjects();		//Startup Gui and Board
 		Linker.finish();			//Show Panel0 and get Information about Robot, Webcam and Difficulty
-		Linker.setupGamePlay();		//Sets up Players, 
+		Linker.setupGamePlay();
 		Linker.startupGui();
 		
 		System.out.println("*************************** \n"+ "Welcome to the game Nine Men Morris !! \n \n");
@@ -38,8 +41,8 @@ public class Main {
 		Connection currentConnection = conn1;
 		Connection oppositeConnection = conn2;
 
-		eColor currentPlayerColor = WHITE;
-		eColor oppositePlayerColor = BLACK;
+		StoneColor currentPlayerColor = WHITE;
+		StoneColor oppositePlayerColor = BLACK;
 		
 		player1.setColor(currentPlayerColor);
 		player2.setColor(oppositePlayerColor);
@@ -112,7 +115,7 @@ public class Main {
 			currentConnection = oppositeConnection;
 			oppositeConnection = c;
 
-			eColor color = currentPlayerColor;
+			StoneColor color = currentPlayerColor;
 			currentPlayerColor = oppositePlayerColor;
 			oppositePlayerColor = color;
 

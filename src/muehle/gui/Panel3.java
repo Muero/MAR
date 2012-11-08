@@ -150,6 +150,7 @@ public class Panel3 extends JPanel{
 		c.gridwidth = 1;
 		c.gridheight = 1;
 		button5.setBackground(Color.green);
+		button5.setEnabled(false);
 		c.insets = new Insets(0,0,0,20);	
 	this.add(button5,c);
 	
@@ -182,7 +183,6 @@ public class Panel3 extends JPanel{
 				for(int i=0;i<24;i++){
 					Linker.fieldPositions[i] = new Point(0,0);
 					Linker.fieldPositions[i] = Linker.frame.panel2.getFieldPosition(i);
-					System.out.println("P"+i+": "+Linker.fieldPositions[i]);
 				}
 				Linker.alphaValue = Linker.frame.panel3.getValue(1);
 				Linker.done = true;
@@ -202,62 +202,6 @@ public class Panel3 extends JPanel{
 			public void mouseExited(MouseEvent arg0) {}
 			public void mousePressed(MouseEvent arg0) {}
 			public void mouseReleased(MouseEvent arg0) {}
-		});
-		button5.addMouseListener(new MouseListener(){
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Linker.frame.panel2.resetIndex();
-				Linker.frame.panel2.setFieldPosition(new Point(75,21));
-				Linker.frame.panel2.setFieldPosition(new Point(172,20));
-				Linker.frame.panel2.setFieldPosition(new Point(273,19));
-				Linker.frame.panel2.setFieldPosition(new Point(99,47));
-				Linker.frame.panel2.setFieldPosition(new Point(172,46));
-				Linker.frame.panel2.setFieldPosition(new Point(245,45));
-				Linker.frame.panel2.setFieldPosition(new Point(131,74));
-				Linker.frame.panel2.setFieldPosition(new Point(170,74));
-				Linker.frame.panel2.setFieldPosition(new Point(213,74));
-				Linker.frame.panel2.setFieldPosition(new Point(62,108));
-				Linker.frame.panel2.setFieldPosition(new Point(96,111));
-				Linker.frame.panel2.setFieldPosition(new Point(129,111));
-				Linker.frame.panel2.setFieldPosition(new Point(216,110));
-				Linker.frame.panel2.setFieldPosition(new Point(251,110));
-				Linker.frame.panel2.setFieldPosition(new Point(287,111));
-				Linker.frame.panel2.setFieldPosition(new Point(126,150));
-				Linker.frame.panel2.setFieldPosition(new Point(173,151));
-				Linker.frame.panel2.setFieldPosition(new Point(219,151));
-				Linker.frame.panel2.setFieldPosition(new Point(87,185));
-				Linker.frame.panel2.setFieldPosition(new Point(173,186));
-				Linker.frame.panel2.setFieldPosition(new Point(258,188));
-				Linker.frame.panel2.setFieldPosition(new Point(47,222));
-				Linker.frame.panel2.setFieldPosition(new Point(175,226));
-				Linker.frame.panel2.setFieldPosition(new Point(305,227));
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 		});
 		button4.addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {

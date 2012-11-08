@@ -1,17 +1,17 @@
 package muehle.gui;
 
-import static muehle.model.Board.eColor.NONE;
+import static muehle.model.Board.StoneColor.NONE;
 import muehle.Linker;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.human.HumanPositionInput;
 
 public class ButtonInput implements HumanPositionInput {
 	
 	private Board board;
-	private eColor player;
-	private eColor opposite;
+	private StoneColor player;
+	private StoneColor opposite;
 	private Panel4 panel4;
 
 	public ButtonInput(Board board,Panel4 panel4) {
@@ -20,9 +20,9 @@ public class ButtonInput implements HumanPositionInput {
 	}
 
 	@Override
-	public void setColor(eColor color) {
+	public void setColor(StoneColor color) {
 		this.player = color;
-		if(color == eColor.BLACK) opposite = eColor.WHITE; else opposite = eColor.BLACK;
+		if(color == StoneColor.BLACK) opposite = StoneColor.WHITE; else opposite = StoneColor.BLACK;
 	}
 
 	@Override

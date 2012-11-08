@@ -1,7 +1,7 @@
 package muehle.players;
 
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 
 public interface NineMenMorrisPlayer {
 	/**
@@ -18,8 +18,8 @@ public interface NineMenMorrisPlayer {
 
 	String getName();
 	
-	void setColor(eColor color);
-	eColor getColor();
-	eColor getOppositeColor();
+	void setColor(StoneColor color);
+	StoneColor getColor();
+	StoneColor getOppositeColor();
 }
 

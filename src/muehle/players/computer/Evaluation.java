@@ -3,7 +3,7 @@
 package muehle.players.computer;
 
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 
 public class Evaluation {
 
@@ -14,7 +14,7 @@ public class Evaluation {
 	 *            the situation which is evaluated
 	 * @return the evaluation in the form of an integer
 	 */
-	public static int evaluation(Board board, eColor player, eColor opposite) {
+	public static int evaluation(Board board, StoneColor player, StoneColor opposite) {
 
 		int bewertung = (int) Math.round(Math.random() * 40);
 		bewertung = 30;

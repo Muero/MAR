@@ -1,9 +1,9 @@
 package muehle.players.human;
 
-import static muehle.model.Board.eColor.NONE;
+import static muehle.model.Board.StoneColor.NONE;
 import muehle.connection.Connection;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.model.Position;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
@@ -13,7 +13,7 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	private Connection conn;
 	private HumanPositionInput input;
 
-	private eColor color;
+	private StoneColor color;
 
 	public HumanPlayer(String name, Connection conn, HumanPositionInput input) {
 		this.name = name;
@@ -26,21 +26,21 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public void setColor(eColor color) {
+	public void setColor(StoneColor color) {
 		this.color = color;
 		input.setColor(color);
 	}
 
 	@Override
-	public eColor getColor() {
+	public StoneColor getColor() {
 		return color;
 	}
 	
 	@Override
-	public eColor getOppositeColor() {
-		if (getColor() == eColor.BLACK)
-			return eColor.WHITE;
-		else return eColor.BLACK;
+	public StoneColor getOppositeColor() {
+		if (getColor() == StoneColor.BLACK)
+			return StoneColor.WHITE;
+		else return StoneColor.BLACK;
 	}
 	@Override
 	public Move layStone(Board board, int move, int numberOfStones) {

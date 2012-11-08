@@ -40,9 +40,9 @@ public class Panel4 extends JPanel implements MouseListener{
 		for(Position p : Position.getAllPositions()){
 			if(Linker.usewebcam)
 				button[Frame.getGuiPosition(p)].setEnabled(false);
-			if(board.getColor(p) == muehle.model.Board.eColor.BLACK)
+			if(board.getColor(p) == muehle.model.Board.StoneColor.BLACK)
 				button[Frame.getGuiPosition(p)].setBackground(Linker.opponentColor);
-			else if(board.getColor(p) == muehle.model.Board.eColor.WHITE)
+			else if(board.getColor(p) == muehle.model.Board.StoneColor.WHITE)
 				button[Frame.getGuiPosition(p)].setBackground(Linker.humanColor);			
 			else
 				button[Frame.getGuiPosition(p)].setBackground(null);

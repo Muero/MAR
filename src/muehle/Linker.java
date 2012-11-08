@@ -67,7 +67,7 @@ public class Linker {
 	
 	//Dynamic
 	public static Map<Position, Integer> probability = new HashMap<Position, Integer>();
-	public static boolean[] webcamCluster = new boolean[24];									//Is used from muehle.gui.camera.WebCamInput
+	public static int[] webcamCluster = new int[24];									//Is used from muehle.gui.camera.WebCamInput
 	public static boolean waitForGui = true;											//Waits for a specific GuiMode. The GuiMode will be set in frame.setGuiMode(int mode)
 	public static int pressedButton = -1;
 	public static boolean allowRepaint = true;

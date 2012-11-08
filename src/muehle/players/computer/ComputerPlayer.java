@@ -2,15 +2,15 @@ package muehle.players.computer;
 
 import muehle.Linker;
 import muehle.model.Board;
-import muehle.model.Board.eColor;
+import muehle.model.Board.StoneColor;
 import muehle.players.Move;
 import muehle.players.NineMenMorrisPlayer;
 import muehle.players.computer.Minmax.MinimaxResult;
 
 public class ComputerPlayer implements NineMenMorrisPlayer {
 	private String name;
-	private eColor player;
-	private eColor opposite;
+	private StoneColor player;
+	private StoneColor opposite;
 	
 	public ComputerPlayer(String name) {
 		this.name = name;
@@ -20,21 +20,21 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 	}
 
 	@Override
-	public void setColor(eColor color) {
+	public void setColor(StoneColor color) {
 		this.player = color;
-		if(color == eColor.BLACK) opposite = eColor.WHITE; else opposite = eColor.BLACK;
+		if(color == StoneColor.BLACK) opposite = StoneColor.WHITE; else opposite = StoneColor.BLACK;
 	}
 
 	@Override
-	public eColor getColor() {
+	public StoneColor getColor() {
 		return player;
 	}
 	
 	@Override
-	public eColor getOppositeColor() {
-		if (getColor() == eColor.BLACK)
-			return eColor.WHITE;
-		else return eColor.BLACK;
+	public StoneColor getOppositeColor() {
+		if (getColor() == StoneColor.BLACK)
+			return StoneColor.WHITE;
+		else return StoneColor.BLACK;
 	}
 
 	public Move layStone(Board board, int move, int numberOfStones) {
