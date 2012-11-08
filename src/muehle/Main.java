@@ -14,26 +14,20 @@ import muehle.players.NineMenMorrisPlayer;
 
 public class Main {
 
-	public static void main(String[] args) {
-		
-		Connection conn = new BTConnection();
-		conn.openConnection();
-		
+	public static void main(String[] args) {		
 		Linker.createObjects();		//Startup Gui and Board
 		Linker.finish();			//Show Panel0 and get Information about Robot, Webcam and Difficulty
-		Linker.setupGamePlay();
-		Linker.startupGui();
-		
-		System.out.println("*************************** \n"+ "Welcome to the game Nine Men Morris !! \n \n");
-		Linker.play();
-				
-		Linker.closeGame();
-
+		Linker.setupGamePlay();		//Initialize Players, Connections and Modus (Webcam/No Webcam etc)
+		Linker.startupGui();		//Starts Gamemenu or, if webcam is used, webcam-Startup
+		Linker.play();				//Gameplay		
+		Linker.closeGame();			//Close NXT-Connections, Webcamconnection and Game
 	}
 	
 	public static void play(Board board, Panel4 panel4,
 		int numberOfStones, NineMenMorrisPlayer player1,
 		NineMenMorrisPlayer player2, Connection conn1, Connection conn2) {
+
+		System.out.println("*************************** \n"+ "Welcome to the game Nine Men Morris !! \n \n");
 
 		NineMenMorrisPlayer currentPlayer = player1;
 		NineMenMorrisPlayer oppositePlayer = player2;
