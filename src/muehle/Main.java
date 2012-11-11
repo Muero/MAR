@@ -59,7 +59,7 @@ public class Main {
 				System.out.println("*********************************** \n"
 						+ " It have been placed all the stones \n");
 				if (board.getNumberOfStones(currentPlayerColor) < 3)
-					System.out.println(oppositePlayer.getName() + " wins!"); // TODO
+					System.out.println(oppositePlayer.getName() + " wins!");
 				if (board.getNumberOfStones(oppositePlayerColor) < 3)
 					System.out.println(currentPlayer.getName() + " wins!");
 				System.out.println("***********************************");
@@ -73,11 +73,6 @@ public class Main {
 			board.setColor(bestMove.to, currentPlayerColor);
 			if (bestMove.take != null)
 				board.setColor(bestMove.take, NONE);
-
-			// panel.refreshButtonColor(board);
-			
-			//TODO why? currentPlayer?
-			//HumanPlayer.sleep(1000);
 
 			// board is updated
 			System.out.println(board);
