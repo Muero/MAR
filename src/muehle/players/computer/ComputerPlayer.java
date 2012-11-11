@@ -49,7 +49,7 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 
 		// Computer determines his best possible move
 		MinimaxResult result = Minmax.minmaxDecide(board, player, opposite,
-				Linker.difficulty, move, numberOfStones);
+				1, move, numberOfStones);
 		return result.bestMove;
 
 	}

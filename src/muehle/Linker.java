@@ -172,7 +172,7 @@ public class Linker {
 		}
 		
 		
-		if(usealgorithm1 == true)
+		if(usealgorithm1)
 			difficulty = difficulty1;
 		else
 			difficulty = difficulty2;
@@ -190,9 +190,8 @@ public class Linker {
 		
 		
 	}
+	
 	public static void startupGui(){
-		
-		
 		if(usewebcam1){
 			frame.setGuiMode(2);
 			frame.waitFor();
