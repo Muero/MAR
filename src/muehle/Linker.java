@@ -186,6 +186,9 @@ public class Linker {
 			NineMenMorrisPlayer p = player1;
 			player1 = player2;
 			player2 = p;
+			String s = name1;
+			name1 = name2;
+			name2 = s;
 		}
 		
 		
