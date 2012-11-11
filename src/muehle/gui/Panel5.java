@@ -3,6 +3,8 @@ package muehle.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
@@ -85,20 +87,12 @@ public class Panel5 extends JPanel {
 			this.add(button[i]);
 		}
 		showHelp.setBackground(Color.orange);
-		showHelp.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {
+		showHelp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				help = !help;
 				Linker.frame.panel5.paintComponent(getGraphics());
 			}
-			public void mouseEntered(MouseEvent arg0) {
-			}
-			public void mouseExited(MouseEvent arg0) {
-			}
-			public void mousePressed(MouseEvent arg0) {
-			}
-			public void mouseReleased(MouseEvent arg0) {
-			}
-			
 		});
 		this.add(showHelp);
 	}

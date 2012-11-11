@@ -26,7 +26,7 @@ public class Panel2 extends JPanel{
 		for(int i=0;i<24;i++)
 			positions[i] = new Point(-10,-10);
 		this.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseReleased(MouseEvent arg0) {
 				mouseClicked = true;
 				mousePosition = new Point(arg0.getX(),arg0.getY());
 			}
