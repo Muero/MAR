@@ -114,8 +114,8 @@ public class Panel4 extends JPanel implements MouseListener{
 		g.drawLine((int) (1*a),(int) (7*b),(int) (7*a),(int) (7*b));
 		
 		g.setFont(new Font("Arial",Font.BOLD,15));
-		g.drawString("Roboter",(int) (1*a)-(s/2)+s+5,(int) (8*b)+s-3);
-		g.drawString("Mensch",(int) (4*a)-(s/2)+s+5,(int) (8*b)+s-3);
+		g.drawString(Linker.name1,(int) (1*a)-(s/2)+s+5,(int) (8*b)+s-3);
+		g.drawString(Linker.name2,(int) (4*a)-(s/2)+s+5,(int) (8*b)+s-3);
 		
 		if(Linker.usewebcam1||Linker.usewebcam2){
 			g.setColor(resourceColor[bildMode]);
