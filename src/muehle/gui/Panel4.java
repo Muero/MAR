@@ -38,7 +38,7 @@ public class Panel4 extends JPanel implements MouseListener{
 	}
 	public void thread(){
 		for(Position p : Position.getAllPositions()){
-			if(Linker.usewebcam)
+			if(Linker.usewebcam1||Linker.usewebcam2)
 				button[Frame.getGuiPosition(p)].setEnabled(false);
 			if(board.getColor(p) == muehle.model.Board.StoneColor.BLACK)
 				button[Frame.getGuiPosition(p)].setBackground(Linker.opponentColor);
@@ -117,7 +117,7 @@ public class Panel4 extends JPanel implements MouseListener{
 		g.drawString("Roboter",(int) (1*a)-(s/2)+s+5,(int) (8*b)+s-3);
 		g.drawString("Mensch",(int) (4*a)-(s/2)+s+5,(int) (8*b)+s-3);
 		
-		if(Linker.usewebcam){
+		if(Linker.usewebcam1||Linker.usewebcam2){
 			g.setColor(resourceColor[bildMode]);
 			g.drawString(resourceText[bildMode],(int) (0*a)-(s/2)+s+5,(int) (8*b)-9);			
 		}

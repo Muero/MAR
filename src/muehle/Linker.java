@@ -31,19 +31,17 @@ public class Linker {
 	public static Connection conn2;														//Same for this Connection
 	public static NineMenMorrisPlayer player1;											//Default is Human
 	public static NineMenMorrisPlayer player2;											//Default is Robot
-	public static HumanPositionInput input = null;										//Can be ButtonInput or WebcamInput. Is defined in setupGamePlay()
+	public static HumanPositionInput input1 = null;										//Can be ButtonInput or WebcamInput. Is defined in setupGamePlay()
+	public static HumanPositionInput input2 = null;
 	
 	//Final Fields
-	public static final int numberOfStones = 4;											//How many Stones to lay
+	public static final int numberOfStones = 9;											//How many Stones to lay
 	public static final Color opponentColor = new Color(255,0,0);						//Color of the Human Player
 	public static final Color humanColor = new Color(0,0,255);							//Color of the OpponentPlayer
 	public static final Dimension guiSize = new Dimension(542, 378);					//Size of the Gui Window
 	public static final String[] difficultyNames = {"Easy","Normal","Hard","Insane"};	//Used in Panel0
 	public static final String[] modes = 												//DropupMenu in the StartupGui
-		{"   Robot - Human",
-		 "Computer - Human",
-		 "   Robot - Robot",
-		 "   Human - Human"};
+		{"Man","Machine","Computer"};
 	public static final Color[] probabilityColor = 										//Sets up Colors for different Probabilities
 	   {new Color(255,0,0),new Color(225,25,0),
 		new Color(200,50,0),new Color(175,75,0),
@@ -53,10 +51,17 @@ public class Linker {
 		new Color(255,255,255)};
 
 	//Will be generated in Startup-Gui
-	public static boolean usewebcam = false;											//Webcam or no Webcam
-	public static boolean usealgorithm = false;											//RandomPlayer or ComputerPlayer
-	public static int difficulty = 2;													//Difficulty of ComputerPlayer.
-	public static int robotMode = 0;													//Returnvalue of the StartupGui-Dropdownmenu
+	public static String name1 = "Name 1";
+	public static String name2 = "Name 2";
+	public static int mode1 = 0;
+	public static int mode2 = 0;
+	public static boolean usewebcam1 = false;											//Webcam or no Webcam
+	public static boolean usewebcam2 = false;
+	public static boolean usealgorithm1 = false;											//RandomPlayer or ComputerPlayer
+	public static boolean usealgorithm2 = false;
+	public static int difficulty1 = 2;													//Difficulty of ComputerPlayer.
+	public static int difficulty2 = 2;
+	public static int difficulty = 2;
 	public static boolean done = false;													//Determines if Startup-Gui is finished or not
 	
 	//Will be generated in StartGameGui
@@ -85,27 +90,54 @@ public class Linker {
 	public static void setupGamePlay(){
 		
 		//SetUp Connections to NXT's
-		if(robotMode == 0){			//Robot - Human
+		
+		//Connection 1
+		if(mode1 == 0){
 			conn1 = new EmptyConnection();
-			conn2 = new BTConnection();
-		}else if(robotMode == 1){	//Computer - Human
+		}else if(mode1 == 1){
+			if(usewebcam1)
+				conn1 = new BTConnection();
+			else
+				conn1 = new EmptyConnection();
+		}else{
 			conn1 = new EmptyConnection();
-			conn2 = new EmptyConnection();
-		}else if(robotMode == 2){	//Robot - Robot
-			conn1 = new BTConnection();
-			conn2 = new BTConnection();
-		}else if(robotMode == 3){	//Human - Human
-			conn1 = new EmptyConnection();
-			conn2 = new EmptyConnection();
 		}
 		conn1.openConnection();
+
+		//Connection 2
+		if(mode2 == 0){
+			conn2 = new EmptyConnection();
+		}else if(mode2 == 1){
+			if(usewebcam2)
+				conn2 = new BTConnection();
+			else
+				conn2 = new EmptyConnection();
+		}else{
+			conn2 = new EmptyConnection();
+		}
 		conn2.openConnection();
 		
 		//If Webcam is in use
-		if(usewebcam) {
-			input = new WebCamInput(board,conn2);
+		if(usewebcam1) {
+			input1 = new WebCamInput(board,conn1);
 			
 			System.out.println(conn1.getName());
+			
+			ImageGrabber.startImaging();
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			ImageGrabber.takePicture();
+			ImageGrabber.importPicture(frame);
+			ImageGrabber.readColor(frame);			
+		} else {
+			input1 = new ButtonInput(board, frame.panel4);
+		}
+		if(usewebcam2) {
+			input2 = new WebCamInput(board,conn2);
+			
 			System.out.println(conn2.getName());
 			
 			
@@ -119,16 +151,32 @@ public class Linker {
 			ImageGrabber.importPicture(frame);
 			ImageGrabber.readColor(frame);			
 		} else {
-			input = new ButtonInput(board, frame.panel4);
+			input2 = new ButtonInput(board, frame.panel4);
+		}
+
+		if(mode1 == 0){
+			player1 = new HumanPlayer(name1,conn1,input1);			
+		}else{
+			if(usealgorithm1)
+				player1 = new ComputerPlayer(name1);
+			else
+				player1 = new RandomPlayer();
+		}		
+		if(mode2 == 0){
+			player2 = new HumanPlayer(name2,conn2,input2);			
+		}else{
+			if(usealgorithm1)
+				player2 = new ComputerPlayer(name2);
+			else
+				player2 = new RandomPlayer();
 		}
 		
-		//Define Players
-		player1 = new HumanPlayer("Patrick",conn1,input);
-		if(usealgorithm){
-			player2 = new ComputerPlayer("MüRo");
-		}else{
-			player2 = new RandomPlayer();
-		}
+		
+		if(usealgorithm1 == true)
+			difficulty = difficulty1;
+		else
+			difficulty = difficulty2;
+		
 		
 		//Choose who starts
 		if (new Random().nextBoolean()) {
@@ -145,7 +193,7 @@ public class Linker {
 	public static void startupGui(){
 		
 		
-		if(usewebcam){
+		if(usewebcam1){
 			frame.setGuiMode(2);
 			frame.waitFor();
 			frame.setGuiMode(3);
