@@ -168,7 +168,7 @@ public class Frame extends JFrame{
 			break;
 		case 1:	//StartupGui
 			this.setVisible(true);
-			this.setSize(200,250);
+			this.setSize(350,300);
 			this.panel0.setVisible(true);
 			this.panel1.setVisible(false);
 			this.panel2.setVisible(false);
