@@ -69,7 +69,7 @@ public class Panel5 extends JPanel {
 		prob = Minmax.getProbability(board, player,move, numberOfStones);
 		
 		for (Position p : Position.getAllPositions()) {
-			button[Frame.getGuiPosition(p)].setEnabled(false); //TODO die sind immer auf false
+			button[Frame.getGuiPosition(p)].setEnabled(false);
 			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(prob.get(p)));
 		}
 		try {

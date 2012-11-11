@@ -181,8 +181,6 @@ public class Panel3 extends JPanel{
 		});
 		button2.addMouseListener(new MouseListener(){
 		public void mouseClicked(MouseEvent arg0) {
-//TODO
-//			if(starterSet&&fieldSet)
 			if(starterSet){
 				for(int i=0;i<24;i++){
 					Linker.fieldPositions[i] = new Point(0,0);
@@ -233,28 +231,16 @@ public class Panel3 extends JPanel{
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseEntered(MouseEvent arg0) {}
 
 			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseExited(MouseEvent arg0) {}
 
 			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mousePressed(MouseEvent arg0) {}
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseReleased(MouseEvent arg0) {}
 			
 		});
 }

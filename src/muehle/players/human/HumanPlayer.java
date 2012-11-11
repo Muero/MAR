@@ -50,7 +50,7 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 		board.setColor(inputPosition, color);
 
 		Position takeAway = null;
-		if (board.isMill(inputPosition, color)) { // if the player has a mill
+		if (board.isMill(inputPosition, color) ) { // if the player has a mill
 			// TODO: Regelabklärung: Was wenn Gegner nur geschlossene Muehlen?
 			takeAway = input.takeStonePosition();
 		}

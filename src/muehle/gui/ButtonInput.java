@@ -98,7 +98,7 @@ public class ButtonInput implements HumanPositionInput {
 			}
 			sleep(1);
 		} while (inputPositionTo == null);
-		if(moveNotPossible) return null; else return inputPositionTo; // TODO document in interface was Resultat bedeutet
+		if(moveNotPossible) return null; else return inputPositionTo;
 	}
 
 	@Override
