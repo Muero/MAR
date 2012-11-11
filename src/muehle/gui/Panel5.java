@@ -3,6 +3,8 @@ package muehle.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +21,8 @@ public class Panel5 extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public static JButton[] button = new JButton[24];
-
+	public static JButton showHelp = new JButton("Show Help");
+	public boolean help = false;
 	public Board board;
 
 	public Panel5(Board board) {
@@ -81,12 +84,42 @@ public class Panel5 extends JPanel {
 			button[i].setEnabled(false);
 			this.add(button[i]);
 		}
+		showHelp.setBackground(Color.orange);
+		showHelp.addMouseListener(new MouseListener(){
+			public void mouseClicked(MouseEvent arg0) {
+				help = !help;
+				Linker.frame.panel5.paintComponent(getGraphics());
+			}
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			public void mouseExited(MouseEvent arg0) {
+			}
+			public void mousePressed(MouseEvent arg0) {
+			}
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			
+		});
+		this.add(showHelp);
 	}
 
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(230, 230, 230));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		drawField(g);
+		if(help){
+			for(int i=0;i<24;i++)
+				button[i].setVisible(true);
+			showHelp.setText("hide Help");
+			showHelp.setBounds(this.getWidth()-100,this.getHeight()-20,100,20);
+			drawField(g);
+		}else{
+			showHelp.setBounds(this.getWidth()-100,this.getHeight()-20,100,20);
+			showHelp.setText("show Help");
+			showHelp.setVisible(true);
+			for(int i=0;i<24;i++)
+				button[i].setVisible(false);
+		}
+		
 	}
 
 	private void drawField(Graphics g) {
@@ -180,4 +213,6 @@ public class Panel5 extends JPanel {
 
 	}
 
+	public void thread(){
+	}
 }

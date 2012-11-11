@@ -59,6 +59,8 @@ public class Frame extends JFrame{
 					Linker.frame.panel3.thread();
 				if(Linker.frame.panel4.isVisible())
 					Linker.frame.panel4.thread();
+				if(Linker.frame.panel5.isVisible())
+					Linker.frame.panel5.thread();
 				try{
 					Thread.sleep(100);
 				}catch(Exception e){}
