@@ -165,7 +165,7 @@ public class Linker {
 		if(mode2 == 0){
 			player2 = new HumanPlayer(name2,conn2,input2);			
 		}else{
-			if(usealgorithm1)
+			if(usealgorithm2)
 				player2 = new ComputerPlayer(name2);
 			else
 				player2 = new RandomPlayer();
