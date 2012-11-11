@@ -23,6 +23,7 @@ public class Evaluation {
 		int oppositeMills = board.getNumberOfMills(opposite);
 		//Number of the Stones
 		int numberOfPlayerStones = board.getNumberOfStones(player);
+		 
 		int numberOfOppositeStones = board.getNumberOfStones(opposite);
 		//Number of the open Mills
 		int openMillsPlayer = board.getNumberOfOpenMills(player);
