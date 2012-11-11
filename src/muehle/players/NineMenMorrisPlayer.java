@@ -6,8 +6,8 @@ import muehle.model.Board.StoneColor;
 public interface NineMenMorrisPlayer {
 	/**
 	 * Can only be called if situation is non-stuck for player player.
-	 * @param board
-	 * @param player
+	 * @param board is the current game board
+	 * @param player 
 	 * @param panel
 	 * @param conn
 	 * @return

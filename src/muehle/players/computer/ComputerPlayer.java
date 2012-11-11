@@ -12,12 +12,17 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 	private StoneColor player;
 	private StoneColor opposite;
 	
+	/**
+	 * @param name is the Name of the Computer
+	 */
 	public ComputerPlayer(String name) {
 		this.name = name;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 
 	@Override
 	public void setColor(StoneColor color) {
@@ -36,6 +41,7 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 			return StoneColor.WHITE;
 		else return StoneColor.BLACK;
 	}
+
 
 	public Move layStone(Board board, int move, int numberOfStones) {
 		//panel.setRobotOnTurn(true);

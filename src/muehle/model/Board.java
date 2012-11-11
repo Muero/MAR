@@ -7,6 +7,9 @@ import java.util.Set;
 
 public class Board {
 
+	/**
+	 * represents the Color of the Stones
+	 */
 	public enum StoneColor {
 		NONE, BLACK, WHITE // The three modes that a "Position" may have.
 	}
@@ -17,9 +20,8 @@ public class Board {
 	 * Returns the Color on the Position p. If on the Position is no Color it
 	 * returns the Color NONE.
 	 * 
-	 * @param p
-	 *            the position where you want to find out the color
-	 * @return c the color at the position p
+	 * @param p is the position where you want to find out the color
+	 * @return c is the color at the position p
 	 */
 	public StoneColor getColor(Position p) {
 		if (p == null)
@@ -34,10 +36,8 @@ public class Board {
 	 * Set the color c on the position p. The color can be retrieved with method
 	 * {@link getColor}
 	 * 
-	 * @param p
-	 *            position
-	 * @param c
-	 *            color
+	 * @param p is the position where you want to set a Color
+	 * @param c is the color you want to set
 	 * @throws IllegalArgumentException
 	 *             if p == null
 	 */
@@ -86,8 +86,7 @@ public class Board {
 	/**
 	 * Returns the number of stones of a given color.
 	 * 
-	 * @param color
-	 *            given color
+	 * @param color is the given color
 	 * @return the number of stones with the given color
 	 */
 	public int getNumberOfStones(StoneColor color) {
@@ -102,11 +101,9 @@ public class Board {
 	/**
 	 * Test whether a mill is on the Position pos.
 	 * 
-	 * @param stone
-	 *            the color of the mill
-	 * @param pos
-	 *            one of the positions of the mill
-	 * @return whether a mill is at position ps
+	 * @param stone is the color of the mill
+	 * @param pos is one of the positions of the mill
+	 * @return whether a mill is at the Position pos
 	 */
 	public boolean isMill(Position pos, StoneColor stone) {
 		int id = pos.getId();
@@ -143,8 +140,7 @@ public class Board {
 	/**
 	 * Counts the number of mills in the given color c
 	 * 
-	 * @param c
-	 *            color whose mills care counted
+	 * @param c is the color whose mills care counted
 	 * @return number of mills in the color c
 	 */
 	public int getNumberOfMills(StoneColor c) {
@@ -222,7 +218,12 @@ public class Board {
 		return counter;
 
 	}
-	public boolean freePosition(StoneColor color){
+	/**
+	 * Decide if there is a Position without a Color
+	 * 
+	 * @return if there is a Position with no Color
+	 */
+	public boolean freePosition(){
 		for (Position p : Position.getAllPositions()){
 			if (getColor(p)==StoneColor.NONE)
 				return true;
@@ -231,6 +232,11 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * Tests if you get stuck
+	 * @param you is your Color
+	 * @return if your Color get stuck
+	 */
 	public boolean getStuck(StoneColor you) {
 		if (getNumberOfStones(you)==0)
 			return false;		
@@ -247,7 +253,14 @@ public class Board {
 		return true;
 	}
 
-	public int getNumberOfOpenMills(StoneColor stone) {
+	/**
+	 * Counts the number of Mills on the board
+	 * @param stone is the Color of the mill
+	 * @return the number of Mills with the color stone
+	 */
+	public int getNumberOfOpenMills(StoneColor stone/*, boolean moveMode*/) {
+		//TODO im lay und springen sieht das anders aus
+		
 		int z = 0;
 		// biggest circle
 		// left

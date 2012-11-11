@@ -37,18 +37,19 @@ public class Minmax {
 
 		if (!board.getStuck(player)) {
 			if (move < numberOfStones * 2) {
+				//In the Situation: Lay the stones
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);
 			} else if (board.getNumberOfStones(player) > 3) {
-				//System.out.println("minimax bewegen");
+				//In the Situation: Move the Stones
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
 			} else if (board.getNumberOfStones(player) == 3){
-				//System.out.println("minimax springen");
+				//In the Situation: Jump with the Stones
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);
 			} else{
-				//player lost
+				//player has less than 3 Stones / he lost
 				value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite));
 			}
 		} else {
@@ -60,8 +61,6 @@ public class Minmax {
 
 	}
 
-	// true == oppposite(computer) ist dran
-	// false == player
 	public static MinimaxResult minmaxLay(Board board, StoneColor player,
 			StoneColor opposite, int depth, int move, int numberOfStones) {
 		if (depth > 0) {
@@ -141,7 +140,6 @@ public class Minmax {
 		if (depth > 0) {
 
 			int result;
-			//System.out.println("hier");
 			Position nextMoveFrom = null;
 			Position nextMoveTo = null;
 			Position nextTake = null;

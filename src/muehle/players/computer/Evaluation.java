@@ -18,15 +18,17 @@ public class Evaluation {
 
 		int bewertung = (int) Math.round(Math.random() * 40);
 		bewertung = 30;
+		//Number of the Mills
 		int playerMills = board.getNumberOfMills(player);
 		int oppositeMills = board.getNumberOfMills(opposite);
-
+		//Number of the Stones
 		int numberOfPlayerStones = board.getNumberOfStones(player);
 		int numberOfOppositeStones = board.getNumberOfStones(opposite);
-
+		//Number of the open Mills
 		int openMillsPlayer = board.getNumberOfOpenMills(player);
 		int openMillsOpposite = board.getNumberOfOpenMills(opposite);
-
+		
+		
 		if (board.getStuck(player)) {
 			bewertung = bewertung - 100;
 		} else if (board.getStuck(opposite)) {
