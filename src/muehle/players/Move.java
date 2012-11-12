@@ -7,6 +7,7 @@ public final class Move {
 	public Position to;
 	public Position take;
 
+
 	public Move(Position from, Position to, Position take) {
 		this.from = from;
 		this.take = take;

@@ -51,11 +51,11 @@ public class Minmax {
 						move, numberOfStones);
 			} else{
 				//player has less than 3 Stones / he lost
-				value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth));
+				value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 			}
 		} else {
 			//player get stuck / lost
-			value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth));
+			value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 		}
 
 		return value;
@@ -132,7 +132,7 @@ public class Minmax {
 			return new MinimaxResult(new Move(null, nextMove, nextTake), -result);
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth));
+			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 
 		}
 
@@ -230,7 +230,7 @@ public class Minmax {
 					nextTake), (-1 * result));
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth));
+			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 
 		}
 
@@ -329,7 +329,7 @@ public class Minmax {
 					nextTake), -result);
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth));
+			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 
 		}
 

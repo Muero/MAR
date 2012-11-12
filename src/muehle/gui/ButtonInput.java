@@ -36,16 +36,13 @@ public class ButtonInput implements HumanPositionInput {
 			if (inputPosition != null) {
 				if (board.getColor(inputPosition) != NONE) {
 					inputPosition = null;
-					// panel.clickedButton = null;
+					Linker.pressedButton = -1;
 					System.out.println("position occupied");
 				}
 			}
 			sleep(1);
 		} while (inputPosition == null);
 		Linker.pressedButton = -1;
-		// board is updated
-		// panel.refreshButtonColor(board);
-		// panel.repaint();
 		return inputPosition;
 	}
 
@@ -54,14 +51,12 @@ public class ButtonInput implements HumanPositionInput {
 		System.out.println("Your next move? \n" + "From where?");
 		
 		Position inputPositionFrom = null;
-		// panel4.clickedButton = null;
 		Linker.pressedButton = -1;
 		do { // The player said which stone he wants to move
 			inputPositionFrom = panel4.getLayedButton();
 			if (inputPositionFrom != null) {
 				if (board.getColor(inputPositionFrom) != player) {
 					inputPositionFrom = null;
-					// panel4.clickedButton = null;
 					Linker.pressedButton = -1;
 					System.out.println("Position not " + player);
 				}
@@ -106,20 +101,21 @@ public class ButtonInput implements HumanPositionInput {
 		System.out.println("You have mill, which stone take you away?");
 		
 		Position takeAway = null;
+		Linker.pressedButton = -1;
 		do {
 			takeAway = panel4.getLayedButton(); // player can take
 													// away a stone
 			if (takeAway != null) {
-				if (board.getColor(takeAway) == opposite
-						&& !board.isMill(takeAway, opposite)) {
-				} else {
+				if (board.getColor(takeAway) != opposite
+						|| board.isMill(takeAway, opposite)) {
 					takeAway = null;
-					// panel.clickedButton = null;
+					Linker.pressedButton = -1;
 					System.out.println("It's not an opponent's stone");
 				}
 			}
 			sleep(1);
 		} while (takeAway == null);
+		Linker.pressedButton = -1;
 		return takeAway;
 	}
 
