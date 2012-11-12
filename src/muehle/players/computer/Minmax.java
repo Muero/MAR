@@ -51,11 +51,12 @@ public class Minmax {
 						move, numberOfStones);
 			} else{
 				//player has less than 3 Stones / he lost
-				value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+				System.err.println("Lost");
+				value = new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 			}
 		} else {
 			//player get stuck / lost
-			value = new MinimaxResult(null, Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			value = new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
 		}
 
 		return value;
