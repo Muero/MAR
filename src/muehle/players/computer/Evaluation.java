@@ -44,10 +44,10 @@ public class Evaluation {
 					bewertung = bewertung + 300 * (playerMills - oppositeMills);
 				bewertung = bewertung + 20 * openMillsPlayerLay;
 				bewertung = bewertung - 20 * openMillsOppositeLay;
-			} else if (numberOfPlayerStones > 3 && numberOfOppositeStones > 3) {
+			} else if (numberOfPlayerStones > 3 || numberOfOppositeStones > 3) {
 				// In the Situation: Move the Stones
 				if (playerMills > 0)
-					bewertung = bewertung + 200 * (playerMills - oppositeMills);
+					bewertung = bewertung + 400 * (playerMills - oppositeMills);
 				else if (oppositeMills > 0)
 					bewertung = bewertung + 200 * (playerMills - oppositeMills);
 				bewertung = bewertung + 20 * openMillsPlayerMove;
@@ -58,10 +58,6 @@ public class Evaluation {
 					bewertung = bewertung + 400 * (playerMills - oppositeMills);
 				else if (oppositeMills > 0)
 					bewertung = bewertung + 200 * (playerMills - oppositeMills);
-				if (numberOfPlayerStones < 3)
-					bewertung = bewertung - 1000;
-				if (numberOfOppositeStones < 3)
-					bewertung = bewertung + 1000;
 				bewertung = bewertung + 20 * openMillsPlayerLay;
 				bewertung = bewertung - 20 * openMillsOppositeLay;
 			} else if ((numberOfPlayerStones < 3 || numberOfOppositeStones < 3)) {
@@ -71,6 +67,7 @@ public class Evaluation {
 					bewertung = bewertung + 1000;
 			}
 		}
+		
 		if (depth % 2 != 0)
 			return -bewertung;
 		else

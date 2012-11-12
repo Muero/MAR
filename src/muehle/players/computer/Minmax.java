@@ -94,6 +94,8 @@ public class Minmax {
 															// its turn
 										(depth + 1), move + 1, numberOfStones);
 
+								if(depth==1)
+									System.err.println(turn + " " + takeAway + " " + value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMove = turn;
@@ -114,7 +116,7 @@ public class Minmax {
 						// Depending on what color is in the series, the minimum
 						// or the maximum is stored.
 						if(depth==1)
-						System.out.println(value.rank);
+						System.out.println(turn + " " + value.rank);
 						if (result < value.rank) {
 							result = value.rank;
 							nextMove = turn;
@@ -186,7 +188,8 @@ public class Minmax {
 															// turn
 												player, (depth + 1), move + 1,
 												numberOfStones);
-										
+										if(depth==1)
+											System.err.println(turnTo + " " + value.rank);
 										if (result < value.rank) {
 											result = value.rank;
 											nextMoveFrom = turnFrom;
@@ -208,7 +211,8 @@ public class Minmax {
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
-								
+								if(depth==1)
+									System.out.println(turnTo + " " + value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMoveFrom = turnFrom;
@@ -287,7 +291,8 @@ public class Minmax {
 														// turn
 												opposite, player, (depth + 1),
 												move + 1, numberOfStones);
-
+										if(depth==1)
+											System.err.println(turnTo + " " + value.rank);
 										if (result < value.rank) {
 											result = value.rank;
 											nextMoveFrom = turnFrom;
@@ -309,6 +314,8 @@ public class Minmax {
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
+								if(depth==1)
+									System.out.println(turnTo + " " + value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMoveFrom = turnFrom;
