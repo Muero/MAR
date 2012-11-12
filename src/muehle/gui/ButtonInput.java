@@ -19,6 +19,7 @@ public class ButtonInput implements HumanPositionInput {
 		this.panel4 = panel4;
 	}
 
+
 	@Override
 	public void setColor(StoneColor color) {
 		this.player = color;

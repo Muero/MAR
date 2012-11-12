@@ -24,7 +24,6 @@ import muehle.players.random.RandomPlayer;
 
 public class Linker {
 	
-	//Objects - Warning! Have to be defined!
 	public static Frame frame;															//Generates Constructor of muehle.gui.Frame
 	public static Board board;															//Generates Constructor of muehle.model.Board
 	public static Connection conn1;														//Connections can be BTConnection or EmptyConnection, if NXT's are used or not
@@ -57,7 +56,7 @@ public class Linker {
 	public static int mode2 = 0;
 	public static boolean usewebcam1 = false;											//Webcam or no Webcam
 	public static boolean usewebcam2 = false;
-	public static boolean usealgorithm1 = false;											//RandomPlayer or ComputerPlayer
+	public static boolean usealgorithm1 = false;										//RandomPlayer or ComputerPlayer
 	public static boolean usealgorithm2 = false;
 	public static int difficulty1 = 2;													//Difficulty of ComputerPlayer.
 	public static int difficulty2 = 2;
@@ -87,10 +86,12 @@ public class Linker {
 		frame.setGuiMode(1);
 		frame.waitFor();
 	}
+	/**
+	 * SetUp Connections to NXT's and
+	 * 	choose who starts
+	 */
 	public static void setupGamePlay(){
-		
-		//SetUp Connections to NXT's
-		
+				
 		//Connection 1
 		if(mode1 == 0){
 			conn1 = new EmptyConnection();
@@ -205,9 +206,12 @@ public class Linker {
 	}
 
 	public static void play(){
-		Main.play(board, frame.panel4, numberOfStones, player1, player2, conn1, conn2);
+		Main.play(board, numberOfStones, player1, player2, conn1, conn2);
 	}
 
+	/**
+	 * Close the Connections and ends the frame
+	 */
 	public static void closeGame(){
 		conn1.closeConnection();
 		conn2.closeConnection();

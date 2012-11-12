@@ -12,6 +12,12 @@ public interface NineMenMorrisPlayer {
 	 * @param conn
 	 * @return
 	 */
+	/**
+	 * @param board
+	 * @param move
+	 * @param numberOfStones
+	 * @return
+	 */
 	Move layStone(Board board, int move, int numberOfStones);
 
 	Move moveStone(Board board, int move, int numberOfStones);

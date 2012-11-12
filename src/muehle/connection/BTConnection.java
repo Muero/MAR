@@ -11,7 +11,8 @@ import muehle.model.Position;
 
 
 public class BTConnection implements Connection {
-	/**
+	/**								 96
+	 * 
 	 *			70		  73         76
 	 * 	
 	 * 				61	  63 	65
@@ -21,11 +22,7 @@ public class BTConnection implements Connection {
 	 * 				21    23    25
 	 * 
 	 * 			10		  13		 16
-	 * 
-	 *          0   1   2  3  4  5    6
-	 *          7   8   9
 	 */
-	//	Board.NXTBoard[0][0][1]
 	
 	public static int NXTAblage = 1; //X-Koordinate der Spielsteine
 
@@ -40,6 +37,8 @@ public class BTConnection implements Connection {
 	public static DataInputStream dis;
 	public static DataOutputStream dos2;
 	public static DataInputStream dis2;
+
+
 
 	@Override
 	public void openConnection() {
