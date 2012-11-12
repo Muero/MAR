@@ -7,8 +7,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -170,54 +173,42 @@ public class Panel3 extends JPanel{
 	 * Adds to every Component its specific MouseListener
 	 */
 	private void addListenersToObjects(){
-		button1.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {
+		button1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				isButton1 = true;
 			}
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}			
 		});
-		button2.addMouseListener(new MouseListener(){
-		public void mouseClicked(MouseEvent arg0) {
-			if(starterSet){
-				for(int i=0;i<24;i++){
-					Linker.fieldPositions[i] = new Point(0,0);
-					Linker.fieldPositions[i] = Linker.frame.panel2.getFieldPosition(i);
+		button2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (starterSet) {
+					for (int i = 0; i < 24; i++) {
+						Linker.fieldPositions[i] = new Point(0, 0);
+						Linker.fieldPositions[i] = Linker.frame.panel2
+								.getFieldPosition(i);
+					}
+					Linker.alphaValue = Linker.frame.panel3.getValue(1);
+					Linker.done = true;
+					Linker.waitForGui = false;
 				}
-				Linker.alphaValue = Linker.frame.panel3.getValue(1);
-				Linker.done = true;
-				Linker.waitForGui = false;
 			}
-		}
-		public void mouseEntered(MouseEvent arg0) {}
-		public void mouseExited(MouseEvent arg0) {}
-		public void mousePressed(MouseEvent arg0) {}
-		public void mouseReleased(MouseEvent arg0) {}			
-	});
-		button3.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {
+		});
+		button3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				isButton3 = true;
 			}
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}
 		});
-		button4.addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {
+		button4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				isButton4 = true;
 			}
-			public void mouseEntered(MouseEvent arg0) {}
-			public void mouseExited(MouseEvent arg0) {}
-			public void mousePressed(MouseEvent arg0) {}
-			public void mouseReleased(MouseEvent arg0) {}
 		});
-		button6.addMouseListener(new MouseListener(){
-
+		button6.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				Linker.allowRepaint = false;
 				try {
 					Thread.sleep(5000);
@@ -229,21 +220,9 @@ public class Panel3 extends JPanel{
 				ImageGrabber.readColor(Linker.frame);
 				Linker.allowRepaint = true;
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {}
-			
 		});
-}
+	}
+
 	/*
 	 * Returns true if Starter is set
 	 */

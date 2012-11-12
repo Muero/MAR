@@ -71,8 +71,6 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 		// board is updated
 		System.out.println(board);
-		// panel.refreshButtonColor(board);
-		// panel.repaint();
 
 		Position takeAway = null;
 		if (board.isMill(inputPositionTo, color)) { // if the player has a mill

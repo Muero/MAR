@@ -246,7 +246,7 @@ public class Panel0 extends JPanel implements MouseListener{
 	/**
 	 * Listeners of all Buttons. Only mouseClicked is used
 	 */
-	public void mouseClicked(MouseEvent e) {
+	public void mouseReleased(MouseEvent e) {
 		jb1.setText("Please wait...");
 		
 		Linker.mode1 = jc2.getSelectedIndex();
@@ -299,6 +299,6 @@ public class Panel0 extends JPanel implements MouseListener{
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
 
 }

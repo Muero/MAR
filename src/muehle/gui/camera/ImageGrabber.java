@@ -30,7 +30,7 @@ public class ImageGrabber {
 	private static Color[][] imageColor;					//ImageColor speichert alle Pixel des Bildes in einem Array ab
 	
 	/**
-	 * Startet die Klasse getCam
+	 * Starts the class getCam
 	 */
 	public static void startImaging(){
 		System.err.println("Imaging started!");
@@ -38,7 +38,7 @@ public class ImageGrabber {
 		t.getCam();
 	}	
 	/**
-	 * Diese Methode wird von aussen aufgerufen, um ein Bild zu importieren, zu laden und die Farben an den Positionen zu berechnen
+	 * This method is called from outside to import an image to load and calculate the color at the positions
 	 * @param a
 	 * @param alphaSize
 	 * @param alphaValue
@@ -112,7 +112,7 @@ public class ImageGrabber {
 		System.out.println("Bild importiert");
 	}
 	/**
-	 * Nimmt ein Bild von der Webcam
+	 * Takes a picture of the webcam
 	 */
 	public static void takePicture(){
 		Linker.takePicture = true;

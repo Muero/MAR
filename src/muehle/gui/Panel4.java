@@ -140,12 +140,12 @@ public class Panel4 extends JPanel implements MouseListener{
 		return null;
 	}
 
-	public void mouseClicked(MouseEvent arg0) {
-		Linker.pressedButton = Integer.parseInt(arg0.getComponent().getName());
-	}
+	public void mouseClicked(MouseEvent arg0) {}
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mousePressed(MouseEvent arg0) {}
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {
+		Linker.pressedButton = Integer.parseInt(arg0.getComponent().getName());
+	}
 
 }

@@ -12,12 +12,17 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 	private StoneColor player;
 	private StoneColor opposite;
 	
+	/**
+	 * @param name is the Name of the Computer
+	 */
 	public ComputerPlayer(String name) {
 		this.name = name;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 
 	@Override
 	public void setColor(StoneColor color) {
@@ -37,13 +42,14 @@ public class ComputerPlayer implements NineMenMorrisPlayer {
 		else return StoneColor.BLACK;
 	}
 
+
 	public Move layStone(Board board, int move, int numberOfStones) {
 		//panel.setRobotOnTurn(true);
 		System.out.println("I'm thinking ... \n");
 
 		// Computer determines his best possible move
 		MinimaxResult result = Minmax.minmaxDecide(board, player, opposite,
-				Linker.difficulty, move, numberOfStones);
+				1, move, numberOfStones);
 		return result.bestMove;
 
 	}
