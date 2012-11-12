@@ -8,22 +8,24 @@ import muehle.model.Position;
 import muehle.players.human.HumanPositionInput;
 
 public class ButtonInput implements HumanPositionInput {
-	
+
 	private Board board;
 	private StoneColor player;
 	private StoneColor opposite;
 	private Panel4 panel4;
 
-	public ButtonInput(Board board,Panel4 panel4) {
+	public ButtonInput(Board board, Panel4 panel4) {
 		this.board = board;
 		this.panel4 = panel4;
 	}
 
-
 	@Override
 	public void setColor(StoneColor color) {
 		this.player = color;
-		if(color == StoneColor.BLACK) opposite = StoneColor.WHITE; else opposite = StoneColor.BLACK;
+		if (color == StoneColor.BLACK)
+			opposite = StoneColor.WHITE;
+		else
+			opposite = StoneColor.BLACK;
 	}
 
 	@Override
@@ -50,7 +52,7 @@ public class ButtonInput implements HumanPositionInput {
 	@Override
 	public Position fromStonePosition() {
 		System.out.println("Your next move? \n" + "From where?");
-		
+
 		Position inputPositionFrom = null;
 		Linker.pressedButton = -1;
 		do { // The player said which stone he wants to move
@@ -94,24 +96,29 @@ public class ButtonInput implements HumanPositionInput {
 			}
 			sleep(1);
 		} while (inputPositionTo == null);
-		if(moveNotPossible) return null; else return inputPositionTo;
+		if (moveNotPossible)
+			return null;
+		else
+			return inputPositionTo;
 	}
 
 	@Override
 	public Position takeStonePosition() {
 		System.out.println("You have mill, which stone take you away?");
-		
+
 		Position takeAway = null;
 		Linker.pressedButton = -1;
 		do {
 			takeAway = panel4.getLayedButton(); // player can take
-													// away a stone
+												// away a stone
 			if (takeAway != null) {
 				if (board.getColor(takeAway) != opposite
 						|| board.isMill(takeAway, opposite)) {
-					takeAway = null;
-					Linker.pressedButton = -1;
-					System.out.println("It's not an opponent's stone");
+					if (!board.everyStoneIsInMill(opposite)) {
+						takeAway = null;
+						Linker.pressedButton = -1;
+						System.out.println("It's not an opponent's stone or the stone is in a mill");
+					}
 				}
 			}
 			sleep(1);

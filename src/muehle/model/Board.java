@@ -14,13 +14,14 @@ public class Board {
 		NONE, BLACK, WHITE // The three modes that a "Position" may have.
 	}
 
-	private Map<Position, StoneColor>board = new HashMap<Position, StoneColor>();
+	private Map<Position, StoneColor> board = new HashMap<Position, StoneColor>();
 
 	/**
 	 * Returns the Color on the Position p. If on the Position is no Color it
 	 * returns the Color NONE.
 	 * 
-	 * @param p is the position where you want to find out the color
+	 * @param p
+	 *            is the position where you want to find out the color
 	 * @return c is the color at the position p
 	 */
 	public StoneColor getColor(Position p) {
@@ -36,8 +37,10 @@ public class Board {
 	 * Set the color c on the position p. The color can be retrieved with method
 	 * {@link getColor}
 	 * 
-	 * @param p is the position where you want to set a Color
-	 * @param c is the color you want to set
+	 * @param p
+	 *            is the position where you want to set a Color
+	 * @param c
+	 *            is the color you want to set
 	 * @throws IllegalArgumentException
 	 *             if p == null
 	 */
@@ -86,7 +89,8 @@ public class Board {
 	/**
 	 * Returns the number of stones of a given color.
 	 * 
-	 * @param color is the given color
+	 * @param color
+	 *            is the given color
 	 * @return the number of stones with the given color
 	 */
 	public int getNumberOfStones(StoneColor color) {
@@ -101,8 +105,10 @@ public class Board {
 	/**
 	 * Test whether a mill is on the Position pos.
 	 * 
-	 * @param stone is the color of the mill
-	 * @param pos is one of the positions of the mill
+	 * @param stone
+	 *            is the color of the mill
+	 * @param pos
+	 *            is one of the positions of the mill
 	 * @return whether a mill is at the Position pos
 	 */
 	public boolean isMill(Position pos, StoneColor stone) {
@@ -138,9 +144,25 @@ public class Board {
 	}
 
 	/**
+	 * If you have a mill, but every opposing stone is in a mill, you can take a stone from a mill.
+	 * @param color
+	 * @return if every stone with the color color is in a mill
+	 */
+	public boolean everyStoneIsInMill(StoneColor color) {
+		for (Position p : Position.getAllPositions()) {
+			if (getColor(p) == color) {
+				if (!isMill(p, color))
+					return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Counts the number of mills in the given color c
 	 * 
-	 * @param c is the color whose mills care counted
+	 * @param c
+	 *            is the color whose mills care counted
 	 * @return number of mills in the color c
 	 */
 	public int getNumberOfMills(StoneColor c) {
@@ -218,28 +240,33 @@ public class Board {
 		return counter;
 
 	}
+
 	/**
 	 * Decide if there is a Position without a Color
 	 * 
 	 * @return if there is a Position with no Color
 	 */
-	public boolean freePosition(){
-		for (Position p : Position.getAllPositions()){
-			if (getColor(p)==StoneColor.NONE)
+	public boolean freePosition() {
+		for (Position p : Position.getAllPositions()) {
+			if (getColor(p) == StoneColor.NONE)
 				return true;
 		}
-		
+
 		return false;
 	}
 
 	/**
 	 * Tests if you get stuck
 	 * @param you is your Color
+	 * @param move 
+	 * @param numberOfStones is with how many stones you play
 	 * @return if your Color get stuck
 	 */
-	public boolean getStuck(StoneColor you) {
-		if (getNumberOfStones(you)==0)
-			return false;		
+	public boolean getStuck(StoneColor you, int move, int numberOfStones) {
+		if (move < numberOfStones*2) //Lay-Situation
+			return false;
+		if (getNumberOfStones(you) == 0)
+			return false;
 		for (Position p : Position.getAllPositions()) {
 			if (getColor(p) == you) {
 				for (Position n : Position.getNeighboursOf(p)) {
@@ -255,11 +282,13 @@ public class Board {
 
 	/**
 	 * Counts the number of Mills on the board
-	 * @param stone is the Color of the mill
+	 * 
+	 * @param stone
+	 *            is the Color of the mill
 	 * @return the number of Mills with the color stone
 	 */
 	public int getNumberOfOpenMillsMove(StoneColor stone) {
-		
+
 		int z = 0;
 		// biggest circle
 		// left
@@ -539,8 +568,7 @@ public class Board {
 				&& board.get(Position.p76) == stone
 				&& board.get(Position.p73) == StoneColor.NONE)
 			z++;
-		
-		
+
 		// right cross
 		if (board.get(Position.p46) == stone
 				&& board.get(Position.p45) == stone
@@ -605,6 +633,7 @@ public class Board {
 			z++;
 		return z;
 	}
+
 	public int getNumberOfOpenMillsLay(StoneColor stone) {
 		int z = 0;
 		// biggest circle
@@ -793,8 +822,7 @@ public class Board {
 				&& board.get(Position.p53) == stone
 				&& board.get(Position.p73) == StoneColor.NONE)
 			z++;
-		
-		
+
 		// right cross
 
 		if (board.get(Position.p46) == stone
@@ -812,30 +840,22 @@ public class Board {
 				&& board.get(Position.p46) == StoneColor.NONE)
 			z++;
 		// bottom cross
-	
+
 		if (board.get(Position.p13) == stone
 				&& board.get(Position.p23) == stone
 				&& board.get(Position.p33) == StoneColor.NONE)
 			z++;
-		
+
 		if (board.get(Position.p13) == stone
 				&& board.get(Position.p33) == stone
 				&& board.get(Position.p23) == StoneColor.NONE)
 			z++;
-		
+
 		if (board.get(Position.p23) == stone
 				&& board.get(Position.p33) == stone
 				&& board.get(Position.p13) == StoneColor.NONE)
 			z++;
 		return z;
 	}
-		
-		
-		
-	}
 
-
-
-
-
-
+}

@@ -38,7 +38,7 @@ public class Panel5 extends JPanel {
 	 * @param i
 	 * @return
 	 */
-	private static Color getProbabilityColor(int i) {
+	private static Color getProbabilityColor(int i) { //TODO farbe richtig setzten
 		if(i==0){
 			return null;
 		}

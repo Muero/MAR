@@ -57,7 +57,7 @@ public class WebCamInput implements HumanPositionInput {
 			if(!(stein==-1)){
 				retry=false;
 			}else{
-				System.out.println("NOOOOOOOOT ERKANNT");
+				System.out.println("Not recognized");
 			}
 			System.out.println(Linker.pressedButton);
 			Linker.webcamCluster = neu;

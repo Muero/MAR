@@ -74,7 +74,7 @@ public class Main {
 				bestMove = currentPlayer.layStone(board, move, numberOfStones);
 			} else if (board.getNumberOfStones(BLACK) >= 3
 					&& board.getNumberOfStones(WHITE) >= 3
-					&& !board.getStuck(currentPlayerColor)) {
+					&& !board.getStuck(currentPlayerColor, move, numberOfStones)) {
 				// In the Situation: Move/Jump the Stones
 				bestMove = currentPlayer.moveStone(board, move, numberOfStones);
 			} else {

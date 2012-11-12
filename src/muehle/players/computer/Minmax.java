@@ -36,27 +36,29 @@ public class Minmax {
 			StoneColor opposite, int depth, int move, int numberOfStones) {
 		MinimaxResult value = null;
 
-		if (move < numberOfStones * 2 || !board.getStuck(player)) { // TODO in lay phase nicht richtig
+		if (move < numberOfStones * 2
+				|| !board.getStuck(player, move, numberOfStones)) {
 			if (move < numberOfStones * 2) {
-				//In the Situation: Lay the stones
+				// In the Situation: Lay the stones
 				value = Minmax.minmaxLay(board, player, opposite, depth, move,
 						numberOfStones);
 			} else if (board.getNumberOfStones(player) > 3) {
-				//In the Situation: Move the Stones
+				// In the Situation: Move the Stones
 				value = Minmax.minmaxMove(board, player, opposite, depth, move,
 						numberOfStones);
-			} else if (board.getNumberOfStones(player) == 3){
-				//In the Situation: Jump with the Stones
+			} else if (board.getNumberOfStones(player) == 3) {
+				// In the Situation: Jump with the Stones
 				value = Minmax.minmaxJumping(board, player, opposite, depth,
 						move, numberOfStones);
-			} else{
-				//player has less than 3 Stones / he lost
-				System.err.println("Lost");
-				value = new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			} else {
+				// player has less than 3 Stones / he lost
+				value = new MinimaxResult(null, -Evaluation.evaluation(board,
+						player, opposite, depth, move, numberOfStones));
 			}
 		} else {
-			//player get stuck / lost
-			value = new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			// player get stuck / lost
+			value = new MinimaxResult(null, -Evaluation.evaluation(board,
+					player, opposite, depth, move, numberOfStones));
 		}
 
 		return value;
@@ -65,7 +67,7 @@ public class Minmax {
 
 	public static MinimaxResult minmaxLay(Board board, StoneColor player,
 			StoneColor opposite, int depth, int move, int numberOfStones) {
-		if (depth<Linker.difficulty){
+		if (depth < Linker.difficulty) {
 			int result;
 
 			Position nextMove = null;
@@ -95,8 +97,9 @@ public class Minmax {
 															// its turn
 										(depth + 1), move + 1, numberOfStones);
 
-								if(depth==1)
-									System.err.println(turn + " " + takeAway + " " + value.rank);
+								if (depth == 1)
+									System.err.println(turn + " " + takeAway
+											+ " " + value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMove = turn;
@@ -116,8 +119,8 @@ public class Minmax {
 
 						// Depending on what color is in the series, the minimum
 						// or the maximum is stored.
-						if(depth==1)
-						System.out.println(turn + " " + value.rank);
+						if (depth == 1)
+							System.out.println(turn + " " + value.rank);
 						if (result < value.rank) {
 							result = value.rank;
 							nextMove = turn;
@@ -132,10 +135,12 @@ public class Minmax {
 				}
 			}
 
-			return new MinimaxResult(new Move(null, nextMove, nextTake), -result);
+			return new MinimaxResult(new Move(null, nextMove, nextTake),
+					-result);
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			return new MinimaxResult(null, -Evaluation.evaluation(board,
+					player, opposite, depth, move, numberOfStones));
 
 		}
 
@@ -143,7 +148,7 @@ public class Minmax {
 
 	public static MinimaxResult minmaxMove(Board board, StoneColor player,
 			StoneColor opposite, int depth, int move, int numberOfStones) {
-		if (depth<Linker.difficulty) {
+		if (depth < Linker.difficulty) {
 
 			int result;
 			Position nextMoveFrom = null;
@@ -189,8 +194,9 @@ public class Minmax {
 															// turn
 												player, (depth + 1), move + 1,
 												numberOfStones);
-										if(depth==1)
-											System.err.println(turnTo + " " + value.rank);
+										if (depth == 1)
+											System.err.println(turnTo + " "
+													+ value.rank);
 										if (result < value.rank) {
 											result = value.rank;
 											nextMoveFrom = turnFrom;
@@ -212,8 +218,9 @@ public class Minmax {
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
-								if(depth==1)
-									System.out.println(turnTo + " " + value.rank);
+								if (depth == 1)
+									System.out.println(turnTo + " "
+											+ value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMoveFrom = turnFrom;
@@ -235,7 +242,8 @@ public class Minmax {
 					nextTake), (-1 * result));
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			return new MinimaxResult(null, -Evaluation.evaluation(board,
+					player, opposite, depth, move, numberOfStones));
 
 		}
 
@@ -243,7 +251,7 @@ public class Minmax {
 
 	public static MinimaxResult minmaxJumping(Board board, StoneColor player,
 			StoneColor opposite, int depth, int move, int numberOfStones) {
-		if (depth<Linker.difficulty) {
+		if (depth < Linker.difficulty) {
 
 			int result;
 
@@ -292,8 +300,9 @@ public class Minmax {
 														// turn
 												opposite, player, (depth + 1),
 												move + 1, numberOfStones);
-										if(depth==1)
-											System.err.println(turnTo + " " + value.rank);
+										if (depth == 1)
+											System.err.println(turnTo + " "
+													+ value.rank);
 										if (result < value.rank) {
 											result = value.rank;
 											nextMoveFrom = turnFrom;
@@ -315,8 +324,9 @@ public class Minmax {
 
 								// Depending on what color is in the series, the
 								// minimum or the maximum is stored.
-								if(depth==1)
-									System.out.println(turnTo + " " + value.rank);
+								if (depth == 1)
+									System.out.println(turnTo + " "
+											+ value.rank);
 								if (result < value.rank) {
 									result = value.rank;
 									nextMoveFrom = turnFrom;
@@ -337,28 +347,60 @@ public class Minmax {
 					nextTake), -result);
 		} else {
 			// If the depth is reached, the current field rated
-			return new MinimaxResult(null, -Evaluation.evaluation(board, player, opposite, depth, move, numberOfStones));
+			return new MinimaxResult(null, -Evaluation.evaluation(board,
+					player, opposite, depth, move, numberOfStones));
 
 		}
 
 	}
 
-	public static Map<Position, Integer> getProbability(Board board, StoneColor player, int move, int numberOfStones) {
+	public static Map<Position, Integer> getProbability(Board board,
+			StoneColor player, int move, int numberOfStones) {
 		Map<Position, Integer> probabilities = new HashMap<Position, Integer>();
 		int depth = 4;
-		for (Position p : Position.getAllPositions()) {
-			if (board.getColor(p) == StoneColor.NONE) { //TODO gilt nur bei legen und springen
-				board.setColor(p, player);
-				MinimaxResult res = Minmax.minmaxDecide(board, player==StoneColor.BLACK?StoneColor.WHITE:StoneColor.BLACK, player, depth-1, move+1,
-						numberOfStones);
-				probabilities.put(p,-res.getRank());
-				board.setColor(p, StoneColor.NONE);
-			}else{
-				probabilities.put(p, 0);
+		if (move < numberOfStones * 2 || board.getNumberOfStones(player) == 3) { // Stuation:
+																					// Lay/Jump
+																					// the
+																					// stones
+			for (Position p : Position.getAllPositions()) {
+				if (board.getColor(p) == StoneColor.NONE) {
+					board.setColor(p, player);
+					MinimaxResult res = Minmax.minmaxDecide(board,
+							player == StoneColor.BLACK ? StoneColor.WHITE
+									: StoneColor.BLACK, player, depth - 1,
+							move + 1, numberOfStones);
+					probabilities.put(p, -res.getRank());
+					board.setColor(p, StoneColor.NONE);
+				} else {
+					probabilities.put(p, 0);
+				}
 			}
+
+		} else if (board.getNumberOfStones(player) > 3) {
+			for (Position p : Position.getAllPositions()) {
+				if (board.getColor(p) == player) {
+					for (Position q : Position.getNeighboursOf(p)) {
+						if (board.getColor(q) == StoneColor.NONE) {
+							board.setColor(p, StoneColor.NONE);
+							board.setColor(q, player);
+							MinimaxResult res = Minmax
+									.minmaxDecide(
+											board,
+											player == StoneColor.BLACK ? StoneColor.WHITE
+													: StoneColor.BLACK, player,
+											depth - 1, move + 1, numberOfStones);
+							probabilities.put(p, -res.getRank());
+							board.setColor(p, player);
+							board.setColor(q, StoneColor.NONE);
+						}
+					}
+				} else {
+					probabilities.put(p, 0);
+				}
+			}
+
 		}
 		System.err.println(probabilities);
 		return probabilities;
 	}
-
 }

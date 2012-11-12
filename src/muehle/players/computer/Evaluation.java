@@ -22,7 +22,6 @@ public class Evaluation {
 		int oppositeMills = board.getNumberOfMills(opposite);
 		// Number of the Stones
 		int numberOfPlayerStones = board.getNumberOfStones(player);
-
 		int numberOfOppositeStones = board.getNumberOfStones(opposite);
 		// Number of the open Mills
 		int openMillsPlayerMove = board.getNumberOfOpenMillsMove(player);
@@ -30,18 +29,18 @@ public class Evaluation {
 		int openMillsPlayerLay = board.getNumberOfOpenMillsLay(player);
 		int openMillsOppositeLay = board.getNumberOfOpenMillsLay(opposite);
 
-		if (board.getStuck(player)) {
+		if (board.getStuck(player, move, numberOfStones)) {
 			bewertung = bewertung - 1000;
-		} else if (board.getStuck(opposite)) {
+		} else if (board.getStuck(opposite, move, numberOfStones)) {
 			bewertung = bewertung + 1000;
 		} else {
 
 			if (move < numberOfStones * 2) {
 				// In the Situation: Lay the stones
 				if (playerMills > 0)
-					bewertung = bewertung + 200 * (playerMills - oppositeMills);
-				else if (oppositeMills > 0)
-					bewertung = bewertung + 300 * (playerMills - oppositeMills);
+					bewertung = bewertung + 200 * (playerMills - oppositeMills);//In the Lay phase, the computer
+				else if (oppositeMills > 0)										//should better "destroy" other mills,
+					bewertung = bewertung + 300 * (playerMills - oppositeMills);//than create own mills
 				bewertung = bewertung + 20 * openMillsPlayerLay;
 				bewertung = bewertung - 20 * openMillsOppositeLay;
 			} else if (numberOfPlayerStones > 3 || numberOfOppositeStones > 3) {
