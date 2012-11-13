@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +36,8 @@ public class Panel5 extends JPanel {
 	 * @param i
 	 * @return
 	 */
-	private static Color getProbabilityColor(int i) { //TODO farbe richtig setzten
-		if(i==0){
+	private static Color getProbabilityColor(int i) {
+		if (i == 0) {
 			return null;
 		}
 		if (i <= -120)
@@ -65,14 +63,16 @@ public class Panel5 extends JPanel {
 		return new Color(0, 0, 0);
 	}
 
-	public static void setBackgroundProbabilityColor(Board board, final StoneColor player,final int move, final int numberOfStones) {
+	public static void setBackgroundProbabilityColor(Board board,
+			final StoneColor player, final int move, final int numberOfStones) {
 
 		Map<Position, Integer> prob = new HashMap<Position, Integer>();
-		prob = Minmax.getProbability(board, player,move, numberOfStones);
-		
+		prob = Minmax.getProbability(board, player, move, numberOfStones);
+
 		for (Position p : Position.getAllPositions()) {
 			button[Frame.getGuiPosition(p)].setEnabled(false);
-			button[Frame.getGuiPosition(p)].setBackground(getProbabilityColor(prob.get(p)));
+			button[Frame.getGuiPosition(p)]
+					.setBackground(getProbabilityColor(prob.get(p)));
 		}
 		try {
 			Thread.sleep(100);
@@ -100,20 +100,22 @@ public class Panel5 extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(new Color(230, 230, 230));
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		if(help){
-			for(int i=0;i<24;i++)
+		if (help) {
+			for (int i = 0; i < 24; i++)
 				button[i].setVisible(true);
 			showHelp.setText("hide Help");
-			showHelp.setBounds(this.getWidth()-100,this.getHeight()-20,100,20);
+			showHelp.setBounds(this.getWidth() - 100, this.getHeight() - 20,
+					100, 20);
 			drawField(g);
-		}else{
-			showHelp.setBounds(this.getWidth()-100,this.getHeight()-20,100,20);
+		} else {
+			showHelp.setBounds(this.getWidth() - 100, this.getHeight() - 20,
+					100, 20);
 			showHelp.setText("show Help");
 			showHelp.setVisible(true);
-			for(int i=0;i<24;i++)
+			for (int i = 0; i < 24; i++)
 				button[i].setVisible(false);
 		}
-		
+
 	}
 
 	private void drawField(Graphics g) {
@@ -207,6 +209,6 @@ public class Panel5 extends JPanel {
 
 	}
 
-	public void thread(){
+	public void thread() {
 	}
 }

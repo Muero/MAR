@@ -143,20 +143,6 @@ public class Board {
 
 	}
 
-	/**
-	 * If you have a mill, but every opposing stone is in a mill, you can take a stone from a mill.
-	 * @param color
-	 * @return if every stone with the color color is in a mill
-	 */
-	public boolean everyStoneIsInMill(StoneColor color) {
-		for (Position p : Position.getAllPositions()) {
-			if (getColor(p) == color) {
-				if (!isMill(p, color))
-					return false;
-			}
-		}
-		return true;
-	}
 
 	/**
 	 * Counts the number of mills in the given color c
