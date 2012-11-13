@@ -38,6 +38,11 @@ public class Panel2 extends JPanel {
 	 * 
 	 * @return index
 	 */
+	
+	public void resetIndex(){
+		this.index = 0;
+	}
+	
 	public int getPositionIndex() {
 		return index;
 	}
