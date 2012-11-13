@@ -378,6 +378,9 @@ public class Minmax {
 
 		} else if (board.getNumberOfStones(player) > 3) {
 			for (Position p : Position.getAllPositions()) {
+				probabilities.put(p,  0);
+			}
+			for (Position p : Position.getAllPositions()) {
 				if (board.getColor(p) == player) {
 					for (Position q : Position.getNeighboursOf(p)) {
 						if (board.getColor(q) == StoneColor.NONE) {
