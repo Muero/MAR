@@ -389,13 +389,14 @@ public class Minmax {
 											player == StoneColor.BLACK ? StoneColor.WHITE
 													: StoneColor.BLACK, player,
 											depth - 1, move + 1, numberOfStones);
-							probabilities.put(p, -res.getRank());
+							
+							probabilities.put(q, -res.getRank());
 							board.setColor(p, player);
 							board.setColor(q, StoneColor.NONE);
-						}
+						} else {
+							probabilities.put(q, 0);
 					}
-				} else {
-					probabilities.put(p, 0);
+				}
 				}
 			}
 
