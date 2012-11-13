@@ -32,7 +32,9 @@ public class Panel2 extends JPanel{
 			}
 		});
 	}
-	
+	public void resetIndex(){
+		this.index = 0;
+	}
 	/**
 	 * Returns the Index of the last set Position
 	 * @return index

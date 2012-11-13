@@ -96,10 +96,7 @@ public class Linker {
 		if(mode1 == 0){
 			conn1 = new EmptyConnection();
 		}else if(mode1 == 1){
-			if(usewebcam1)
-				conn1 = new BTConnection();
-			else
-				conn1 = new EmptyConnection();
+			conn1 = new BTConnection();
 		}else{
 			conn1 = new EmptyConnection();
 		}
@@ -109,10 +106,7 @@ public class Linker {
 		if(mode2 == 0){
 			conn2 = new EmptyConnection();
 		}else if(mode2 == 1){
-			if(usewebcam2)
-				conn2 = new BTConnection();
-			else
-				conn2 = new EmptyConnection();
+			conn2 = new BTConnection();
 		}else{
 			conn2 = new EmptyConnection();
 		}
@@ -156,7 +150,7 @@ public class Linker {
 		}
 
 		if(mode1 == 0){
-			player1 = new HumanPlayer(name1,conn1,input1);			
+			player1 = new HumanPlayer(name1,conn1,input2);
 		}else{
 			if(usealgorithm1)
 				player1 = new ComputerPlayer(name1);
@@ -164,7 +158,7 @@ public class Linker {
 				player1 = new RandomPlayer();
 		}		
 		if(mode2 == 0){
-			player2 = new HumanPlayer(name2,conn2,input2);			
+			player2 = new HumanPlayer(name2,conn2,input1);			
 		}else{
 			if(usealgorithm2)
 				player2 = new ComputerPlayer(name2);
@@ -196,7 +190,7 @@ public class Linker {
 	}
 	
 	public static void startupGui(){
-		if(usewebcam1){
+		if(usewebcam1||usewebcam2){
 			frame.setGuiMode(2);
 			frame.waitFor();
 			frame.setGuiMode(3);
