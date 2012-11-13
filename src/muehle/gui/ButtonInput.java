@@ -114,11 +114,11 @@ public class ButtonInput implements HumanPositionInput {
 			if (takeAway != null) {
 				if (board.getColor(takeAway) != opposite
 						|| board.isMill(takeAway, opposite)) {
-					if (!board.everyStoneIsInMill(opposite)) {
-						takeAway = null;
-						Linker.pressedButton = -1;
-						System.out.println("It's not an opponent's stone or the stone is in a mill");
-					}
+					takeAway = null;
+					Linker.pressedButton = -1;
+					System.out
+							.println("It's not an opponent's stone or the stone is in a mill");
+
 				}
 			}
 			sleep(1);

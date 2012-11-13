@@ -35,13 +35,15 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 	public StoneColor getColor() {
 		return color;
 	}
-	
+
 	@Override
 	public StoneColor getOppositeColor() {
 		if (getColor() == StoneColor.BLACK)
 			return StoneColor.WHITE;
-		else return StoneColor.BLACK;
+		else
+			return StoneColor.BLACK;
 	}
+
 	@Override
 	public Move layStone(Board board, int move, int numberOfStones) {
 
@@ -50,8 +52,7 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 		board.setColor(inputPosition, color);
 
 		Position takeAway = null;
-		if (board.isMill(inputPosition, color) ) { // if the player has a mill
-			// TODO: Regelabklärung: Was wenn Gegner nur geschlossene Muehlen?
+		if (board.isMill(inputPosition, color)) { // if the player has a mill
 			takeAway = input.takeStonePosition();
 		}
 		return new Move(null, inputPosition, takeAway);
@@ -74,13 +75,11 @@ public class HumanPlayer implements NineMenMorrisPlayer {
 
 		Position takeAway = null;
 		if (board.isMill(inputPositionTo, color)) { // if the player has a mill
-			// TODO: Regelabklärung: Was wenn Gegner nur geschlossene Muehlen?
 			takeAway = input.takeStonePosition();
 		}
-			
+
 		System.out.println(board);
 		return new Move(inputPositionFrom, inputPositionTo, takeAway);
 	}
-
 
 }

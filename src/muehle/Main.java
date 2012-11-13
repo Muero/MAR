@@ -3,9 +3,7 @@ package muehle;
 import static muehle.model.Board.StoneColor.BLACK;
 import static muehle.model.Board.StoneColor.NONE;
 import static muehle.model.Board.StoneColor.WHITE;
-import muehle.connection.BTConnection;
 import muehle.connection.Connection;
-import muehle.gui.Panel4;
 import muehle.gui.Panel5;
 import muehle.model.Board;
 import muehle.model.Board.StoneColor;
@@ -74,7 +72,8 @@ public class Main {
 				bestMove = currentPlayer.layStone(board, move, numberOfStones);
 			} else if (board.getNumberOfStones(BLACK) >= 3
 					&& board.getNumberOfStones(WHITE) >= 3
-					&& !board.getStuck(currentPlayerColor, move, numberOfStones)) {
+					&& !board
+							.getStuck(currentPlayerColor, move, numberOfStones)) {
 				// In the Situation: Move/Jump the Stones
 				bestMove = currentPlayer.moveStone(board, move, numberOfStones);
 			} else {
@@ -114,8 +113,6 @@ public class Main {
 			System.out.println("  To " + bestMove.to);
 			System.out.println(" TakeStone: " + bestMove.take);
 
-			Panel5.setBackgroundProbabilityColor(board, currentPlayerColor,
-					move, numberOfStones);
 			System.out.println("");
 			System.out.println(board);
 			// the players will be replaced
@@ -130,6 +127,12 @@ public class Main {
 			StoneColor color = currentPlayerColor;
 			currentPlayerColor = oppositePlayerColor;
 			oppositePlayerColor = color;
+
+			if (move < 2 * numberOfStones
+					|| board.getNumberOfStones(oppositePlayerColor) >= 3
+					&& board.getNumberOfStones(currentPlayerColor) >= 3)
+				Panel5.setBackgroundProbabilityColor(board, currentPlayerColor,
+						move, numberOfStones);
 
 			move++;
 		}

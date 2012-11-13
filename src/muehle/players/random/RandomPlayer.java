@@ -47,7 +47,6 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 				take = positions[rand.nextInt(positions.length)];
 				if (board.getColor(take) == getOppositeColor()
 						&& !board.isMill(take, getOppositeColor()))
-					// TODO was wenn alle gegn Steine in Mühle
 					haveTakePosition = false;
 			}
 		}
@@ -73,10 +72,10 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 		}
 		boolean haveToPosition = true;
 		while (haveToPosition) {
-			if(board.getNumberOfStones(color)!=3)
-			to = neighbs[rand.nextInt(neighbs.length)];
+			if (board.getNumberOfStones(color) != 3)
+				to = neighbs[rand.nextInt(neighbs.length)];
 			else
-			to = positions[rand.nextInt(positions.length)];			
+				to = positions[rand.nextInt(positions.length)];
 			if (board.getColor(to) == StoneColor.NONE)
 				haveToPosition = false;
 		}
@@ -86,7 +85,6 @@ public class RandomPlayer implements NineMenMorrisPlayer {
 				take = positions[rand.nextInt(positions.length)];
 				if (board.getColor(take) == getOppositeColor()
 						&& !board.isMill(take, getOppositeColor()))
-					// TODO was wenn alle gegn Steine in Mühle
 					haveTakePosition = false;
 			}
 

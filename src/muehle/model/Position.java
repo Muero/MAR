@@ -166,9 +166,13 @@ public final class Position {
 
 	/**
 	 * Tests if two Positions are side by side
-	 * @param p1 is the first Position
-	 * @param p2 is the second Position
-	 * @return true if one Position is next to the other Position, else it returns false.
+	 * 
+	 * @param p1
+	 *            is the first Position
+	 * @param p2
+	 *            is the second Position
+	 * @return true if one Position is next to the other Position, else it
+	 *         returns false.
 	 */
 	public static boolean isNeighbour(Position p1, Position p2) {
 		return neighbours.get(p1).contains(p2);
@@ -176,7 +180,10 @@ public final class Position {
 
 	/**
 	 * Returns the Positions adjacent to the given Position.
-	 * @param position is the Positions from which your are looking for the neighbours.
+	 * 
+	 * @param position
+	 *            is the Positions from which your are looking for the
+	 *            neighbours.
 	 * @return a Set of the Positions whth the nieghbours
 	 */
 	public static Set<Position> getNeighboursOf(Position position) {
@@ -184,8 +191,11 @@ public final class Position {
 	}
 
 	/**
-	 * Transformed the integer of a Position in a Position in the form of a Position.
-	 * @param id is the integer of the Position
+	 * Transformed the integer of a Position in a Position in the form of a
+	 * Position.
+	 * 
+	 * @param id
+	 *            is the integer of the Position
 	 * @return the Position id in the form of a Position and not of an integer
 	 */
 	public static Position getPosition(int id) {

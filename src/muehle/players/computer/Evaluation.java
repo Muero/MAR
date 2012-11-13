@@ -38,9 +38,18 @@ public class Evaluation {
 			if (move < numberOfStones * 2) {
 				// In the Situation: Lay the stones
 				if (playerMills > 0)
-					bewertung = bewertung + 200 * (playerMills - oppositeMills);//In the Lay phase, the computer
-				else if (oppositeMills > 0)										//should better "destroy" other mills,
-					bewertung = bewertung + 300 * (playerMills - oppositeMills);//than create own mills
+					bewertung = bewertung + 200 * (playerMills - oppositeMills);// In
+																				// the
+																				// Lay
+																				// phase,
+																				// the
+																				// computer
+				else if (oppositeMills > 0) // should better "destroy" other
+											// mills,
+					bewertung = bewertung + 300 * (playerMills - oppositeMills);// than
+																				// create
+																				// own
+																				// mills
 				bewertung = bewertung + 20 * openMillsPlayerLay;
 				bewertung = bewertung - 20 * openMillsOppositeLay;
 			} else if (numberOfPlayerStones > 3 || numberOfOppositeStones > 3) {
@@ -66,7 +75,7 @@ public class Evaluation {
 					bewertung = bewertung + 1000;
 			}
 		}
-		
+
 		if (depth % 2 != 0)
 			return -bewertung;
 		else
